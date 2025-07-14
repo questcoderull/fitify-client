@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
-import Home from "../Pages/HoomPage/Home";
+import Home from "../Pages/HoomPage/Home/Home";
 import AllTrainers from "../Pages/AllTrainers/AllTrainers";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import Community from "../Pages/Community/Community";

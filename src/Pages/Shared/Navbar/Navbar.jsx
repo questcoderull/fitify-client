@@ -16,14 +16,14 @@ const Navbar = () => {
 
   const links = (
     <>
-      <li className="hover:bg-[#023047] rounded-md transition">
+      <li className="hover:bg-primary rounded-md transition">
         <NavLink
           to="/"
           className={({ isActive }) =>
             `flex items-center gap-2 px-3 py-2 rounded-md ${
               isActive
-                ? "bg-[#023047] text-white"
-                : "text-[#023047] hover:text-white"
+                ? "bg-primary text-white"
+                : "text-primary hover:text-white"
             }`
           }
         >
@@ -32,14 +32,14 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-[#023047] rounded-md transition">
+      <li className="hover:bg-primary rounded-md transition">
         <NavLink
-          to="/trainers"
+          to="/all-trainers"
           className={({ isActive }) =>
             `flex items-center gap-2 px-3 py-2 rounded-md ${
               isActive
-                ? "bg-[#023047] text-white"
-                : "text-[#023047] hover:text-white"
+                ? "bg-primary text-white"
+                : "text-primary hover:text-white"
             }`
           }
         >
@@ -48,14 +48,14 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-[#023047] rounded-md transition">
+      <li className="hover:bg-primary rounded-md transition">
         <NavLink
-          to="/classes"
+          to="/all-classes"
           className={({ isActive }) =>
             `flex items-center gap-2 px-3 py-2 rounded-md ${
               isActive
-                ? "bg-[#023047] text-white"
-                : "text-[#023047] hover:text-white"
+                ? "bg-primary text-white"
+                : "text-primary hover:text-white"
             }`
           }
         >
@@ -64,14 +64,14 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li className="hover:bg-[#023047] rounded-md transition">
+      <li className="hover:bg-primary rounded-md transition">
         <NavLink
           to="/community"
           className={({ isActive }) =>
             `flex items-center gap-2 px-3 py-2 rounded-md ${
               isActive
-                ? "bg-[#023047] text-white"
-                : "text-[#023047] hover:text-white"
+                ? "bg-primary text-white"
+                : "text-primary hover:text-white"
             }`
           }
         >
@@ -128,7 +128,7 @@ const Navbar = () => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="w-10 rounded-full bg-[#023047] flex items-center justify-center text-white font-bold">
+              <div className="w-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">
                 {user?.displayName?.charAt(0) || "U"}
               </div>
             </div>
@@ -157,10 +157,10 @@ const Navbar = () => {
             </NavLink>
 
             <NavLink
-              to="/register"
+              to="/signUP"
               className={({ isActive }) =>
                 `btn btn-sm flex items-center gap-2 ${
-                  isActive ? "btn-accent text-white" : "btn-outline"
+                  isActive ? "btn-primary text-white" : "btn-outline"
                 }`
               }
             >

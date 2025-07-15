@@ -7,6 +7,7 @@ import Community from "../Pages/Community/Community";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../Pages/Authentication/Login/Login";
 import SignUp from "../Pages/Authentication/SignUp/SignUp";
+import ForbiddenPage from "../Pages/ForbiddenPage/ForbiddebPage";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "community",
         Component: Community,
+      },
+      {
+        path: "forbidden",
+        Component: ForbiddenPage,
       },
     ],
   },

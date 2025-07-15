@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, NavLink } from "react-router";
 import {
   FaHome,
@@ -9,10 +9,10 @@ import {
   FaUserPlus,
 } from "react-icons/fa";
 import FitifyLogo from "../FitifyLogo/FitifyLogo";
+import useAuth from "../../../Hooks/useAuth";
 
 const Navbar = () => {
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(false);
+  const { user, loading } = useAuth();
 
   const links = (
     <>

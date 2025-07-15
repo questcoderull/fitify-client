@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { data, Link } from "react-router";
+import { Link } from "react-router";
+import useAuth from "../../../Hooks/useAuth";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const { createUser } = useAuth();
 
   const {
     register,
@@ -14,6 +17,13 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    createUser(data.email, data.password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

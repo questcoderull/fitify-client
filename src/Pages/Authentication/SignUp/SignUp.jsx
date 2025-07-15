@@ -1,10 +1,21 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { data, Link } from "react-router";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -17,32 +28,43 @@ const SignUp = () => {
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">
               Sign Up now!
             </h1>
-            <form className="fieldset">
+            <form onSubmit={handleSubmit(onSubmit)} className="fieldset">
               <label className="label">Name</label>
               <input
-                name="name"
+                {...register("name", { required: true })}
                 type="text"
                 className="input w-full"
                 placeholder="Name"
-                required
               />
 
+              {errors.photo?.type === "required" && (
+                <p className="text-secondary">Name is requred</p>
+              )}
+
+              {/* Email */}
               <label className="label">Email</label>
               <input
-                name="email"
                 type="email"
+                {...register("email", { required: true })}
                 className="input w-full"
                 placeholder="Email"
-                required
               />
+              {errors.photo?.type === "required" && (
+                <p className="text-secondary">Email is requred</p>
+              )}
 
+              {/* photo */}
               <label className="label">Photo</label>
               <input
-                name="photo"
-                type="text"
+                {...register("photo", { required: true })}
+                type="file"
                 className="input w-full"
-                placeholder="PhotoURL"
+                placeholder="Photo"
               />
+
+              {errors.photo?.type === "required" && (
+                <p className="text-secondary">Photo is requred</p>
+              )}
 
               {/* Password */}
               <label className="label">
@@ -50,9 +72,8 @@ const SignUp = () => {
               </label>
               <div className="input input-bordered flex items-center justify-between w-full px-3 py-2 gap-2">
                 <input
-                  name="password"
+                  {...register("password", { required: true, minLength: 6 })}
                   type={showPassword ? "text" : "password"}
-                  required
                   placeholder="Password"
                   className="flex-grow bg-transparent outline-none"
                 />
@@ -66,10 +87,13 @@ const SignUp = () => {
               </div>
 
               {/* showing error message for password */}
-              {errorMessage && (
-                <h1 className="mt-4 border p-2 rounded text-red-700">
-                  {errorMessage}
-                </h1>
+              {errors.password?.type === "required" && (
+                <p className="text-secondary">Password is requred</p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-secondary">
+                  Password must be 6 charecter or longer
+                </p>
               )}
 
               <button className="btn btn-primary mt-4 ">Sign Up</button>

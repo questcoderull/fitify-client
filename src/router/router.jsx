@@ -4,8 +4,9 @@ import Home from "../Pages/HoomPage/Home/Home";
 import AllTrainers from "../Pages/AllTrainers/AllTrainers";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import Community from "../Pages/Community/Community";
-import LogIn from "../Pages/LogIn/LogIn";
-import SignUp from "../Pages/SignUp/SignUp";
+import AuthLayout from "../layouts/AuthLayout";
+import Login from "../Pages/Authentication/Login/Login";
+import SignUp from "../Pages/Authentication/SignUp/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -28,9 +29,16 @@ export const router = createBrowserRouter([
         path: "community",
         Component: Community,
       },
+    ],
+  },
+
+  {
+    path: "/",
+    Component: AuthLayout,
+    children: [
       {
-        path: "logIn",
-        Component: LogIn,
+        path: "login",
+        Component: Login,
       },
       {
         path: "signUp",

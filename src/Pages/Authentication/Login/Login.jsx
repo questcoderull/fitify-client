@@ -2,9 +2,20 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
 import FitifyLogo from "../../Shared/FitifyLogo/FitifyLogo";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <div className="hero bg-base-200">
@@ -18,11 +29,11 @@ const Login = () => {
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">
               Log In now!
             </h1>
-            <form className="fieldset">
+            <form onSubmit={handleSubmit(onSubmit)} className="fieldset">
               <label className="label">Email</label>
               <input
-                name="email"
                 type="email"
+                {...register("email")}
                 className="input w-full"
                 placeholder="Email"
               />
@@ -33,11 +44,12 @@ const Login = () => {
               </label>
               <div className="input input-bordered flex items-center justify-between w-full px-3 py-2 gap-2">
                 <input
-                  name="password"
+                  {...register("password", { required: true, minLength: 6 })}
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   className="flex-grow bg-transparent outline-none"
                 />
+
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -46,6 +58,15 @@ const Login = () => {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
+
+              {errors.password?.type === "required" && (
+                <p className="text-secondary">Password is requred</p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-secondary">
+                  Password must be 6 charecter or longer
+                </p>
+              )}
 
               <button className="btn btn-primary mt-4">Login</button>
             </form>

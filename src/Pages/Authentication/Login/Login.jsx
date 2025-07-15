@@ -3,6 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
 import FitifyLogo from "../../Shared/FitifyLogo/FitifyLogo";
 import { useForm } from "react-hook-form";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -71,7 +72,7 @@ const Login = () => {
               <button className="btn btn-primary mt-4">Login</button>
             </form>
 
-            <h className="text-2xl">Social login will be here</h>
+            <SocialLogin></SocialLogin>
 
             <p className="mt-3">
               Don't have an account?{" "}

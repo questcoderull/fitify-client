@@ -12,7 +12,17 @@ import FitifyLogo from "../FitifyLogo/FitifyLogo";
 import useAuth from "../../../Hooks/useAuth";
 
 const Navbar = () => {
-  const { user, loading } = useAuth();
+  const { user, loading, logOutUser } = useAuth();
+
+  const handleLogout = () => {
+    logOutUser()
+      .then(() => {
+        console.log("logged out succesfully");
+      })
+      .then((error) => {
+        console.log(error);
+      });
+  };
 
   const links = (
     <>
@@ -138,7 +148,12 @@ const Navbar = () => {
             >
               <li className="mb-2">{user.displayName || "Your Name"}</li>
               <li>
-                <button className="btn btn-neutral w-full">Logout</button>
+                <button
+                  onClick={handleLogout}
+                  className="btn btn-neutral w-full"
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </div>

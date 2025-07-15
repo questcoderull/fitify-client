@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -109,7 +110,7 @@ const SignUp = () => {
               <button className="btn btn-primary mt-4 ">Sign Up</button>
             </form>
 
-            <h className="text-2xl">Social login will be here</h>
+            <SocialLogin></SocialLogin>
 
             <p className="mt-3">
               Already have an account?{" "}

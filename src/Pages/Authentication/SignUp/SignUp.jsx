@@ -4,11 +4,12 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import axios from "axios";
 
 const SignUp = () => {
+  const { createUser, updateUserProfile } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-
-  const { createUser } = useAuth();
+  const [profilePic, setProfilePic] = useState("");
 
   const {
     register,
@@ -21,10 +22,37 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result);
+
+        //updating profilePic and name here (in firebase)
+        const userProfile = {
+          displayName: data.name,
+          photoURL: profilePic,
+        };
+
+        updateUserProfile(userProfile)
+          .then(() => {
+            console.log("profile picture updated successfully");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleImageUpload = async (e) => {
+    const image = e.target.files[0];
+    console.log(image);
+    const formData = new FormData();
+    formData.append("image", image);
+    const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_image_upload_key
+    }`;
+
+    const res = await axios.post(imageUploadUrl, formData);
+    setProfilePic(res.data.data.url);
   };
 
   return (
@@ -67,15 +95,11 @@ const SignUp = () => {
               {/* photo */}
               <label className="label">Photo</label>
               <input
-                {...register("photo", { required: true })}
+                onChange={handleImageUpload}
                 type="file"
                 className="input w-full"
                 placeholder="Photo"
               />
-
-              {errors.photo?.type === "required" && (
-                <p className="text-secondary">Photo is requred</p>
-              )}
 
               {/* Password */}
               <label className="label">

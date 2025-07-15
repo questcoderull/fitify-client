@@ -138,8 +138,24 @@ const Navbar = () => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="w-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">
-                {user?.displayName?.charAt(0) || "U"}
+              <div className="w-24 rounded-full">
+                {/* from gpt */}
+                {user && user.photoURL ? (
+                  <>
+                    <img
+                      src={user.photoURL}
+                      alt="User profile"
+                      className="w-20 h-20 rounded-full object-cover cursor-pointer"
+                    />
+                  </>
+                ) : (
+                  <div
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-[#023047] text-[#FFB703] text-lg font-bold uppercase cursor-default"
+                    title={user?.displayName || "User"}
+                  >
+                    {user?.displayName?.charAt(0) || "U"}
+                  </div>
+                )}
               </div>
             </div>
             <ul

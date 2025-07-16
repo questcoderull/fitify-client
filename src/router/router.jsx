@@ -9,6 +9,7 @@ import Login from "../Pages/Authentication/Login/Login";
 import SignUp from "../Pages/Authentication/SignUp/SignUp";
 import ForbiddenPage from "../Pages/ForbiddenPage/ForbiddebPage";
 import TrainerDetails from "../Pages/TrainersDetails/TrainersDetails";
+import TrainerBooking from "../Pages/TrainerBooking/TrainerBooking";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
       {
         path: "trainer/:id",
         Component: TrainerDetails,
+      },
+
+      {
+        path: "trainer-booking/:id",
+        Component: TrainerBooking,
       },
       {
         path: "forbidden",

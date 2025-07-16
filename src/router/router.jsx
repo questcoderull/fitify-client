@@ -8,6 +8,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../Pages/Authentication/Login/Login";
 import SignUp from "../Pages/Authentication/SignUp/SignUp";
 import ForbiddenPage from "../Pages/ForbiddenPage/ForbiddebPage";
+import TrainerDetails from "../Pages/TrainersDetails/TrainersDetails";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "community",
         Component: Community,
+      },
+      {
+        path: "trainer/:id",
+        Component: TrainerDetails,
       },
       {
         path: "forbidden",

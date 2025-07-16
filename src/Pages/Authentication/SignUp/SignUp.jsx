@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import axios from "axios";
+import useAxios from "../../../Hooks/useAxios";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [profilePic, setProfilePic] = useState("");
+  const navigate = useNavigate();
+  const axiosInstance = useAxios();
 
   const {
     register,
@@ -20,8 +23,19 @@ const SignUp = () => {
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result);
+        // updating userinfo in the db.
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+          role: "member",
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString,
+        };
+
+        const userRes = await axiosInstance.post("/users", userInfo);
+        console.log(userRes.data);
 
         //updating profilePic and name here (in firebase)
         const userProfile = {
@@ -32,6 +46,7 @@ const SignUp = () => {
         updateUserProfile(userProfile)
           .then(() => {
             console.log("profile picture updated successfully");
+            navigate("/");
           })
           .catch((error) => {
             console.log(error);

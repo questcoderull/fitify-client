@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import FitifyLogo from "../FitifyLogo/FitifyLogo";
 import useAuth from "../../../Hooks/useAuth";
+import { MdDashboard } from "react-icons/md";
 
 const Navbar = () => {
   const { user, loading, logOutUser } = useAuth();
@@ -89,6 +90,24 @@ const Navbar = () => {
           Community
         </NavLink>
       </li>
+
+      {user && (
+        <li className="hover:bg-primary rounded-md transition">
+          <NavLink
+            to="/dashbord"
+            className={({ isActive }) =>
+              `flex items-center gap-2 px-3 py-2 rounded-md ${
+                isActive
+                  ? "bg-primary text-white"
+                  : "text-primary hover:text-white"
+              }`
+            }
+          >
+            <MdDashboard />
+            Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
 

@@ -10,6 +10,8 @@ import SignUp from "../Pages/Authentication/SignUp/SignUp";
 import ForbiddenPage from "../Pages/ForbiddenPage/ForbiddebPage";
 import TrainerDetails from "../Pages/TrainersDetails/TrainersDetails";
 import TrainerBooking from "../Pages/TrainerBooking/TrainerBooking";
+import PrivateRoute from "../Routes/PrivateRoute";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -61,5 +63,21 @@ export const router = createBrowserRouter([
         Component: SignUp,
       },
     ],
+  },
+
+  {
+    path: "/dashbord",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+
+    children: [
+      {
+path: 'add-class',
+element:
+    }
+  ],
   },
 ]);

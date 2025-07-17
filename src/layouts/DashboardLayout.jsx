@@ -1,6 +1,7 @@
 import React from "react";
 import { MdOutlineAddBox } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
+import FitifyLogo from "../Pages/Shared/FitifyLogo/FitifyLogo";
 
 const DashboardLayout = () => {
   return (
@@ -42,7 +43,11 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+
+        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-2">
+          <div className="mb-5 pl-2">
+            <FitifyLogo></FitifyLogo>
+          </div>
           {/* Sidebar content here */}
           <li className="hover:bg-primary rounded-md transition">
             <NavLink

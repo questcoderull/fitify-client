@@ -64,37 +64,73 @@ const Trainers = () => {
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
 
   return (
-    <div className="overflow-x-auto p-4">
-      <h2 className="text-3xl font-bold mb-6 text-center">All Trainers</h2>
-      <table className="table w-full border rounded-lg shadow-lg">
-        <thead className="bg-primary text-white">
-          <tr>
-            <th>#</th>
-            <th>Trainer Name</th>
-            <th>Email</th>
-            <th>Joined Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {trainers.map((trainer, index) => (
-            <tr key={trainer._id} className="hover:bg-gray-100">
-              <td>{index + 1}</td>
-              <td className="font-semibold">{trainer.name}</td>
-              <td>{trainer.email}</td>
-              <td>{new Date(trainer.joined_At).toLocaleDateString("en-US")}</td>
-              <td>
+    <div className="p-4 space-y-4">
+      <h2 className="text-2xl md:text-3xl font-bold text-center">
+        All Trainers
+      </h2>
+
+      {/* Mobile View - Cards */}
+      <div className="block md:hidden space-y-4">
+        {trainers.map((trainer, index) => (
+          <div key={trainer._id} className="card bg-base-100 shadow-md">
+            <div className="card-body p-4">
+              <h3 className="font-bold text-lg">
+                {index + 1}. {trainer.name}
+              </h3>
+              <p className="text-sm">
+                <span className="font-semibold">Email:</span> {trainer.email}
+              </p>
+              <p className="text-sm">
+                <span className="font-semibold">Joined:</span>{" "}
+                {new Date(trainer.joined_At).toLocaleDateString("en-US")}
+              </p>
+              <div className="card-actions justify-end mt-3">
                 <button
                   onClick={() => handleRemoveTrainer(trainer._id)}
-                  className="btn btn-sm btn-error text-white flex items-center gap-1"
+                  className="btn btn-sm btn-error text-white"
                 >
-                  <FaTrashAlt /> Remove
+                  <FaTrashAlt className="mr-1" /> Remove
                 </button>
-              </td>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop View - Table */}
+      <div className="overflow-x-auto hidden md:block">
+        <table className="table w-full border rounded-lg shadow-lg text-base">
+          <thead className="bg-primary text-white">
+            <tr>
+              <th>#</th>
+              <th>Trainer Name</th>
+              <th>Email</th>
+              <th>Joined Date</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {trainers.map((trainer, index) => (
+              <tr key={trainer._id} className="hover:bg-gray-100">
+                <td>{index + 1}</td>
+                <td className="font-semibold">{trainer.name}</td>
+                <td>{trainer.email}</td>
+                <td>
+                  {new Date(trainer.joined_At).toLocaleDateString("en-US")}
+                </td>
+                <td>
+                  <button
+                    onClick={() => handleRemoveTrainer(trainer._id)}
+                    className="btn btn-sm btn-error text-white flex items-center gap-1"
+                  >
+                    <FaTrashAlt /> Remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

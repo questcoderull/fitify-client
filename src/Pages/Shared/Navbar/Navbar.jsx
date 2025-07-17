@@ -94,7 +94,7 @@ const Navbar = () => {
       {user && (
         <li className="hover:bg-primary rounded-md transition">
           <NavLink
-            to="/dashbord"
+            to="/dashboard"
             className={({ isActive }) =>
               `flex items-center gap-2 px-3 py-2 rounded-md ${
                 isActive

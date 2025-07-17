@@ -12,6 +12,7 @@ import TrainerDetails from "../Pages/TrainersDetails/TrainersDetails";
 import TrainerBooking from "../Pages/TrainerBooking/TrainerBooking";
 import PrivateRoute from "../Routes/PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
+import AddClass from "../Pages/DashbordPages/AddClass/AddClass";
 
 export const router = createBrowserRouter([
   {
@@ -66,7 +67,7 @@ export const router = createBrowserRouter([
   },
 
   {
-    path: "/dashbord",
+    path: "/dashboard",
     element: (
       <PrivateRoute>
         <DashboardLayout></DashboardLayout>
@@ -75,9 +76,9 @@ export const router = createBrowserRouter([
 
     children: [
       {
-path: 'add-class',
-element:
-    }
-  ],
+        path: "add-class",
+        element: <AddClass></AddClass>,
+      },
+    ],
   },
 ]);

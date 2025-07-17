@@ -85,6 +85,7 @@ const AddClass = () => {
           <input
             onChange={handleImageUpload}
             type="file"
+            accept="image/*"
             className="file-input w-full"
           />
           {!imageUrl && <p className="text-red-500 text-sm">Upload an image</p>}

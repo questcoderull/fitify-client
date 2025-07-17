@@ -112,7 +112,8 @@ const SignUp = () => {
               <input
                 onChange={handleImageUpload}
                 type="file"
-                className="input w-full"
+                accept="image/*"
+                className="file-input w-full"
                 placeholder="Photo"
               />
 

@@ -15,6 +15,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AddClass from "../Pages/DashbordPages/AddClass/AddClass";
 import AllSubscribers from "../Pages/DashbordPages/AllSubscriber/AllSubscribers";
 import Trainers from "../Pages/DashbordPages/AllTraniers/Trainers";
+import BeTrainer from "../Pages/BeTrainer/BeTrainer";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ export const router = createBrowserRouter([
       {
         path: "trainer-booking/:id",
         Component: TrainerBooking,
+      },
+      {
+        path: "be-trainer",
+        element: (
+          <PrivateRoute>
+            <BeTrainer></BeTrainer>
+          </PrivateRoute>
+        ),
       },
       {
         path: "forbidden",

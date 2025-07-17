@@ -138,9 +138,9 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <Link to="/" className="ml-3">
+        <span className="ml-3">
           <FitifyLogo />
-        </Link>
+        </span>
       </div>
 
       <div className="navbar-center hidden lg:flex">

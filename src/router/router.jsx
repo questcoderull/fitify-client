@@ -14,6 +14,7 @@ import PrivateRoute from "../Routes/PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddClass from "../Pages/DashbordPages/AddClass/AddClass";
 import AllSubscribers from "../Pages/DashbordPages/AllSubscriber/AllSubscribers";
+import Trainers from "../Pages/DashbordPages/AllTraniers/Trainers";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
       {
         path: "all-subscribers",
         element: <AllSubscribers></AllSubscribers>,
+      },
+      {
+        path: "trainers",
+        element: <Trainers></Trainers>,
       },
     ],
   },

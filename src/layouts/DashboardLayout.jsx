@@ -81,6 +81,22 @@ const DashboardLayout = () => {
             </NavLink>
           </li>
 
+          <li className="hover:bg-primary rounded-md transition">
+            <NavLink
+              to="/dashboard/trainers"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-3 py-2 rounded-md ${
+                  isActive
+                    ? "bg-primary text-white"
+                    : "text-primary hover:text-white"
+                }`
+              }
+            >
+              <MdPeopleAlt />
+              Trainers
+            </NavLink>
+          </li>
+
           <li>
             <a>Sidebar Item 2</a>
           </li>

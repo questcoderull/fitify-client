@@ -13,6 +13,7 @@ import TrainerBooking from "../Pages/TrainerBooking/TrainerBooking";
 import PrivateRoute from "../Routes/PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddClass from "../Pages/DashbordPages/AddClass/AddClass";
+import AllSubscribers from "../Pages/DashbordPages/AllSubscriber/AllSubscribers";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: "add-class",
         element: <AddClass></AddClass>,
+      },
+      {
+        path: "all-subscribers",
+        element: <AllSubscribers></AllSubscribers>,
       },
     ],
   },

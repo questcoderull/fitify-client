@@ -1,5 +1,5 @@
 import React from "react";
-import { MdOutlineAddBox } from "react-icons/md";
+import { MdOutlineAddBox, MdPeopleAlt } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 import FitifyLogo from "../Pages/Shared/FitifyLogo/FitifyLogo";
 
@@ -64,6 +64,23 @@ const DashboardLayout = () => {
               Add Class
             </NavLink>
           </li>
+
+          <li className="hover:bg-primary rounded-md transition">
+            <NavLink
+              to="/dashboard/all-subscribers"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-3 py-2 rounded-md ${
+                  isActive
+                    ? "bg-primary text-white"
+                    : "text-primary hover:text-white"
+                }`
+              }
+            >
+              <MdPeopleAlt />
+              All Subscribers
+            </NavLink>
+          </li>
+
           <li>
             <a>Sidebar Item 2</a>
           </li>

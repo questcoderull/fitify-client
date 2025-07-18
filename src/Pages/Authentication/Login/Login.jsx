@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import FitifyLogo from "../../Shared/FitifyLogo/FitifyLogo";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import useAuth from "../../../Hooks/useAuth";
+import useAxios from "../../../Hooks/useAxios";
 
 const Login = () => {
+  const { logInUser } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const axiosInstance = useAxios();
 
   const {
     register,
@@ -14,8 +18,22 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from || "/";
+
   const onSubmit = (data) => {
     console.log(data);
+
+    logInUser(data.email, data.password)
+      .then(async (result) => {
+        console.log(result);
+
+        navigate(from);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

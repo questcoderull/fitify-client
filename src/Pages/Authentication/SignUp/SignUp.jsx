@@ -31,7 +31,7 @@ const SignUp = () => {
           email: data.email,
           role: "member",
           created_at: new Date().toISOString(),
-          last_log_in: new Date().toISOString,
+          last_log_in: new Date().toISOString(),
         };
 
         const userRes = await axiosInstance.post("/users", userInfo);

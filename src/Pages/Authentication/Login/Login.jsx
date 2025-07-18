@@ -29,6 +29,13 @@ const Login = () => {
       .then(async (result) => {
         console.log(result);
 
+        //  Update last login time
+        const res = await axiosInstance.patch("/users/update-last-login", {
+          email: data.email,
+          last_log_in: new Date().toISOString(),
+        });
+        console.log(res.data);
+
         navigate(from);
       })
       .catch((error) => {

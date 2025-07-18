@@ -2,6 +2,8 @@ import React from "react";
 import { MdOutlineAddBox, MdPeopleAlt } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 import FitifyLogo from "../Pages/Shared/FitifyLogo/FitifyLogo";
+import { FaUserClock } from "react-icons/fa";
+import { BiTimeFive } from "react-icons/bi";
 
 const DashboardLayout = () => {
   return (
@@ -94,6 +96,13 @@ const DashboardLayout = () => {
             >
               <MdPeopleAlt />
               Trainers
+            </NavLink>
+          </li>
+
+          <li className="hover:bg-primary rounded-md transition">
+            <NavLink to="/dashboard/pending-trainers">
+              <FaUserClock />
+              Pending Trainers
             </NavLink>
           </li>
 

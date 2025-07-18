@@ -25,10 +25,12 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then(async (result) => {
         console.log(result);
+        console.log("profile pic", profilePic);
         // updating userinfo in the db.
         const userInfo = {
           name: data.name,
           email: data.email,
+          profilePic: profilePic,
           role: "member",
           created_at: new Date().toISOString(),
           last_log_in: new Date().toISOString(),
@@ -91,7 +93,7 @@ const SignUp = () => {
                 placeholder="Name"
               />
 
-              {errors.photo?.type === "required" && (
+              {errors.name?.type === "required" && (
                 <p className="text-secondary">Name is requred</p>
               )}
 
@@ -103,19 +105,23 @@ const SignUp = () => {
                 className="input w-full"
                 placeholder="Email"
               />
-              {errors.photo?.type === "required" && (
+              {errors.email?.type === "required" && (
                 <p className="text-secondary">Email is requred</p>
               )}
 
               {/* photo */}
               <label className="label">Photo</label>
               <input
+                {...register("photo", { required: true })}
                 onChange={handleImageUpload}
                 type="file"
                 accept="image/*"
                 className="file-input w-full"
                 placeholder="Photo"
               />
+              {errors.photo?.type === "required" && (
+                <p className="text-secondary">Photo is required</p>
+              )}
 
               {/* Password */}
               <label className="label">

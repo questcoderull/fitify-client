@@ -131,113 +131,119 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar sticky top-0 z-50 py-4 px-4 md:px-8 bg-white/30 backdrop-blur-md shadow">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-white rounded-box shadow-md z-10 mt-3 w-52 p-2"
-          >
-            {links}
-          </ul>
-        </div>
-        <span className="ml-3">
-          <FitifyLogo />
-        </span>
-      </div>
-
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-2">{links}</ul>
-      </div>
-
-      <div className="navbar-end">
-        {loading ? (
-          <span className="loading loading-spinner text-primary"></span>
-        ) : user ? (
-          <div className="dropdown dropdown-end">
+    <div className=" sticky top-0 z-50 py-4 bg-white/30 backdrop-blur-md shadow">
+      <div className="navbar max-w-11/12 mx-auto">
+        <div className="navbar-start">
+          <div className="dropdown">
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className="btn btn-accent text-white lg:hidden"
             >
-              <div className="w-24 rounded-full">
-                {/* from gpt */}
-                {user && user.photoURL ? (
-                  <>
-                    <img
-                      src={user.photoURL}
-                      alt="User profile"
-                      className="w-20 h-20 rounded-full object-cover cursor-pointer"
-                    />
-                  </>
-                ) : (
-                  <div
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-[#023047] text-[#FFB703] text-lg font-bold uppercase cursor-default"
-                    title={user?.displayName || "User"}
-                  >
-                    {user?.displayName?.charAt(0) || "U"}
-                  </div>
-                )}
-              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-white rounded-box shadow mt-3 w-52 p-3 border"
+              className="menu menu-sm dropdown-content bg-white rounded-box shadow-md z-10 mt-3 w-52 p-2"
             >
-              <li className="mb-2">{user.displayName || "Your Name"}</li>
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className="btn btn-neutral w-full"
-                >
-                  Logout
-                </button>
-              </li>
+              {links}
             </ul>
           </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                `btn btn-sm flex items-center gap-2 ${
-                  isActive ? "btn-primary text-white" : "btn-outline"
-                }`
-              }
-            >
-              <FaSignInAlt />
-              Login
-            </NavLink>
+          <span className="ml-3">
+            <FitifyLogo />
+          </span>
+        </div>
 
-            <NavLink
-              to="/signUP"
-              className={({ isActive }) =>
-                `btn btn-sm flex items-center gap-2 ${
-                  isActive ? "btn-primary text-white" : "btn-outline"
-                }`
-              }
-            >
-              <FaUserPlus />
-              Sign Up
-            </NavLink>
-          </div>
-        )}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1 space-x-2">{links}</ul>
+        </div>
+
+        <div className="navbar-end">
+          {loading ? (
+            <span className="loading loading-spinner text-primary"></span>
+          ) : user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-24 rounded-full">
+                  {/* from gpt */}
+                  {user && user.photoURL ? (
+                    <>
+                      <img
+                        src={user.photoURL}
+                        alt="User profile"
+                        className="w-20 h-20 rounded-full object-cover cursor-pointer"
+                      />
+                    </>
+                  ) : (
+                    <div
+                      className="w-10 h-10 flex items-center justify-center rounded-full bg-[#023047] text-[#FFB703] text-lg font-bold uppercase cursor-default"
+                      title={user?.displayName || "User"}
+                    >
+                      {user?.displayName?.charAt(0) || "U"}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-white rounded-box shadow mt-3 w-52 p-3 border"
+              >
+                <li className="mb-2">{user.displayName || "Your Name"}</li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="btn btn-neutral w-full"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `btn btn-sm flex items-center gap-2 ${
+                    isActive ? "btn-primary text-white" : "btn-outline"
+                  }`
+                }
+              >
+                <FaSignInAlt />
+                Login
+              </NavLink>
+
+              <NavLink
+                to="/signUP"
+                className={({ isActive }) =>
+                  `btn btn-sm flex items-center gap-2 ${
+                    isActive ? "btn-primary text-white" : "btn-outline"
+                  }`
+                }
+              >
+                <FaUserPlus />
+                Sign Up
+              </NavLink>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

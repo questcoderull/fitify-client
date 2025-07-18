@@ -30,7 +30,7 @@ const AllTrainers = () => {
   }
 
   return (
-    <div className="px-5 md:px-20 py-10">
+    <div className="py-10">
       <Helmet>
         <title>Fitify | All Trainers</title>
       </Helmet>

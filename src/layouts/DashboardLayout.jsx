@@ -3,7 +3,7 @@ import { MdOutlineAddBox, MdPeopleAlt } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 import FitifyLogo from "../Pages/Shared/FitifyLogo/FitifyLogo";
 import { FaUserClock } from "react-icons/fa";
-import { BiTimeFive } from "react-icons/bi";
+import { GiWeightLiftingUp } from "react-icons/gi";
 
 const DashboardLayout = () => {
   return (
@@ -76,7 +76,7 @@ const DashboardLayout = () => {
               to="/dashboard/trainers"
               className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
-              <MdPeopleAlt />
+              <GiWeightLiftingUp />
               Trainers
             </NavLink>
           </li>

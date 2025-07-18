@@ -31,13 +31,7 @@ const Navbar = () => {
       <li className="hover:bg-primary rounded-md transition">
         <NavLink
           to="/"
-          className={({ isActive }) =>
-            `flex items-center gap-2 px-3 py-2 rounded-md ${
-              isActive
-                ? "bg-primary text-white"
-                : "text-primary hover:text-white"
-            }`
-          }
+          className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
         >
           <FaHome />
           Home
@@ -47,13 +41,7 @@ const Navbar = () => {
       <li className="hover:bg-primary rounded-md transition">
         <NavLink
           to="/all-trainers"
-          className={({ isActive }) =>
-            `flex items-center gap-2 px-3 py-2 rounded-md ${
-              isActive
-                ? "bg-primary text-white"
-                : "text-primary hover:text-white"
-            }`
-          }
+          className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
         >
           <FaUserFriends />
           All Trainers
@@ -63,13 +51,7 @@ const Navbar = () => {
       <li className="hover:bg-primary rounded-md transition">
         <NavLink
           to="/all-classes"
-          className={({ isActive }) =>
-            `flex items-center gap-2 px-3 py-2 rounded-md ${
-              isActive
-                ? "bg-primary text-white"
-                : "text-primary hover:text-white"
-            }`
-          }
+          className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
         >
           <FaDumbbell />
           All Classes
@@ -79,13 +61,7 @@ const Navbar = () => {
       <li className="hover:bg-primary rounded-md transition">
         <NavLink
           to="/community"
-          className={({ isActive }) =>
-            `flex items-center gap-2 px-3 py-2 rounded-md ${
-              isActive
-                ? "bg-primary text-white"
-                : "text-primary hover:text-white"
-            }`
-          }
+          className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
         >
           <FaComments />
           Community
@@ -97,13 +73,7 @@ const Navbar = () => {
           <li className="hover:bg-primary rounded-md transition">
             <NavLink
               to="/dashboard"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 rounded-md ${
-                  isActive
-                    ? "bg-primary text-white"
-                    : "text-primary hover:text-white"
-                }`
-              }
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
               <MdDashboard />
               Dashboard
@@ -113,13 +83,7 @@ const Navbar = () => {
           <li className="hover:bg-primary rounded-md transition">
             <NavLink
               to="/be-trainer"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 rounded-md ${
-                  isActive
-                    ? "bg-primary text-white"
-                    : "text-primary hover:text-white"
-                }`
-              }
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
               <GiMuscleUp />
               Be a trainer

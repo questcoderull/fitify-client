@@ -54,13 +54,7 @@ const DashboardLayout = () => {
           <li className="hover:bg-primary rounded-md transition">
             <NavLink
               to="/dashboard/add-class"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 rounded-md ${
-                  isActive
-                    ? "bg-primary text-white"
-                    : "text-primary hover:text-white"
-                }`
-              }
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
               <MdOutlineAddBox />
               Add Class
@@ -70,13 +64,7 @@ const DashboardLayout = () => {
           <li className="hover:bg-primary rounded-md transition">
             <NavLink
               to="/dashboard/all-subscribers"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 rounded-md ${
-                  isActive
-                    ? "bg-primary text-white"
-                    : "text-primary hover:text-white"
-                }`
-              }
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
               <MdPeopleAlt />
               All Subscribers
@@ -86,13 +74,7 @@ const DashboardLayout = () => {
           <li className="hover:bg-primary rounded-md transition">
             <NavLink
               to="/dashboard/trainers"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-2 rounded-md ${
-                  isActive
-                    ? "bg-primary text-white"
-                    : "text-primary hover:text-white"
-                }`
-              }
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
               <MdPeopleAlt />
               Trainers
@@ -100,7 +82,10 @@ const DashboardLayout = () => {
           </li>
 
           <li className="hover:bg-primary rounded-md transition">
-            <NavLink to="/dashboard/pending-trainers">
+            <NavLink
+              to="/dashboard/pending-trainers"
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+            >
               <FaUserClock />
               Pending Trainers
             </NavLink>

@@ -17,6 +17,7 @@ import AllSubscribers from "../Pages/DashbordPages/AllSubscriber/AllSubscribers"
 import Trainers from "../Pages/DashbordPages/AllTraniers/Trainers";
 import BeTrainer from "../Pages/BeTrainer/BeTrainer";
 import PendingTrainers from "../Pages/DashbordPages/PendingTrainers/PendingTrainers";
+import AddForum from "../Pages/DashbordPages/AddForum/AddForum";
 
 export const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ export const router = createBrowserRouter([
       {
         path: "pending-trainers",
         element: <PendingTrainers></PendingTrainers>,
+      },
+      {
+        path: "add-forum",
+        element: <AddForum></AddForum>,
       },
     ],
   },

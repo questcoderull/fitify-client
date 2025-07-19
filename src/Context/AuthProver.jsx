@@ -11,12 +11,14 @@ import {
 } from "firebase/auth";
 
 import { auth } from "../firebase/firebase.init";
+import useAxios from "../Hooks/useAxios";
 
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-
+  const [role, setRole] = useState(null);
   const provider = new GoogleAuthProvider();
+  const axiosInstance = useAxios();
 
   //   creating new user
   const createUser = (email, password) => {
@@ -46,10 +48,17 @@ const AuthProvider = ({ children }) => {
 
   //   ovserber
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       setLoading(false);
       // console.log("user in the auth state change", currentUser);
+
+      if (currentUser?.email) {
+        const res = await axiosInstance.get(`/users/${currentUser.email}`);
+        setRole(res.data?.role);
+      } else {
+        setRole(null);
+      }
     });
 
     return () => {
@@ -60,6 +69,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     loading,
     user,
+    role,
     setLoading,
     createUser,
     logInUser,

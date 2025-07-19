@@ -18,7 +18,24 @@ createRoot(document.getElementById("root")).render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <RouterProvider router={router} />
-          <Toaster />
+          <Toaster
+            toastOptions={{
+              success: {
+                duration: 5000,
+                style: {
+                  background: "#065482",
+                  color: "#fff",
+                },
+              },
+              error: {
+                duration: 9000,
+                style: {
+                  background: "#f89746",
+                  color: "#fff",
+                },
+              },
+            }}
+          />
         </AuthProvider>
       </QueryClientProvider>
     </HelmetProvider>

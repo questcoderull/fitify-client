@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAxios from "../../Hooks/useAxios";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const AllClasses = () => {
   const axios = useAxios();
@@ -26,6 +27,36 @@ const AllClasses = () => {
 
     fetchData();
   }, [axios]);
+
+  const showExtraTrainers = (trainers) => {
+    const isMobile = window.innerWidth < 768;
+    const html = trainers
+      .map(
+        (t) => `
+      <a href="/trainer/${t._id}" target="${isMobile ? "_self" : "_blank"}" 
+         style="display: flex; align-items: center; gap: 15px; padding: 10px; border-bottom: 1px solid #eee; text-decoration: none;">
+        <img 
+          src="${t.image}" 
+          title="${t.name}" 
+          alt="${t.name}"
+          style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #ccc;" 
+        />
+        <span style="font-size: 16px; color: #333; font-weight: 500;">${
+          t.name
+        }</span>
+      </a>
+    `
+      )
+      .join("");
+
+    Swal.fire({
+      title: "Other Trainers",
+      html: `<div style="max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">${html}</div>`,
+      showCloseButton: true,
+      showConfirmButton: false,
+      width: window.innerWidth > 640 ? "600px" : "95%",
+    });
+  };
 
   if (loading) {
     return (
@@ -87,8 +118,11 @@ const AllClasses = () => {
 
                     {/* If more than 5, show +X */}
                     {matchedTrainers.length > 5 && (
-                      <div className="avatar avatar-placeholder">
-                        <div className="bg-neutral text-neutral-content w-12">
+                      <div className="avatar avatar-placeholder cursor-pointer">
+                        <div
+                          className="bg-neutral text-neutral-content w-12"
+                          onClick={() => showExtraTrainers(matchedTrainers)}
+                        >
                           <span>+{matchedTrainers.length - 5}</span>
                         </div>
                       </div>

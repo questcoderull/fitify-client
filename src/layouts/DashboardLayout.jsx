@@ -5,6 +5,7 @@ import {
   MdOutlineAddBox,
   MdOutlineHistory,
   MdPeopleAlt,
+  MdPerson,
 } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 import FitifyLogo from "../Pages/Shared/FitifyLogo/FitifyLogo";
@@ -132,7 +133,7 @@ const DashboardLayout = () => {
               to="/dashboard/my-profile"
               className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
-              <MdOutlineHistory className="text-lg" />
+              <MdPerson className="text-lg" />
               My Profile
             </NavLink>
           </li>

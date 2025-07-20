@@ -1,5 +1,10 @@
 import React from "react";
-import { MdForum, MdOutlineAddBox, MdPeopleAlt } from "react-icons/md";
+import {
+  MdEventAvailable,
+  MdForum,
+  MdOutlineAddBox,
+  MdPeopleAlt,
+} from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 import FitifyLogo from "../Pages/Shared/FitifyLogo/FitifyLogo";
 import { FaUserClock } from "react-icons/fa";
@@ -98,6 +103,16 @@ const DashboardLayout = () => {
             >
               <MdForum />
               Add Forum
+            </NavLink>
+          </li>
+
+          <li className="hover:bg-primary rounded-md transition">
+            <NavLink
+              to="/dashboard/add-slot"
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+            >
+              <MdEventAvailable />
+              Add Slot
             </NavLink>
           </li>
 

@@ -288,13 +288,11 @@ const BeATrainer = () => {
           placeholder="LinkedIn Link"
           className="input w-full"
         />
-        {errors.facebook ||
-          errors.facebook ||
-          (errors.linkedin && (
-            <p className="text-red-500 text-sm">
-              You must Provide your social links
-            </p>
-          ))}
+        {(errors.facebook || errors.facebook || errors.linkedin) && (
+          <p className="text-red-500 text-sm">
+            You must Provide your social links
+          </p>
+        )}
 
         <label>Description</label>
         <textarea

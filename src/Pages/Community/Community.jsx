@@ -72,7 +72,10 @@ const Community = () => {
           const downVoted = post.downVotes?.includes(user?.email);
 
           return (
-            <div key={post._id} className="card bg-base-100 shadow-lg">
+            <div
+              key={post._id}
+              className="card bg-base-100 border border-gray-300"
+            >
               <div className="card-body">
                 <div className="flex items-center gap-3">
                   <img

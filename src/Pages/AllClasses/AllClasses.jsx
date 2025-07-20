@@ -48,7 +48,8 @@ const AllClasses = () => {
                 Duration: {singleClass.duration}
               </p>
               <p className="text-sm text-gray-500">
-                Level: {singleClass.level}
+                Level: {singleClass.level}{" "}
+                <span className="ml-2">Category : {singleClass.category}</span>
               </p>
 
               {/* <div className="flex flex-wrap mt-3">

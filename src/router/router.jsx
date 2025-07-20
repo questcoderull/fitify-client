@@ -18,6 +18,7 @@ import Trainers from "../Pages/DashbordPages/AllTraniers/Trainers";
 import BeTrainer from "../Pages/BeTrainer/BeTrainer";
 import PendingTrainers from "../Pages/DashbordPages/PendingTrainers/PendingTrainers";
 import AddForum from "../Pages/DashbordPages/AddForum/AddForum";
+import AddSlot from "../Pages/DashbordPages/AddSlot/AddSlot";
 
 export const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ export const router = createBrowserRouter([
       {
         path: "add-forum",
         element: <AddForum></AddForum>,
+      },
+      {
+        path: "add-slot",
+        element: <AddSlot></AddSlot>,
       },
     ],
   },

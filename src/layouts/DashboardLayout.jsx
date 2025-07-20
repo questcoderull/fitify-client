@@ -3,6 +3,7 @@ import {
   MdEventAvailable,
   MdForum,
   MdOutlineAddBox,
+  MdOutlineHistory,
   MdPeopleAlt,
 } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
@@ -113,6 +114,16 @@ const DashboardLayout = () => {
             >
               <MdEventAvailable />
               Add Slot
+            </NavLink>
+          </li>
+
+          <li className="hover:bg-primary rounded-md transition">
+            <NavLink
+              to="/dashboard/activity-log"
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+            >
+              <MdOutlineHistory className="text-lg" />
+              Activity Log
             </NavLink>
           </li>
 

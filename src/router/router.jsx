@@ -19,6 +19,7 @@ import BeTrainer from "../Pages/BeTrainer/BeTrainer";
 import PendingTrainers from "../Pages/DashbordPages/PendingTrainers/PendingTrainers";
 import AddForum from "../Pages/DashbordPages/AddForum/AddForum";
 import AddSlot from "../Pages/DashbordPages/AddSlot/AddSlot";
+import ActivityLog from "../Pages/DashbordPages/ActivityLog/ActivityLog";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,10 @@ export const router = createBrowserRouter([
       {
         path: "add-slot",
         element: <AddSlot></AddSlot>,
+      },
+      {
+        path: "activity-log",
+        element: <ActivityLog></ActivityLog>,
       },
     ],
   },

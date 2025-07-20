@@ -20,6 +20,7 @@ import PendingTrainers from "../Pages/DashbordPages/PendingTrainers/PendingTrain
 import AddForum from "../Pages/DashbordPages/AddForum/AddForum";
 import AddSlot from "../Pages/DashbordPages/AddSlot/AddSlot";
 import ActivityLog from "../Pages/DashbordPages/ActivityLog/ActivityLog";
+import MyProfile from "../Pages/DashbordPages/MyProfile/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +118,10 @@ export const router = createBrowserRouter([
       {
         path: "activity-log",
         element: <ActivityLog></ActivityLog>,
+      },
+      {
+        path: "my-profile",
+        element: <MyProfile></MyProfile>,
       },
     ],
   },

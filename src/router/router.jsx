@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
         Component: TrainerBooking,
       },
       {
-        path: "payment/:id",
+        path: "payment/:trainerId",
         element: (
           <PrivateRoute>
             <Payment></Payment>,

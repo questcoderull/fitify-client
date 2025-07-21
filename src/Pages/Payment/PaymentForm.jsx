@@ -16,9 +16,9 @@ const PaymentForm = () => {
   const { trainerId } = useParams();
   const [fee, setfee] = useState(0);
   const navigate = useNavigate();
-
   const feeInCents = fee * 100;
-  console.log("fee in cence", feeInCents);
+  //   console.log("fee in cence", feeInCents);
+  const [processing, setProcessing] = useState(false);
 
   const { isPending, data: trainerInfo = {} } = useQuery({
     queryKey: ["triners", trainerId],
@@ -43,9 +43,10 @@ const PaymentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!stripe || !elements) {
+    if (!stripe || !elements || processing) {
       return;
     }
+    setProcessing(true);
 
     const card = elements.getElement(CardElement);
 
@@ -84,12 +85,12 @@ const PaymentForm = () => {
 
       if (result.error) {
         setError(result.error.message);
-        console.log(result.error.message);
+        // console.log(result.error.message);
       } else {
         setError("");
         if (result.paymentIntent.status === "succeeded") {
           console.log("Payment succeeded!");
-          console.log(result);
+          //   console.log(result);
 
           //   step 5. eikhane ja ja korar korbo. like mark as booked, or creating payment history. eikhane  slot book relete code hobe after a succefull payment.
 
@@ -111,6 +112,25 @@ const PaymentForm = () => {
           const bookingRes = await axiosSecure.post("/bookings", bookingData);
           console.log("Booking response:", bookingRes.data);
 
+          // Payment data
+          const paymentInfo = {
+            transactionId: result.paymentIntent.id,
+            memberEmail: user.email,
+            amount: fee,
+            trainerId,
+            trainerEmail: trainerInfo.email,
+            package: selectedPackage,
+            day,
+            label,
+            time,
+            date: new Date(),
+            status: "succeeded",
+          };
+
+          // Save payment info separately
+          const paymentRes = await axiosSecure.post("/payments", paymentInfo);
+          console.log("payment response", paymentRes);
+
           // Step 1: Clear card form after payment
           elements.getElement(CardElement).clear();
 
@@ -128,12 +148,14 @@ const PaymentForm = () => {
         }
       }
     }
+
+    setProcessing(false);
   };
 
   if (isPending) {
     return "Loading...";
   }
-  console.log(trainerInfo);
+  //   console.log(trainerInfo);
 
   return (
     // <div className="max-w-2xl mx-auto my-12 p-6 bg-white rounded-xl shadow-md space-y-6">
@@ -230,9 +252,9 @@ const PaymentForm = () => {
         <button
           className="btn btn-primary w-full"
           type="submit"
-          disabled={!stripe}
+          disabled={!stripe || processing}
         >
-          Pay ${fee} to book the slot
+          {processing ? "Processing..." : `Pay $${fee} to book the slot`}
         </button>
         {error && <p className="text-sm text-red-500">{error}</p>}
       </form>

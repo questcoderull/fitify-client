@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useLocation, useNavigate } from "react-router";
 import { Helmet } from "react-helmet-async";
 import useAxios from "../../Hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
 
 const TrainerBooking = () => {
   const { id } = useParams();
@@ -9,24 +10,33 @@ const TrainerBooking = () => {
   const navigate = useNavigate();
   const axios = useAxios();
 
-  const [trainer, setTrainer] = useState(null);
-  const [selectedPackage, setSelectedPackage] = useState("Basic");
-
+  // Getting query parameters from URL (example: ?day=Sunday&label=Evening&time=8:00%20PM)
   const searchParams = new URLSearchParams(location.search);
-  const slot = searchParams.get("slot");
+  const day = searchParams.get("day");
+  const label = searchParams.get("label");
+  const time = searchParams.get("time");
 
-  useEffect(() => {
-    axios
-      .get(`/trainers/${id}`)
-      .then((res) => setTrainer(res.data))
-      .catch((err) => console.error("Error fetching trainer:", err));
-  }, [id]);
+  const {
+    data: trainer,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["trainer", id],
+    queryFn: async () => {
+      const res = await axios.get(`/trainers/${id}`);
+      return res.data;
+    },
+  });
+
+  const [selectedPackage, setSelectedPackage] = React.useState("Basic");
 
   const handleJoinNow = () => {
-    navigate(`/payment/${id}?slot=${slot}&package=${selectedPackage}`);
+    navigate(
+      `/payment/${id}?day=${day}&label=${label}&time=${time}&package=${selectedPackage}`
+    );
   };
 
-  if (!trainer) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-[60vh]">
         <span className="loading loading-spinner text-primary"></span>
@@ -34,8 +44,16 @@ const TrainerBooking = () => {
     );
   }
 
+  if (error || !trainer) {
+    return (
+      <div className="text-center text-red-500">
+        Failed to load trainer data
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-5xl mx-auto p-6 ">
+    <div className="max-w-5xl mx-auto p-6">
       <Helmet>
         <title>Fitify | Book {trainer.name}</title>
       </Helmet>
@@ -46,15 +64,18 @@ const TrainerBooking = () => {
 
       <div className="mb-4 border border-secondary bg-base-100 p-4 rounded-lg shadow">
         <img
-          src={trainer.profileImage}
+          src={trainer.image || trainer.profileImage}
           alt={trainer.name}
           className="rounded-lg w-full md:w-96 mb-4"
         />
         <p>
-          <strong>Slot:</strong> {slot}
+          <strong>Slot:</strong> {day} - {label} - {time}
         </p>
         <p>
-          <strong>Classes:</strong> {trainer.expertise}
+          <strong>Classes:</strong>{" "}
+          {Array.isArray(trainer.expertise)
+            ? trainer.expertise.join(", ")
+            : trainer.expertise}
         </p>
       </div>
 

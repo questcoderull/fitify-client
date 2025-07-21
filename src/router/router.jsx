@@ -21,6 +21,7 @@ import AddForum from "../Pages/DashbordPages/AddForum/AddForum";
 import AddSlot from "../Pages/DashbordPages/AddSlot/AddSlot";
 import ActivityLog from "../Pages/DashbordPages/ActivityLog/ActivityLog";
 import MyProfile from "../Pages/DashbordPages/MyProfile/MyProfile";
+import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ export const router = createBrowserRouter([
       {
         path: "trainer-booking/:id",
         Component: TrainerBooking,
+      },
+      {
+        path: "payment/:id",
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>,
+          </PrivateRoute>
+        ),
       },
       {
         path: "be-trainer",

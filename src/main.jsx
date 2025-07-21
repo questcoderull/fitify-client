@@ -20,6 +20,7 @@ createRoot(document.getElementById("root")).render(
           <RouterProvider router={router} />
           <Toaster
             toastOptions={{
+              position: "top-right",
               success: {
                 duration: 5000,
                 style: {

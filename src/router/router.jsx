@@ -23,6 +23,7 @@ import ActivityLog from "../Pages/DashbordPages/ActivityLog/ActivityLog";
 import MyProfile from "../Pages/DashbordPages/MyProfile/MyProfile";
 import Payment from "../Pages/Payment/Payment";
 import ManageSlots from "../Pages/DashbordPages/ManageSlots/ManageSlots";
+import BookedTrainer from "../Pages/DashbordPages/BookedTrainers/BookedTrainers";
 
 export const router = createBrowserRouter([
   {
@@ -136,6 +137,10 @@ export const router = createBrowserRouter([
       {
         path: "manage-slots",
         element: <ManageSlots></ManageSlots>,
+      },
+      {
+        path: "booked-trainer",
+        element: <BookedTrainer></BookedTrainer>,
       },
     ],
   },

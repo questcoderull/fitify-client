@@ -9,8 +9,9 @@ import {
 } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 import FitifyLogo from "../Pages/Shared/FitifyLogo/FitifyLogo";
-import { FaUserClock } from "react-icons/fa";
+import { FaUserCheck, FaUserClock } from "react-icons/fa";
 import { GiWeightLiftingUp } from "react-icons/gi";
+import { BiTimeFive } from "react-icons/bi";
 
 const DashboardLayout = () => {
   return (
@@ -143,8 +144,18 @@ const DashboardLayout = () => {
               to="/dashboard/manage-slots"
               className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
-              <MdPerson className="text-lg" />
+              <BiTimeFive className="text-lg" />
               Manage slots
+            </NavLink>
+          </li>
+
+          <li className="hover:bg-primary rounded-md transition">
+            <NavLink
+              to="/dashboard/booked-trainer"
+              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+            >
+              <FaUserCheck className="text-lg" />
+              My Booked Trainers
             </NavLink>
           </li>
 

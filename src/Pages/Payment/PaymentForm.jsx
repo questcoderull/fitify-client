@@ -100,6 +100,7 @@ const PaymentForm = () => {
             trainerEmail: trainerInfo.email,
             memberEmail: user.email,
             memberName: user.displayName,
+            memberImage: user.photoURL,
             day,
             label,
             time,

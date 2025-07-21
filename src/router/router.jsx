@@ -22,6 +22,7 @@ import AddSlot from "../Pages/DashbordPages/AddSlot/AddSlot";
 import ActivityLog from "../Pages/DashbordPages/ActivityLog/ActivityLog";
 import MyProfile from "../Pages/DashbordPages/MyProfile/MyProfile";
 import Payment from "../Pages/Payment/Payment";
+import ManageSlots from "../Pages/DashbordPages/ManageSlots/ManageSlots";
 
 export const router = createBrowserRouter([
   {
@@ -131,6 +132,10 @@ export const router = createBrowserRouter([
       {
         path: "my-profile",
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "manage-slots",
+        element: <ManageSlots></ManageSlots>,
       },
     ],
   },

@@ -1,31 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router";
 import { Helmet } from "react-helmet-async";
 import useAxios from "../../Hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
 
 const AllTrainers = () => {
-  const [trainers, setTrainers] = useState([]);
-  const [loading, setLoading] = useState(true);
   const axios = useAxios();
 
-  useEffect(() => {
-    axios
-      .get("/trainers")
-      .then((response) => {
-        setTrainers(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching trainers:", error);
-        setLoading(false);
-      });
-  }, []);
+  const {
+    data: trainers = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["trainers"],
+    queryFn: async () => {
+      const res = await axios.get("/trainers");
+      return res.data;
+    },
+  });
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <span className="loading loading-spinner text-primary loading-lg"></span>
       </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500">Failed to load trainers</div>
     );
   }
 
@@ -42,21 +46,37 @@ const AllTrainers = () => {
           <div key={trainer._id} className="card bg-base-100 shadow-md border">
             <figure>
               <img
-                src={trainer.profileImage}
+                src={trainer.image || trainer.profileImage}
                 alt={trainer.name}
                 className="w-full h-64 object-cover"
               />
             </figure>
             <div className="card-body">
               <h2 className="card-title text-primary">{trainer.name}</h2>
-              <p className="text-sm">Experience: {trainer.experience}</p>
-              <p className="text-sm">Expertise: {trainer.expertise}</p>
+              <p className="text-sm">Age: {trainer.age}</p>
               <p className="text-sm">
-                Available Days: {trainer.availableDays?.join(", ")}
+                Expertise:{" "}
+                {Array.isArray(trainer.expertise)
+                  ? trainer.expertise.join(", ")
+                  : trainer.expertise}
               </p>
               <p className="text-sm">
-                Slots: {trainer.availableSlots?.join(", ")}
+                Available Days:{" "}
+                {trainer.structuredSlots?.map((slot) => slot.day).join(", ")}
               </p>
+              <div className="text-sm space-y-1">
+                {trainer.structuredSlots?.map((slotObj, i) => (
+                  <div key={i}>
+                    <strong>{slotObj.day}</strong>:
+                    {slotObj.slots.map((group, j) => (
+                      <div key={j}>
+                        <span className="italic"> {group.label}: </span>
+                        {group.times.join(", ")}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
               <div className="mt-3">
                 <Link
                   to={`/trainer/${trainer._id}`}

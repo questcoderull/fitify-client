@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const ManageSlots = () => {
   const axiosSecure = useAxiosSecure();
@@ -9,7 +10,11 @@ const ManageSlots = () => {
   const [selectedBooking, setSelectedBooking] = useState(null);
 
   // Get trainer info by email
-  const { data: trainer = {}, isPending: loadingTrainer } = useQuery({
+  const {
+    data: trainer = {},
+    isPending: loadingTrainer,
+    refetch: refetchTrainer,
+  } = useQuery({
     queryKey: ["trainer", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/trainers-with-email/${user.email}`);
@@ -28,6 +33,34 @@ const ManageSlots = () => {
     },
     enabled: !!trainer?._id,
   });
+
+  const handleDeleteSlot = async (day, label, time) => {
+    const result = await Swal.fire({
+      title: `Delete slot?`,
+      text: `Are you sure you want to delete the slot: ${day} - ${label} - ${time}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await axiosSecure.delete(`/trainers/${trainer._id}/slot`, {
+          data: { day, label, time },
+        });
+
+        if (res.data.message) {
+          Swal.fire("Deleted!", res.data.message, "success");
+          refetchTrainer();
+        }
+      } catch (error) {
+        Swal.fire("Error!", "Failed to delete slot", "error");
+        console.error(error);
+      }
+    }
+  };
 
   if (loadingTrainer || loadingBookings) {
     return <p className="text-center mt-10">Loading slots...</p>;
@@ -87,7 +120,16 @@ const ManageSlots = () => {
                               See Details
                             </button>
                           ) : (
-                            <button className="btn btn-sm btn-error text-white">
+                            <button
+                              onClick={() =>
+                                handleDeleteSlot(
+                                  dayBlock.day,
+                                  slotGroup.label,
+                                  time
+                                )
+                              }
+                              className="btn btn-sm btn-error text-white"
+                            >
                               Delete
                             </button>
                           )}

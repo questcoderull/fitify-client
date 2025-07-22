@@ -145,7 +145,7 @@ const PaymentForm = () => {
   `,
             confirmButtonText: "Awesome!",
           }).then(() => {
-            navigate(`dashboard/booked-trainer`);
+            navigate("/dashboard/booked-trainer");
           });
         }
       }

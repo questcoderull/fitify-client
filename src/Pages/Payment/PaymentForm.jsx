@@ -98,6 +98,7 @@ const PaymentForm = () => {
             trainerId,
             trainerName: trainerInfo.name,
             trainerEmail: trainerInfo.email,
+            trainerSkill: trainerInfo.expertise,
             memberEmail: user.email,
             memberName: user.displayName,
             memberImage: user.photoURL,
@@ -144,7 +145,7 @@ const PaymentForm = () => {
   `,
             confirmButtonText: "Awesome!",
           }).then(() => {
-            navigate(`/trainer-booking/${trainerId}`);
+            navigate(`dashboard/booked-trainer`);
           });
         }
       }
@@ -156,7 +157,7 @@ const PaymentForm = () => {
   if (isPending) {
     return "Loading...";
   }
-  //   console.log(trainerInfo);
+  console.log(trainerInfo.expertise);
 
   return (
     // <div className="max-w-2xl mx-auto my-12 p-6 bg-white rounded-xl shadow-md space-y-6">

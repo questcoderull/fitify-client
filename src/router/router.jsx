@@ -24,6 +24,7 @@ import MyProfile from "../Pages/DashbordPages/MyProfile/MyProfile";
 import Payment from "../Pages/Payment/Payment";
 import ManageSlots from "../Pages/DashbordPages/ManageSlots/ManageSlots";
 import BookedTrainer from "../Pages/DashbordPages/BookedTrainers/BookedTrainers";
+import MakeAdmin from "../Pages/DashbordPages/MakeAdmin/MakeAdmin";
 
 export const router = createBrowserRouter([
   {
@@ -141,6 +142,10 @@ export const router = createBrowserRouter([
       {
         path: "booked-trainer",
         element: <BookedTrainer></BookedTrainer>,
+      },
+      {
+        path: "make-admin",
+        element: <MakeAdmin></MakeAdmin>,
       },
     ],
   },

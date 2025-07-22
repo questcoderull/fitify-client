@@ -42,25 +42,27 @@ const BookedTrainer = () => {
 
   const handleSubmitReview = async () => {
     if (!selectedBooking) return;
-
     if (!reviewText.trim()) {
       return toast.error("Please write a review");
     }
     if (!ratingValue) {
       return toast.error("Please write a review");
     }
-
     const payload = {
       trainerId: selectedBooking.trainerId,
       trainerName: trainers[selectedBooking.trainerId]?.name || "",
-      memberName: selectedBooking.memberName,
+
+      memberName: user?.displayName || "Anonymous",
+      memberEmail: user?.email,
+      memberPhotoURL: user?.photoURL || "",
+
       rating: ratingValue,
       reviewText: reviewText,
-      date: new Date().toISOString(),
+      reviwed_at: new Date().toISOString(),
     };
 
     try {
-      const res = await axiosSecure.post("/reviews", payload);
+      const res = await axiosSecure.post("/review", payload);
       if (res.data.insertedId) {
         Swal.fire("Success!", "Review submitted successfully", "success");
       } else {
@@ -69,7 +71,6 @@ const BookedTrainer = () => {
     } catch (err) {
       Swal.fire("Error", "Could not submit review", "error");
     }
-
     document.getElementById("review_modal").close();
     setReviewText("");
     setRatingValue(3);
@@ -88,6 +89,7 @@ const BookedTrainer = () => {
                style="width:100px; height:100px; object-fit:cover; border-radius:50%; margin-bottom:10px;" />
           <p><b>Trainer Email:</b> ${trainer?.email || "N/A"}</p>
           <p><b>Member Name:</b> ${booking.memberName}</p>
+          <p><b>Trainer skill:</b> ${booking.trainerSkill}</p>
           <p><b>Day:</b> ${booking.day}</p>
           <p><b>Time:</b> ${booking.time}</p>
           <p><b>Label:</b> ${booking.label}</p>

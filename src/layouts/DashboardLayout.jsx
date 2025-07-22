@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  MdAdminPanelSettings,
   MdEventAvailable,
   MdForum,
   MdOutlineAddBox,
@@ -164,7 +165,7 @@ const DashboardLayout = () => {
               to="/dashboard/make-admin"
               className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
-              <FaUserCheck className="text-lg" />
+              <MdAdminPanelSettings className="text-lg" />
               Make Admin
             </NavLink>
           </li>

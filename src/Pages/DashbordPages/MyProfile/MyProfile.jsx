@@ -283,13 +283,29 @@ const MyProfile = () => {
               {profileData?.role || "Member"}
             </span>
           </p>
-
+          {/* 
           <p className="text-sm text-gray-700">
             Last Login:{" "}
             <span className="text-primary font-semibold">
               {user?.metadata?.lastSignInTime
                 ? new Date(user.metadata.lastSignInTime).toLocaleDateString(
                     "en-GB"
+                  )
+                : "Not available"}
+            </span>
+          </p> */}
+
+          <p className="text-sm text-gray-700">
+            Last Login:{" "}
+            <span className="text-primary font-semibold">
+              {user?.metadata?.lastSignInTime
+                ? new Date(user.metadata.lastSignInTime).toLocaleString(
+                    "en-GB",
+                    {
+                      dateStyle: "short",
+                      timeStyle: "short",
+                      hour12: true,
+                    }
                   )
                 : "Not available"}
             </span>

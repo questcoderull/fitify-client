@@ -39,8 +39,12 @@ const MakeAdmin = () => {
       Swal.fire("Removed!", "Admin role removed successfully", "success");
       queryClient.invalidateQueries(["allUsers"]);
     },
-    onError: () => {
-      Swal.fire("Error", "Could not remove admin role", "error");
+    onError: (error) => {
+      Swal.fire(
+        "Error",
+        error.response?.data?.message || "Could not remove admin role",
+        "error"
+      );
     },
   });
 

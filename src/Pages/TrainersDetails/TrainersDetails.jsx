@@ -66,13 +66,39 @@ const TrainerDetails = () => {
           <div className="mt-4">
             <h3 className="text-lg text-primary">Social Links</h3>
             <p className="text-sm text-gray-700">
-              Facebook : {socialLinks.facebook}
+              Facebook:{" "}
+              <a
+                href={socialLinks.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline hover:text-blue-700"
+              >
+                {socialLinks.facebook}
+              </a>
             </p>
+
             <p className="text-sm text-gray-700">
-              Instagram : {socialLinks.instagram}
+              Instagram:{" "}
+              <a
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline hover:text-blue-700"
+              >
+                {socialLinks.instagram}
+              </a>
             </p>
+
             <p className="text-sm text-gray-700">
-              Linkedin : {socialLinks.linkedin}
+              LinkedIn:{" "}
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline hover:text-blue-700"
+              >
+                {socialLinks.linkedin}
+              </a>
             </p>
           </div>
         </div>

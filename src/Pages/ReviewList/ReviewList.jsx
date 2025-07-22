@@ -175,7 +175,7 @@ const ReviewList = () => {
               <p className="text-sm font-medium">
                 — For Trainer:{" "}
                 <Link
-                  className="text-primary underline"
+                  className="text-primary underline hover:text-blue-700"
                   to={`/trainer/${review.trainerId}`}
                 >
                   {review.trainerName}

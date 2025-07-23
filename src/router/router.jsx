@@ -26,6 +26,7 @@ import ManageSlots from "../Pages/DashbordPages/ManageSlots/ManageSlots";
 import BookedTrainer from "../Pages/DashbordPages/BookedTrainers/BookedTrainers";
 import MakeAdmin from "../Pages/DashbordPages/MakeAdmin/MakeAdmin";
 import ClassDetails from "../Pages/ClassDetails/ClassDetails";
+import AdminRoute from "../Routes/AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -110,11 +111,19 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "add-class",
-        element: <AddClass></AddClass>,
+        element: (
+          <AdminRoute>
+            <AddClass></AddClass>,
+          </AdminRoute>
+        ),
       },
       {
         path: "all-subscribers",
-        element: <AllSubscribers></AllSubscribers>,
+        element: (
+          <AdminRoute>
+            <AllSubscribers></AllSubscribers>,
+          </AdminRoute>
+        ),
       },
       {
         path: "trainers",
@@ -122,7 +131,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "pending-trainers",
-        element: <PendingTrainers></PendingTrainers>,
+        element: (
+          <AdminRoute>
+            <PendingTrainers></PendingTrainers>,
+          </AdminRoute>
+        ),
       },
       {
         path: "add-forum",
@@ -150,7 +163,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "make-admin",
-        element: <MakeAdmin></MakeAdmin>,
+        element: (
+          <AdminRoute>
+            <MakeAdmin></MakeAdmin>,
+          </AdminRoute>
+        ),
       },
     ],
   },

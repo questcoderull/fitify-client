@@ -142,6 +142,28 @@ const TrainerDetails = () => {
           )}
         </div>
       </div>
+
+      {/* Be A Trainer Section */}
+      <div className="bg-base-100 mt-10 p-6 rounded-lg shadow border border-primary">
+        <h3 className="text-2xl font-bold mb-4 text-primary text-center">
+          Want to Inspire Others? Become a Trainer!
+        </h3>
+        <p className="text-sm text-gray-700 mb-6 text-center max-w-3xl mx-auto">
+          Are you passionate about fitness and ready to take the next step in
+          your journey? Join our platform as a certified trainer and share your
+          knowledge with members from all walks of life. Whether you're into
+          yoga, strength training, cardio, or nutrition, we welcome you to help
+          shape a healthier community through your unique expertise.
+        </p>
+        <div className="flex justify-center">
+          <Link
+            to="/be-trainer"
+            className="btn btn-primary btn-wide text-white"
+          >
+            Become a Trainer
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

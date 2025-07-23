@@ -1,32 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useAxios from "../../Hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
 const AllClasses = () => {
   const axios = useAxios();
 
-  const [classes, setClasses] = useState([]);
-  const [trainers, setTrainers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const limit = 6;
 
-  // Load all classes and trainers
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const classRes = await axios.get("/classes");
-        const trainerRes = await axios.get("/trainers");
+  // Load paginated classes
+  const {
+    data: classData = { result: [], total: 0 },
+    isLoading: classLoading,
+  } = useQuery({
+    queryKey: ["classes", page],
+    queryFn: async () => {
+      const res = await axios.get(
+        `/classes-with-pagination?page=${page}&limit=${limit}`
+      );
+      return res.data;
+    },
+    keepPreviousData: true,
+  });
 
-        setClasses(classRes.data);
-        setTrainers(trainerRes.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to load data:", error);
-      }
-    };
+  // Load all trainers (no pagination)
+  const { data: trainers = [], isLoading: trainerLoading } = useQuery({
+    queryKey: ["trainers"],
+    queryFn: async () => {
+      const res = await axios.get("/trainers");
+      return res.data;
+    },
+  });
 
-    fetchData();
-  }, [axios]);
+  const totalPages = Math.ceil(classData.total / limit);
 
   const showExtraTrainers = (trainers) => {
     const isMobile = window.innerWidth < 768;
@@ -58,7 +66,7 @@ const AllClasses = () => {
     });
   };
 
-  if (loading) {
+  if (classLoading || trainerLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <span className="loading loading-spinner text-primary loading-lg"></span>
@@ -73,14 +81,16 @@ const AllClasses = () => {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {classes.map((singleClass) => {
-          // Find trainers whose expertise includes this class category
+        {classData.result.map((singleClass) => {
           const matchedTrainers = trainers.filter((trainer) =>
             trainer.expertise?.includes(singleClass.category)
           );
 
           return (
-            <div key={singleClass._id} className="card bg-base-100 shadow-xl">
+            <div
+              key={singleClass._id}
+              className="card bg-base-100 shadow-xl border border-primary"
+            >
               <figure>
                 <img
                   src={singleClass.image}
@@ -99,9 +109,11 @@ const AllClasses = () => {
                   <span className="ml-2">Category: {singleClass.category}</span>
                 </p>
 
-                {/* Show matching trainers (max 5 visible) */}
+                <h1 className="text-primary mt-3">
+                  Available trainers for this class..
+                </h1>
                 {matchedTrainers.length > 0 ? (
-                  <div className="avatar-group -space-x-6 mt-3">
+                  <div className="avatar-group -space-x-6">
                     {matchedTrainers.slice(0, 5).map((trainer) => (
                       <Link
                         to={`/trainer/${trainer._id}`}
@@ -116,14 +128,13 @@ const AllClasses = () => {
                       </Link>
                     ))}
 
-                    {/* If more than 5, show +X */}
                     {matchedTrainers.length > 5 && (
-                      <div className="avatar avatar-placeholder cursor-pointer">
-                        <div
-                          className="bg-neutral text-neutral-content w-12"
-                          onClick={() => showExtraTrainers(matchedTrainers)}
-                        >
-                          <span>+{matchedTrainers.length - 5}</span>
+                      <div
+                        className="avatar avatar-placeholder cursor-pointer"
+                        onClick={() => showExtraTrainers(matchedTrainers)}
+                      >
+                        <div className="bg-neutral text-neutral-content w-12 rounded-full flex items-center justify-center">
+                          +{matchedTrainers.length - 5}
                         </div>
                       </div>
                     )}
@@ -137,6 +148,37 @@ const AllClasses = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Pagination Buttons */}
+      <div className="flex justify-center gap-2 mt-10">
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          className="btn btn-sm"
+          disabled={page === 1}
+        >
+          ◀ Prev
+        </button>
+
+        {[...Array(totalPages).keys()].map((num) => (
+          <button
+            key={num}
+            onClick={() => setPage(num + 1)}
+            className={`btn btn-sm ${
+              page === num + 1 ? "btn-primary text-white" : "btn-outline"
+            }`}
+          >
+            {num + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          className="btn btn-sm"
+          disabled={page === totalPages}
+        >
+          Next ▶
+        </button>
       </div>
     </div>
   );

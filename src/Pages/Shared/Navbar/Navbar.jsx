@@ -8,13 +8,14 @@ import {
   FaSignInAlt,
   FaUserPlus,
 } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
 import FitifyLogo from "../FitifyLogo/FitifyLogo";
 import useAuth from "../../../Hooks/useAuth";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 import { GiMuscleUp } from "react-icons/gi";
 
 const Navbar = () => {
-  const { user, loading, logOutUser } = useAuth();
+  const { user, role, loading, logOutUser } = useAuth();
 
   const handleLogout = () => {
     logOutUser()
@@ -98,34 +99,6 @@ const Navbar = () => {
     <div className=" sticky top-0 z-50 py-4 bg-white/30 backdrop-blur-md shadow">
       <div className="navbar max-w-11/12 mx-auto">
         <div className="navbar-start">
-          <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-accent text-white lg:hidden"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-white rounded-box shadow-md z-10 mt-3 w-52 p-2"
-            >
-              {links}
-            </ul>
-          </div>
           <span className="ml-3">
             <FitifyLogo />
           </span>
@@ -135,53 +108,90 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 space-x-2">{links}</ul>
         </div>
 
-        <div className="navbar-end">
+        <div className="navbar-end gap-3">
           {loading ? (
             <span className="loading loading-spinner text-primary"></span>
           ) : user ? (
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end hidden lg:block">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost btn-circle avatar"
+                className="flex items-center gap-2 cursor-pointer"
               >
-                <div className="w-24 rounded-full">
-                  {/* from gpt */}
-                  {user && user.photoURL ? (
-                    <>
-                      <img
-                        src={user.photoURL}
-                        alt="User profile"
-                        className="w-20 h-20 rounded-full object-cover cursor-pointer"
-                      />
-                    </>
-                  ) : (
-                    <div
-                      className="w-10 h-10 flex items-center justify-center rounded-full bg-[#023047] text-[#FFB703] text-lg font-bold uppercase cursor-default"
-                      title={user?.displayName || "User"}
-                    >
-                      {user?.displayName?.charAt(0) || "U"}
-                    </div>
-                  )}
+                {/* Avatar with ring */}
+                <div className="avatar">
+                  <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <img
+                      src={
+                        user?.photoURL ||
+                        "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                      }
+                      alt="User Avatar"
+                    />
+                  </div>
                 </div>
+                <IoIosArrowDown className="text-lg text-gray-600" />
               </div>
+
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-white rounded-box shadow mt-3 w-52 p-3 border"
+                className="mt-3 z-[1] p-4 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-60 border border-primary"
               >
-                <li className="mb-2">{user.displayName || "Your Name"}</li>
+                <li className="flex items-center gap-3 border-b pb-3 mb-3">
+                  <div className="avatar">
+                    <div className="w-10 rounded-full">
+                      <img
+                        src={
+                          user?.photoURL ||
+                          "https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                        }
+                        alt="User"
+                      />
+                    </div>
+                  </div>
+
+                  <p className="font-semibold text-sm">
+                    {user.displayName || "User"}
+                  </p>
+
+                  {/* <p className="text-xs text-gray-500 -mt-5">{role}</p> */}
+                  <p className="text-xs -mt-4">
+                    <span
+                      className={`badge badge-sm text-white ${
+                        role === "admin"
+                          ? "bg-red-500"
+                          : role === "trainer"
+                          ? "bg-blue-500"
+                          : "bg-green-500"
+                      }`}
+                    >
+                      {role}
+                    </span>
+                  </p>
+                </li>
                 <li>
+                  <Link to="/dashboard" className="text-sm">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/my-profile" className="text-sm">
+                    My Profile
+                  </Link>
+                </li>
+                <li className="mt-2">
                   <button
                     onClick={handleLogout}
-                    className="btn btn-neutral w-full"
+                    className="btn btn-sm w-full btn-outline text-red-500 hover:text-white hover:bg-red-500"
                   >
+                    <MdOutlineLogout className="text-lg" />
                     Logout
                   </button>
                 </li>
               </ul>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-2">
               <NavLink
                 to="/login"
                 className={({ isActive }) =>
@@ -207,6 +217,65 @@ const Navbar = () => {
               </NavLink>
             </div>
           )}
+
+          {/* Mobile Hamburger Dropdown */}
+          <div className="dropdown dropdown-end lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-secondary text-white"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 p-3 shadow bg-white text-gray-800 rounded-box w-56 right-0 border border-gray-200 z-50"
+            >
+              {links}
+
+              {user ? (
+                <>
+                  <li className="mt-2 border-t pt-2">
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to="/dashboard/my-profile">My Profile</Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="btn btn-sm w-full btn-outline text-red-500 hover:text-white hover:bg-red-500 mt-2"
+                    >
+                      <MdOutlineLogout className="text-lg" />
+                      Logout
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="mt-2 border-t pt-2">
+                    <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/signUP">Sign Up</Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

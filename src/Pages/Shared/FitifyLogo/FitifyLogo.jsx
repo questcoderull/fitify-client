@@ -7,8 +7,8 @@ const FitifyLogo = () => {
     <Link to="/">
       <div class=" normal-case text-xl flex items-center">
         <img src={logo} alt="fitify" className="h-10 w-auto" />
-        <span className="hidden md:block text-primary text-4xl font-bold">
-          itify
+        <span className=" text-primary text-4xl font-bold">
+          iti<span className="text-secondary">fy</span>
         </span>
       </div>
     </Link>

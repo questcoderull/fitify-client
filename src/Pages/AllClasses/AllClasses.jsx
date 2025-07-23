@@ -10,6 +10,18 @@ const AllClasses = () => {
   const [page, setPage] = useState(1);
   const limit = 6;
 
+  // For tracking which classes have expanded details
+  const [expandedClasses, setExpandedClasses] = useState([]);
+
+  // Toggle expanded/collapsed state
+  const toggleExpand = (classId) => {
+    setExpandedClasses((prev) =>
+      prev.includes(classId)
+        ? prev.filter((id) => id !== classId)
+        : [...prev, classId]
+    );
+  };
+
   // Load paginated classes
   const {
     data: classData = { result: [], total: 0 },
@@ -86,6 +98,9 @@ const AllClasses = () => {
             trainer.expertise?.includes(singleClass.category)
           );
 
+          const isExpanded = expandedClasses.includes(singleClass._id);
+          const detailsTooLong = singleClass.details.length > 200;
+
           return (
             <div
               key={singleClass._id}
@@ -100,13 +115,33 @@ const AllClasses = () => {
               </figure>
               <div className="card-body">
                 <h2 className="card-title">{singleClass.className}</h2>
-                <p>{singleClass.details}</p>
-                <p className="text-sm text-gray-500">
-                  Duration: {singleClass.duration}
+
+                {/* Description with Read More / Show Less */}
+                <p className="text-sm text-gray-700">
+                  {isExpanded || !detailsTooLong
+                    ? singleClass.details
+                    : `${singleClass.details.slice(0, 200)}... `}
+                  {detailsTooLong && (
+                    <button
+                      onClick={() => toggleExpand(singleClass._id)}
+                      className="text-primary underline ml-2 cursor-pointer"
+                    >
+                      {isExpanded ? "Show Less" : "Read More"}
+                    </button>
+                  )}
                 </p>
-                <p className="text-sm text-gray-500">
-                  Level: {singleClass.level}
-                  <span className="ml-2">Category: {singleClass.category}</span>
+
+                <p className="text-sm text-gray-600 mt-2">
+                  Duration:{" "}
+                  <span className="text-primary">{singleClass.duration}</span>
+                </p>
+                <p className="text-sm text-gray-700">
+                  Level:{" "}
+                  <span className="text-primary">{singleClass.level}</span>
+                  <span className="ml-2.5">
+                    Category:{" "}
+                    <span className="text-primary">{singleClass.category}</span>
+                  </span>
                 </p>
 
                 <h1 className="text-primary mt-3">

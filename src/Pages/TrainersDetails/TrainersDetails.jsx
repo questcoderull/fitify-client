@@ -143,7 +143,7 @@ const TrainerDetails = () => {
           {/* Class Selection Dropdown */}
           <div className="mb-6">
             <label className="block mb-2 text-sm font-medium text-gray-700">
-              Select a Class
+              Select a Class to book
             </label>
             <select
               className="select select-bordered w-full"

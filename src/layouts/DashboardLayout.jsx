@@ -13,8 +13,11 @@ import FitifyLogo from "../Pages/Shared/FitifyLogo/FitifyLogo";
 import { FaUserCheck, FaUserClock } from "react-icons/fa";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { BiTimeFive } from "react-icons/bi";
+import useAuth from "../Hooks/useAuth";
 
 const DashboardLayout = () => {
+  const { role } = useAuth();
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -60,76 +63,126 @@ const DashboardLayout = () => {
             <FitifyLogo></FitifyLogo>
           </div>
           {/* Sidebar content here */}
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/add-class"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <MdOutlineAddBox />
-              Add Class
-            </NavLink>
-          </li>
 
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/all-subscribers"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <MdPeopleAlt />
-              All Subscribers
-            </NavLink>
-          </li>
+          {/* admin links */}
+          {role === "admin" && (
+            <>
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/add-class"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <MdOutlineAddBox />
+                  Add Class
+                </NavLink>
+              </li>
 
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/trainers"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <GiWeightLiftingUp />
-              Trainers
-            </NavLink>
-          </li>
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/all-subscribers"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <MdPeopleAlt />
+                  All Subscribers
+                </NavLink>
+              </li>
 
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/pending-trainers"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <FaUserClock />
-              Pending Trainers
-            </NavLink>
-          </li>
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/trainers"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <GiWeightLiftingUp />
+                  Trainers
+                </NavLink>
+              </li>
 
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/add-forum"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <MdForum />
-              Add Forum
-            </NavLink>
-          </li>
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/pending-trainers"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <FaUserClock />
+                  Pending Trainers
+                </NavLink>
+              </li>
 
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/add-slot"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <MdEventAvailable />
-              Add Slot
-            </NavLink>
-          </li>
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/make-admin"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <MdAdminPanelSettings className="text-lg" />
+                  Make Admin
+                </NavLink>
+              </li>
+            </>
+          )}
 
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/activity-log"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <MdOutlineHistory className="text-lg" />
-              Activity Log
-            </NavLink>
-          </li>
+          {/* links for admin and trainer */}
+          {(role === "admin" || role === "trainer") && (
+            <>
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/add-forum"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <MdForum />
+                  Add Forum
+                </NavLink>
+              </li>
+            </>
+          )}
 
+          {/* links for trainers only */}
+          {role === "trainer" && (
+            <>
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/add-slot"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <MdEventAvailable />
+                  Add Slot
+                </NavLink>
+              </li>
+
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/manage-slots"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <BiTimeFive className="text-lg" />
+                  Manage slots
+                </NavLink>
+              </li>
+            </>
+          )}
+
+          {/* link for only member */}
+          {role === "member" && (
+            <>
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/activity-log"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <MdOutlineHistory className="text-lg" />
+                  Activity Log
+                </NavLink>
+              </li>
+
+              <li className="hover:bg-primary rounded-md transition">
+                <NavLink
+                  to="/dashboard/booked-trainer"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
+                >
+                  <FaUserCheck className="text-lg" />
+                  My Booked Trainers
+                </NavLink>
+              </li>
+            </>
+          )}
           <li className="hover:bg-primary rounded-md transition">
             <NavLink
               to="/dashboard/my-profile"
@@ -138,40 +191,6 @@ const DashboardLayout = () => {
               <MdPerson className="text-lg" />
               My Profile
             </NavLink>
-          </li>
-
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/manage-slots"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <BiTimeFive className="text-lg" />
-              Manage slots
-            </NavLink>
-          </li>
-
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/booked-trainer"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <FaUserCheck className="text-lg" />
-              My Booked Trainers
-            </NavLink>
-          </li>
-
-          <li className="hover:bg-primary rounded-md transition">
-            <NavLink
-              to="/dashboard/make-admin"
-              className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
-            >
-              <MdAdminPanelSettings className="text-lg" />
-              Make Admin
-            </NavLink>
-          </li>
-
-          <li>
-            <a>Sidebar Item 2</a>
           </li>
         </ul>
       </div>

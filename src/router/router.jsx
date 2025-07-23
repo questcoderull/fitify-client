@@ -25,6 +25,7 @@ import Payment from "../Pages/Payment/Payment";
 import ManageSlots from "../Pages/DashbordPages/ManageSlots/ManageSlots";
 import BookedTrainer from "../Pages/DashbordPages/BookedTrainers/BookedTrainers";
 import MakeAdmin from "../Pages/DashbordPages/MakeAdmin/MakeAdmin";
+import ClassDetails from "../Pages/ClassDetails/ClassDetails";
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
             <BeTrainer></BeTrainer>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "class-details/:id",
+        element: <ClassDetails></ClassDetails>,
       },
       {
         path: "forbidden",

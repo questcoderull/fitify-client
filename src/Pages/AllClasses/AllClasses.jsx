@@ -106,13 +106,15 @@ const AllClasses = () => {
               key={singleClass._id}
               className="card bg-base-100 shadow-xl border border-primary"
             >
-              <figure>
-                <img
-                  src={singleClass.image}
-                  alt={singleClass.className}
-                  className="h-48 w-full object-cover"
-                />
-              </figure>
+              <Link to={`/class-details/${singleClass._id}`}>
+                <figure>
+                  <img
+                    src={singleClass.image}
+                    alt={singleClass.className}
+                    className="h-48 w-full object-cover"
+                  />
+                </figure>
+              </Link>
               <div className="card-body">
                 <h2 className="card-title">{singleClass.className}</h2>
 

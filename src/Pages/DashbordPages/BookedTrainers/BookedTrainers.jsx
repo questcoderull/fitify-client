@@ -6,6 +6,7 @@ import Rating from "react-rating";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Link } from "react-router";
 
 const BookedTrainer = () => {
   const { user } = useAuth();
@@ -90,6 +91,9 @@ const BookedTrainer = () => {
           <p><b>Trainer Email:</b> ${trainer?.email || "N/A"}</p>
           <p><b>Member Name:</b> ${booking.memberName}</p>
           <p><b>Trainer skill:</b> ${booking.trainerSkill}</p>
+          <p><b>Class:</b> <Link className="underline" to={/calssDetails/${
+            booking.classId
+          }}> ${booking.classTitle} </Link></p>
           <p><b>Day:</b> ${booking.day}</p>
           <p><b>Time:</b> ${booking.time}</p>
           <p><b>Label:</b> ${booking.label}</p>

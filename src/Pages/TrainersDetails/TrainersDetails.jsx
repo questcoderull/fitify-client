@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
@@ -7,7 +7,9 @@ import useAxios from "../../Hooks/useAxios";
 const TrainerDetails = () => {
   const { id } = useParams();
   const axiosInstance = useAxios();
+  const [selectedClass, setSelectedClass] = useState("");
 
+  // Fetch trainer data
   const {
     data: trainer,
     isLoading,
@@ -16,6 +18,15 @@ const TrainerDetails = () => {
     queryKey: ["trainer", id],
     queryFn: async () => {
       const res = await axiosInstance.get(`/trainers/${id}`);
+      return res.data;
+    },
+  });
+
+  // Fetch all classes
+  const { data: classes = [] } = useQuery({
+    queryKey: ["classes"],
+    queryFn: async () => {
+      const res = await axiosInstance.get("/classes");
       return res.data;
     },
   });
@@ -38,6 +49,11 @@ const TrainerDetails = () => {
 
   const { name, image, description, expertise, structuredSlots, socialLinks } =
     trainer;
+
+  // Filter classes based on trainer's expertise
+  const filteredClasses = classes.filter((cls) =>
+    expertise.includes(cls.category)
+  );
 
   return (
     <div className="max-w-6xl mx-auto p-4">
@@ -76,7 +92,6 @@ const TrainerDetails = () => {
                 {socialLinks.facebook}
               </a>
             </p>
-
             <p className="text-sm text-gray-700">
               Instagram:{" "}
               <a
@@ -88,7 +103,6 @@ const TrainerDetails = () => {
                 {socialLinks.instagram}
               </a>
             </p>
-
             <p className="text-sm text-gray-700">
               LinkedIn:{" "}
               <a
@@ -109,6 +123,58 @@ const TrainerDetails = () => {
             Available Slots
           </h3>
 
+          {/* Class Selection */}
+          <div className="mb-6">
+            <label className="block mb-2 text-sm font-medium text-gray-700">
+              Select a Class
+            </label>
+            <select
+              className="select select-bordered w-full"
+              value={selectedClass}
+              onChange={(e) => setSelectedClass(e.target.value)}
+            >
+              <option value="">-- Choose a Class --</option>
+              {filteredClasses.map((cls) => (
+                <option key={cls._id} value={cls.className}>
+                  {cls.className} ({cls.category})
+                </option>
+              ))}
+            </select>
+
+            {/* Show class preview when selected */}
+            {selectedClass &&
+              (() => {
+                const selectedClassInfo = filteredClasses.find(
+                  (cls) => cls.className === selectedClass
+                );
+                return (
+                  selectedClassInfo && (
+                    <div className="mt-4 p-4 border border-gray-300 rounded-lg">
+                      <h4 className="text-lg font-semibold mb-2">
+                        Selected Class Info
+                      </h4>
+                      <img
+                        src={selectedClassInfo.image}
+                        alt={selectedClassInfo.className}
+                        className="w-full h-48 object-cover rounded mb-3"
+                      />
+                      <p className="text-sm text-gray-700">
+                        <span className="font-medium">Name:</span>{" "}
+                        {selectedClassInfo.className}
+                      </p>
+                      <p className="text-sm text-gray-700">
+                        <span className="font-medium">Category:</span>{" "}
+                        {selectedClassInfo.category}
+                      </p>
+                      <p className="text-sm text-gray-700 mt-2">
+                        {selectedClassInfo.details.slice(0, 120)}...
+                      </p>
+                    </div>
+                  )
+                );
+              })()}
+          </div>
+
           {structuredSlots?.length > 0 ? (
             <div className="space-y-4">
               {structuredSlots.map((slotObj, index) => (
@@ -125,8 +191,16 @@ const TrainerDetails = () => {
                         {labelSlot.times.map((time, idx) => (
                           <Link
                             key={idx}
-                            to={`/trainer-booking/${id}?day=${slotObj.day}&label=${labelSlot.label}&time=${time}`}
-                            className="btn btn-outline btn-primary btn-sm"
+                            to={`/trainer-booking/${id}?day=${
+                              slotObj.day
+                            }&label=${
+                              labelSlot.label
+                            }&time=${time}&class=${encodeURIComponent(
+                              selectedClass
+                            )}`}
+                            className={`btn btn-outline btn-primary btn-sm ${
+                              !selectedClass && "btn-disabled"
+                            }`}
                           >
                             {time}
                           </Link>

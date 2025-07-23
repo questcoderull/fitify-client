@@ -88,12 +88,19 @@ const BookedTrainer = () => {
             trainer?.image || "https://i.ibb.co/YXxmbdJ/default-avatar.png"
           }"
                style="width:100px; height:100px; object-fit:cover; border-radius:50%; margin-bottom:10px;" />
+          <p><b>Trainer:</b> <a href="/trainer/${
+            booking.trainerId
+          }" class="underline" style="color: #3b82f6;">${
+        booking.trainerName
+      }</a></p>
           <p><b>Trainer Email:</b> ${trainer?.email || "N/A"}</p>
           <p><b>Member Name:</b> ${booking.memberName}</p>
           <p><b>Trainer skill:</b> ${booking.trainerSkill}</p>
-          <p><b>Class:</b> <Link className="underline" to={/calssDetails/${
+          <p><b>Class:</b> <a href="/class-details/${
             booking.classId
-          }}> ${booking.classTitle} </Link></p>
+          }" class="underline" style="color: #3b82f6;">${
+        booking.classTitle
+      }</a></p>
           <p><b>Day:</b> ${booking.day}</p>
           <p><b>Time:</b> ${booking.time}</p>
           <p><b>Label:</b> ${booking.label}</p>

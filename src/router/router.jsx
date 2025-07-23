@@ -28,6 +28,7 @@ import MakeAdmin from "../Pages/DashbordPages/MakeAdmin/MakeAdmin";
 import ClassDetails from "../Pages/ClassDetails/ClassDetails";
 import AdminRoute from "../Routes/AdminRoute";
 import TrainerRoute from "../Routes/TrainerRoute";
+import MemberRoute from "../Routes/MemberRoute";
 
 export const router = createBrowserRouter([
   {
@@ -156,7 +157,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "activity-log",
-        element: <ActivityLog></ActivityLog>,
+        element: (
+          <MemberRoute>
+            <ActivityLog></ActivityLog>,
+          </MemberRoute>
+        ),
       },
       {
         path: "my-profile",
@@ -172,7 +177,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "booked-trainer",
-        element: <BookedTrainer></BookedTrainer>,
+        element: (
+          <MemberRoute>
+            <BookedTrainer></BookedTrainer>,
+          </MemberRoute>
+        ),
       },
       {
         path: "make-admin",

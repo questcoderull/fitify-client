@@ -153,7 +153,7 @@ const AllClasses = () => {
                   <div className="avatar-group -space-x-6">
                     {matchedTrainers.slice(0, 5).map((trainer) => (
                       <Link
-                        to={`/trainer/${trainer._id}`}
+                        to={`/trainer/${trainer._id}?classId=${singleClass._id}`}
                         key={trainer._id}
                         title={trainer.name}
                       >

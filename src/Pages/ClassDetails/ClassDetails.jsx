@@ -67,7 +67,7 @@ const ClassDetails = () => {
           {matchedTrainers.map((trainer) => (
             <Link
               key={trainer._id}
-              to={`/trainer/${trainer._id}`}
+              to={`/trainer/${trainer._id}?classId=${classData._id}`}
               className="flex flex-col items-center w-24"
               title={trainer.name}
             >

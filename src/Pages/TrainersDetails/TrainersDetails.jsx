@@ -1,15 +1,27 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useLocation } from "react-router"; // useLocation lagbe URL query read korte
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../Hooks/useAxios";
 
 const TrainerDetails = () => {
   const { id } = useParams();
+  const location = useLocation(); // URL er query params read korar jonno
   const axiosInstance = useAxios();
+
+  // selectedClass e amra class er ID store korbo
   const [selectedClass, setSelectedClass] = useState("");
 
-  // Fetch trainer data
+  // URL query theke classId neyar jonno useEffect
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const classIdFromUrl = params.get("classId"); // ekhane classId ney
+    if (classIdFromUrl) {
+      setSelectedClass(classIdFromUrl); // selectedClass e set korlam
+    }
+  }, [location.search]);
+
+  // Trainer data fetch kora hocche
   const {
     data: trainer,
     isLoading,
@@ -22,7 +34,7 @@ const TrainerDetails = () => {
     },
   });
 
-  // Fetch all classes
+  // Sob classes fetch kora hocche
   const { data: classes = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
@@ -50,9 +62,14 @@ const TrainerDetails = () => {
   const { name, image, description, expertise, structuredSlots, socialLinks } =
     trainer;
 
-  // Filter classes based on trainer's expertise
+  // Trainer er expertise onujayi classes filter kora hocche
   const filteredClasses = classes.filter((cls) =>
     expertise.includes(cls.category)
+  );
+
+  // selectedClass hocche classId, so amra ekhane class info ber korbo
+  const selectedClassInfo = filteredClasses.find(
+    (cls) => cls._id === selectedClass
   );
 
   return (
@@ -117,13 +134,13 @@ const TrainerDetails = () => {
           </div>
         </div>
 
-        {/* Available Slots */}
+        {/* Available Slots & Class Selection */}
         <div className="bg-base-100 p-6 rounded-lg shadow border border-primary">
           <h3 className="text-2xl font-bold mb-4 text-primary">
             Available Slots
           </h3>
 
-          {/* Class Selection */}
+          {/* Class Selection Dropdown */}
           <div className="mb-6">
             <label className="block mb-2 text-sm font-medium text-gray-700">
               Select a Class
@@ -131,50 +148,45 @@ const TrainerDetails = () => {
             <select
               className="select select-bordered w-full"
               value={selectedClass}
+              // onChange e amra classId set korbo
               onChange={(e) => setSelectedClass(e.target.value)}
             >
               <option value="">-- Choose a Class --</option>
               {filteredClasses.map((cls) => (
-                <option key={cls._id} value={cls.className}>
+                // option er value hobe class er _id (ID)
+                <option key={cls._id} value={cls._id}>
                   {cls.className} ({cls.category})
                 </option>
               ))}
             </select>
 
-            {/* Show class preview when selected */}
-            {selectedClass &&
-              (() => {
-                const selectedClassInfo = filteredClasses.find(
-                  (cls) => cls.className === selectedClass
-                );
-                return (
-                  selectedClassInfo && (
-                    <div className="mt-4 p-4 border border-gray-300 rounded-lg">
-                      <h4 className="text-lg font-semibold mb-2">
-                        Selected Class Info
-                      </h4>
-                      <img
-                        src={selectedClassInfo.image}
-                        alt={selectedClassInfo.className}
-                        className="w-full h-48 object-cover rounded mb-3"
-                      />
-                      <p className="text-sm text-gray-700">
-                        <span className="font-medium">Name:</span>{" "}
-                        {selectedClassInfo.className}
-                      </p>
-                      <p className="text-sm text-gray-700">
-                        <span className="font-medium">Category:</span>{" "}
-                        {selectedClassInfo.category}
-                      </p>
-                      <p className="text-sm text-gray-700 mt-2">
-                        {selectedClassInfo.details.slice(0, 120)}...
-                      </p>
-                    </div>
-                  )
-                );
-              })()}
+            {/* Selected class er info show korbo */}
+            {selectedClassInfo && (
+              <div className="mt-4 p-4 border border-gray-300 rounded-lg">
+                <h4 className="text-lg font-semibold mb-2">
+                  Selected Class Info
+                </h4>
+                <img
+                  src={selectedClassInfo.image}
+                  alt={selectedClassInfo.className}
+                  className="w-full h-48 object-cover rounded mb-3"
+                />
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Name:</span>{" "}
+                  {selectedClassInfo.className}
+                </p>
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Category:</span>{" "}
+                  {selectedClassInfo.category}
+                </p>
+                <p className="text-sm text-gray-700 mt-2">
+                  {selectedClassInfo.details.slice(0, 120)}...
+                </p>
+              </div>
+            )}
           </div>
 
+          {/* Show time slots */}
           {structuredSlots?.length > 0 ? (
             <div className="space-y-4">
               {structuredSlots.map((slotObj, index) => (
@@ -196,7 +208,7 @@ const TrainerDetails = () => {
                             }&label=${
                               labelSlot.label
                             }&time=${time}&class=${encodeURIComponent(
-                              selectedClass
+                              selectedClassInfo?.className || ""
                             )}`}
                             className={`btn btn-outline btn-primary btn-sm ${
                               !selectedClass && "btn-disabled"

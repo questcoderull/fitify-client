@@ -11,9 +11,9 @@ const Community = () => {
   const axiosInstance = useAxios();
 
   const [page, setPage] = useState(1);
-  const limit = 6; // Number of forums per page
+  const limit = 6;
+  const [expanded, setExpanded] = useState({});
 
-  // ✅ Fetch paginated forums
   const { data: forumData = { result: [], total: 0 }, isLoading } = useQuery({
     queryKey: ["forums", page],
     queryFn: async () => {
@@ -28,7 +28,6 @@ const Community = () => {
   const forums = forumData.result;
   const totalPages = Math.ceil(forumData.total / limit);
 
-  // ✅ Voting handler
   const voteMutation = useMutation({
     mutationFn: async ({ id, type }) => {
       const res = await axiosInstance.patch(`/forums/vote/${id}`, {
@@ -39,7 +38,6 @@ const Community = () => {
     },
     onSuccess: (result) => {
       const voteType = result.type;
-
       if (voteType === "up") {
         toast.success("Glad you found it helpful!");
       } else if (voteType === "down") {
@@ -65,6 +63,13 @@ const Community = () => {
     }
 
     voteMutation.mutate({ id, type });
+  };
+
+  const toggleReadMore = (id) => {
+    setExpanded((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
 
   if (isLoading)
@@ -123,9 +128,25 @@ const Community = () => {
                   />
                 )}
 
-                <p className="mt-4">{post.content}</p>
+                <p className="mt-4 text-justify">
+                  {post.content.length > 300 ? (
+                    <>
+                      {expanded[post._id]
+                        ? post.content
+                        : post.content.slice(0, 300) + "..."}
+                      <button
+                        className="ml-2 text-sm underline text-primary cursor-pointer"
+                        onClick={() => toggleReadMore(post._id)}
+                      >
+                        {expanded[post._id] ? "Read Less" : "Read More"}
+                      </button>
+                    </>
+                  ) : (
+                    post.content
+                  )}
+                </p>
 
-                <div className="flex items-center justify-between mt-5">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-5">
                   <div className="flex items-center gap-3">
                     <button
                       className={`btn btn-sm ${
@@ -145,10 +166,7 @@ const Community = () => {
                     </button>
                   </div>
 
-                  {/* <p className="text-sm opacity-60 ml-2">
-                    Posted on: {new Date(post.added_At).toLocaleDateString()}
-                  </p> */}
-                  <p className="text-sm opacity-60 ml-2">
+                  <p className="text-sm opacity-60 ml-1 sm:ml-2 text-right sm:text-left">
                     Posted on:{" "}
                     {new Date(post.added_At).toLocaleString("en-US", {
                       dateStyle: "medium",
@@ -162,7 +180,6 @@ const Community = () => {
         })}
       </div>
 
-      {/* ✅ Pagination */}
       <div className="flex justify-center gap-2 mt-10">
         <button
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}

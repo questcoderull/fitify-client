@@ -74,7 +74,7 @@ const AllTrainers = () => {
                     <strong>{slotObj.day}</strong>:
                     {slotObj.slots.map((group, j) => (
                       <div key={j}>
-                        <span className="italic"> {group.label}: </span>
+                        <span> {group.label}: </span>
                         {group.times.join(", ")}
                       </div>
                     ))}

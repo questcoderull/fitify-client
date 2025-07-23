@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 import { Helmet } from "react-helmet-async";
 import useAxios from "../../Hooks/useAxios";
@@ -6,15 +6,15 @@ import { useQuery } from "@tanstack/react-query";
 
 const AllTrainers = () => {
   const axios = useAxios();
+  const [page, setPage] = useState(1);
+  const limit = 6; // per page trainer showing.
 
-  const {
-    data: trainers = [],
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["trainers"],
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["trainers", page],
     queryFn: async () => {
-      const res = await axios.get("/trainers");
+      const res = await axios.get(
+        `/trainers-with-paginaton?page=${page}&limit=${limit}`
+      );
       return res.data;
     },
   });
@@ -33,6 +33,9 @@ const AllTrainers = () => {
     );
   }
 
+  const { result: trainers, total } = data;
+  const totalPages = Math.ceil(total / limit);
+
   return (
     <div className="py-10">
       <Helmet>
@@ -41,6 +44,7 @@ const AllTrainers = () => {
       <h1 className="text-3xl font-bold text-center text-primary mb-10">
         Our Trainers
       </h1>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {trainers.map((trainer) => (
           <div key={trainer._id} className="card bg-base-100 shadow-md border">
@@ -88,6 +92,35 @@ const AllTrainers = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* ✅ Pagination Buttons */}
+      <div className="flex justify-center gap-2 mt-8">
+        <button
+          className="btn btn-sm"
+          disabled={page === 1}
+          onClick={() => setPage((prev) => prev - 1)}
+        >
+          ◀ Prev
+        </button>
+        {[...Array(totalPages).keys()].map((num) => (
+          <button
+            key={num}
+            onClick={() => setPage(num + 1)}
+            className={`btn btn-sm ${
+              page === num + 1 ? "btn-primary text-white" : "btn-outline"
+            }`}
+          >
+            {num + 1}
+          </button>
+        ))}
+        <button
+          className="btn btn-sm"
+          disabled={page === totalPages}
+          onClick={() => setPage((prev) => prev + 1)}
+        >
+          Next ▶
+        </button>
       </div>
     </div>
   );

@@ -1,9 +1,8 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useLocation } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
@@ -14,45 +13,54 @@ const PaymentForm = () => {
   const axiosSecure = useAxiosSecure();
   const [error, setError] = useState("");
   const { trainerId } = useParams();
-  const [fee, setfee] = useState(0);
+  const [fee, setFee] = useState(0);
   const navigate = useNavigate();
   const feeInCents = fee * 100;
-  //   console.log("fee in cence", feeInCents);
   const [processing, setProcessing] = useState(false);
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const day = searchParams.get("day");
+  const label = searchParams.get("label");
+  const time = searchParams.get("time");
+  const selectedPackage = searchParams.get("package");
+  const selectedClassName = searchParams.get("class");
+
+  // Load trainer
   const { isPending, data: trainerInfo = {} } = useQuery({
-    queryKey: ["triners", trainerId],
+    queryKey: ["trainer", trainerId],
     queryFn: async () => {
       const res = await axiosSecure.get(`/trainers/${trainerId}`);
       return res.data;
     },
   });
 
-  // Getting query parameters from URL (example: ?day=Sunday&label=Evening&time=8:00%20PM)
-  const searchParams = new URLSearchParams(location.search);
-  const day = searchParams.get("day");
-  const label = searchParams.get("label");
-  const time = searchParams.get("time");
-  const selectedPackage = searchParams.get("package");
+  // Load class data
+  const { data: allClasses = [] } = useQuery({
+    queryKey: ["all-classes"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/classes");
+      return res.data;
+    },
+  });
+
+  const selectedClassInfo = allClasses.find(
+    (cls) => cls.className === selectedClassName
+  );
 
   useEffect(() => {
-    if (selectedPackage === "Basic") setfee(10);
-    else if (selectedPackage === "Standard") setfee(50);
-    else if (selectedPackage === "Premium") setfee(100);
+    if (selectedPackage === "Basic") setFee(10);
+    else if (selectedPackage === "Standard") setFee(50);
+    else if (selectedPackage === "Premium") setFee(100);
   }, [selectedPackage]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!stripe || !elements || processing) {
-      return;
-    }
+    if (!stripe || !elements || processing) return;
     setProcessing(true);
 
     const card = elements.getElement(CardElement);
-
-    if (!card) {
-      return;
-    }
+    if (!card) return;
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -63,9 +71,6 @@ const PaymentForm = () => {
       setError(error.message);
     } else {
       setError("");
-      console.log("payment method", paymentMethod);
-
-      //step 3. creating payment inten now.
       const res = await axiosSecure.post("create-payment-intent", {
         feeInCents,
         trainerId,
@@ -75,7 +80,7 @@ const PaymentForm = () => {
 
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-          card: elements.getElement(CardElement),
+          card,
           billing_details: {
             name: user.displayName,
             email: user.email,
@@ -85,15 +90,9 @@ const PaymentForm = () => {
 
       if (result.error) {
         setError(result.error.message);
-        // console.log(result.error.message);
       } else {
         setError("");
         if (result.paymentIntent.status === "succeeded") {
-          console.log("Payment succeeded!");
-          //   console.log(result);
-
-          //   step 5. eikhane ja ja korar korbo. like mark as booked, or creating payment history. eikhane  slot book relete code hobe after a succefull payment.
-
           const bookingData = {
             trainerId,
             trainerName: trainerInfo.name,
@@ -107,14 +106,14 @@ const PaymentForm = () => {
             time,
             package: selectedPackage,
             amountPaid: fee,
+            classId: selectedClassInfo?._id,
+            classTitle: selectedClassInfo?.className,
             transactionId: result.paymentIntent.id,
             paymentTime: new Date(),
           };
 
-          const bookingRes = await axiosSecure.post("/bookings", bookingData);
-          console.log("Booking response:", bookingRes.data);
+          await axiosSecure.post("/bookings", bookingData);
 
-          // Payment data
           const paymentInfo = {
             transactionId: result.paymentIntent.id,
             memberEmail: user.email,
@@ -125,24 +124,30 @@ const PaymentForm = () => {
             day,
             label,
             time,
-            date: new Date(),
+            classId: selectedClassInfo?._id,
+            classTitle: selectedClassInfo?.className,
+            paymented_at: new Date(),
             status: "succeeded",
           };
 
-          // Save payment info separately
-          const paymentRes = await axiosSecure.post("/payments", paymentInfo);
-          console.log("payment response", paymentRes);
+          await axiosSecure.post("/payments", paymentInfo);
 
-          // Step 1: Clear card form after payment
+          // Step 3: Increase booked count of the class
+          if (selectedClassInfo?._id) {
+            await axiosSecure.patch(
+              `/classes/increase-booked/${selectedClassInfo._id}`
+            );
+          }
+
           elements.getElement(CardElement).clear();
 
           Swal.fire({
             icon: "success",
             title: "Payment Successful!",
             html: `
-    <p><strong>Transaction ID:</strong> ${result.paymentIntent.id}</p>
-    <p>Thank you for booking with ${trainerInfo.name}!</p>
-  `,
+              <p><strong>Transaction ID:</strong> ${result.paymentIntent.id}</p>
+              <p>Thank you for booking with ${trainerInfo.name}!</p>
+            `,
             confirmButtonText: "Awesome!",
           }).then(() => {
             navigate("/dashboard/booked-trainer");
@@ -154,75 +159,30 @@ const PaymentForm = () => {
     setProcessing(false);
   };
 
-  if (isPending) {
-    return "Loading...";
-  }
-  console.log(trainerInfo.expertise);
+  if (isPending)
+    return <p className="text-center py-10">Loading trainer info...</p>;
 
   return (
-    // <div className="max-w-2xl mx-auto my-12 p-6 bg-white rounded-xl shadow-md space-y-6">
-    //   {/* Trainer and Slot Info Section */}
-    //   <div className="space-y-2 border-b pb-4">
-    //     <h2 className="text-2xl font-bold text-gray-800">Booking Details</h2>
-    //     <p>
-    //       <strong>Trainer:</strong> {trainerInfo.name}
-    //     </p>
-    //     <p>
-    //       <strong>Day:</strong> {day}
-    //     </p>
-    //     <p>
-    //       <strong>Label:</strong> {label}
-    //     </p>
-    //     <p>
-    //       <strong>Time:</strong> {time}
-    //     </p>
-    //     <p>
-    //       <strong>Package:</strong> {selectedPackage}
-    //     </p>
-    //     <p>
-    //       <strong>Fee:</strong> ${fee}
-    //     </p>
-    //   </div>
-
-    //   {/* form */}
-    //   <form
-    //     onSubmit={handleSubmit}
-    //     className="space-y-4 bg-white p-6 rounded-xl shadow-md w-full max-w-md mx-auto"
-    //   >
-    //     <CardElement className="p-4 border rounded"></CardElement>
-    //     <button
-    //       className="btn btn-primary w-full"
-    //       type="submit"
-    //       disabled={!stripe}
-    //     >
-    //       Pay ${fee} to book the slot
-    //     </button>
-
-    //     {error && <p className="text-sm text-error">{error}</p>}
-    //   </form>
-    // </div>
-
-    // plished version
-    <div className="max-w-3xl mx-auto my-16 px-4">
-      {/* Booking Summary Card */}
-      <div className="bg-white shadow-lg rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center border border-primary mb-8">
-        {/* Trainer Image */}
-        <img
-          src={trainerInfo.image}
-          alt={trainerInfo.name}
-          className="w-32 h-32 object-cover rounded-full border-4 border-primary shadow-sm"
-        />
-
+    <div className="max-w-4xl mx-auto my-16 px-4 space-y-10">
+      {/* Trainer + Class Info */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Trainer Info */}
-        <div className="flex-1 space-y-1 text-center md:text-left">
-          <h2 className="text-2xl font-bold text-gray-800">
+        <div className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center border border-primary">
+          <img
+            src={trainerInfo.image}
+            alt={trainerInfo.name}
+            className="w-32 h-32 object-cover rounded-full border-4 border-primary shadow-sm mb-4"
+          />
+          <h2 className="text-xl font-bold text-gray-800 mb-1">
             {trainerInfo.name}
           </h2>
-          <p className="text-gray-600">
-            <span className="font-semibold">Expertise:</span>{" "}
-            {trainerInfo.expertise}
+          <p className="text-sm text-gray-600 mb-2">
+            <strong>Expertise:</strong>{" "}
+            {Array.isArray(trainerInfo.expertise)
+              ? trainerInfo.expertise.join(", ")
+              : trainerInfo.expertise}
           </p>
-          <div className="flex flex-wrap gap-4 mt-4 text-sm text-gray-700">
+          <div className="text-sm text-gray-700 space-y-1 text-center">
             <p>
               <strong>📅 Day:</strong> {day}
             </p>
@@ -240,6 +200,26 @@ const PaymentForm = () => {
             </p>
           </div>
         </div>
+
+        {/* Class Info */}
+        {selectedClassInfo && (
+          <div className="bg-white shadow-lg rounded-2xl p-6 border border-primary flex flex-col items-center">
+            <img
+              src={selectedClassInfo.image}
+              alt={selectedClassInfo.className}
+              className="w-full h-48 object-cover rounded mb-4"
+            />
+            <h3 className="text-xl font-bold text-secondary mb-1 text-center">
+              {selectedClassInfo.className}
+            </h3>
+            <p className="text-sm text-gray-600 mb-1">
+              <strong>Category:</strong> {selectedClassInfo.category}
+            </p>
+            <p className="text-sm text-gray-700 text-center">
+              {selectedClassInfo.details.slice(0, 120)}...
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Payment Form */}

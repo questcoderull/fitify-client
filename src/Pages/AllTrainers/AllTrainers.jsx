@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { Helmet } from "react-helmet-async";
 import useAxios from "../../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { FaUser, FaBrain, FaCalendarAlt, FaClock } from "react-icons/fa";
 
 const AllTrainers = () => {
   const axios = useAxios();
@@ -45,7 +46,7 @@ const AllTrainers = () => {
         Our Trainers
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {trainers.map((trainer) => (
           <div key={trainer._id} className="card bg-base-100 shadow-md border">
             <figure>
@@ -92,9 +93,105 @@ const AllTrainers = () => {
             </div>
           </div>
         ))}
+      </div> */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {trainers.map((trainer) => (
+          <div
+            key={trainer._id}
+            className="card bg-white shadow-lg border border-gray-200 rounded-2xl hover:shadow-2xl hover:scale-[1.03] transition-transform duration-300 flex flex-col"
+          >
+            {/* Avatar Image */}
+            <figure className="flex justify-center pt-6 px-4">
+              <div className="avatar">
+                <div className="rounded-full ring ring-primary ring-offset-base-100 ring-offset-4 shadow-lg w-32 h-32 md:w-36 md:h-36 lg:w-48 lg:h-48 overflow-hidden">
+                  <img
+                    src={trainer.image || trainer.profileImage}
+                    alt={trainer.name}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              </div>
+            </figure>
+
+            {/* Body */}
+            <div className="card-body text-center px-6 pt-3 pb-6 flex flex-col flex-grow">
+              <h2 className="text-xl font-semibold text-primary mb-1">
+                {trainer.name}
+              </h2>
+              <p className="text-sm text-gray-700 mb-3">Age: {trainer.age}</p>
+
+              {/* Expertise */}
+              <div className="mb-3">
+                <p className="text-xs font-semibold text-gray-800 mb-1 tracking-wide">
+                  Expertise
+                </p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {Array.isArray(trainer.expertise) ? (
+                    trainer.expertise.map((item, i) => (
+                      <span
+                        key={i}
+                        className="badge badge-outline badge-primary text-[10px] px-2 py-0.5 rounded-full"
+                      >
+                        {item}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-gray-700 font-medium text-sm">
+                      {trainer.expertise}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Available Days */}
+              <div className="mb-3">
+                <p className="text-xs font-semibold text-gray-800 mb-1 tracking-wide">
+                  Available Days
+                </p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {trainer.structuredSlots?.map((slot, i) => (
+                    <span
+                      key={i}
+                      className="badge badge-outline badge-secondary text-[10px] px-2 py-0.5 rounded-full"
+                    >
+                      {slot.day}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Structured Slots */}
+              <div className="text-left w-full mt-auto space-y-1 text-gray-700 max-h-20 overflow-y-auto text-xs">
+                {trainer.structuredSlots?.map((slotObj, i) => (
+                  <div key={i} className="text-sm leading-tight">
+                    <strong className="text-gray-900">{slotObj.day}</strong>:
+                    {slotObj.slots.map((group, j) => (
+                      <div key={j} className="ml-2 mt-0.5">
+                        <span className="font-semibold text-primary">
+                          {group.label}:
+                        </span>{" "}
+                        {group.times.join(", ")}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+
+              {/* Button */}
+              <div className="mt-4 w-full">
+                <Link
+                  to={`/trainer/${trainer._id}`}
+                  className="btn btn-primary btn-sm w-full rounded-full font-semibold tracking-wide"
+                >
+                  Know More
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
-      {/* ✅ Pagination Buttons */}
+      {/*  Pagination Buttons */}
       <div className="flex justify-center gap-2 mt-8">
         <button
           className="btn btn-sm"

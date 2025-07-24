@@ -33,6 +33,7 @@ import AdminOrTrainerRoute from "../Routes/AdminOrTrainerRoute";
 import PageNotFound from "../Pages/PageNotFoun/PageNotFound";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import CommunityDetails from "../Pages/CommunityDetails/CommunityDetails";
+import BalanceOverview from "../Pages/DashbordPages/BalanceOverview/BalanceOverview";
 
 export const router = createBrowserRouter([
   {
@@ -201,6 +202,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <MakeAdmin></MakeAdmin>,
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "balance-overview",
+        element: (
+          <AdminRoute>
+            <BalanceOverview></BalanceOverview>
           </AdminRoute>
         ),
       },

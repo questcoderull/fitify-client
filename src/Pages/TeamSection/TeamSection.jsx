@@ -50,7 +50,7 @@ const TeamSection = () => {
                 <Link to={`/trainer/${trainer._id}`}>{trainer.name}</Link>
               </h3>
               <p className="text-sm text-gray-700 italic">
-                {trainer.bio?.slice(0, 100)}...
+                {trainer.description?.slice(0, 100)}...
               </p>
               <div className="flex flex-wrap justify-center gap-2 mt-2">
                 {trainer.expertise?.map((item, i) => (

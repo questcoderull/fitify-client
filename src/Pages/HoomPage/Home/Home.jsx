@@ -19,9 +19,9 @@ const Home = () => {
       <FeatureSection></FeatureSection>
       <About></About>
       <FeaturedClasses></FeaturedClasses>
+      <ReviewList></ReviewList>
       <LatestCommunityPosts></LatestCommunityPosts>
       <NewsLater></NewsLater>
-      <ReviewList></ReviewList>
       <TeamSection></TeamSection>
     </div>
   );

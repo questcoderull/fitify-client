@@ -5,6 +5,7 @@ import About from "../About/About";
 import NewsLater from "../NewsLater/NewsLater";
 import { Helmet } from "react-helmet-async";
 import ReviewList from "../../ReviewList/ReviewList";
+import FeaturedClasses from "../../FeaturedClasses/FeaturedClasses";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <Banner></Banner>
       <FeatureSection></FeatureSection>
       <About></About>
+      <FeaturedClasses></FeaturedClasses>
       <NewsLater></NewsLater>
       <ReviewList></ReviewList>
     </div>

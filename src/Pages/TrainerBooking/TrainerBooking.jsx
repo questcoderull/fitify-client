@@ -129,7 +129,7 @@ const TrainerBooking = () => {
       </div>
 
       {/* Package Selection */}
-      <div className="bg-base-100 p-4 rounded-lg shadow border border-primary">
+      {/* <div className="bg-base-100 p-4 rounded-lg shadow border border-primary">
         <h2 className="text-2xl font-bold mb-3">
           Select Membership Package to book
         </h2>
@@ -156,6 +156,98 @@ const TrainerBooking = () => {
         <button onClick={handleJoinNow} className="btn btn-primary mt-6">
           Join Now
         </button>
+      </div> */}
+
+      {/* Package Selection */}
+      <div className="bg-base-100 p-4 rounded-lg shadow border border-primary">
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Select Membership Package to book
+        </h2>
+
+        {/* Grid of Packages */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Basic Package */}
+          <label
+            className={`border rounded-lg p-4 hover:shadow transition cursor-pointer 
+      ${
+        selectedPackage === "Basic"
+          ? "border-primary shadow"
+          : "border-gray-300"
+      }`}
+          >
+            <input
+              type="radio"
+              value="Basic"
+              checked={selectedPackage === "Basic"}
+              onChange={(e) => setSelectedPackage(e.target.value)}
+              className="mb-2"
+            />
+            <h3 className="font-bold text-lg mb-2">Basic Membership</h3>
+            <ul className="text-sm text-gray-600 list-disc pl-5">
+              <li>Access to gym during regular hours</li>
+              <li>Cardio & strength equipment</li>
+              <li>Locker rooms and showers</li>
+            </ul>
+            <p className="mt-2 text-primary font-bold">Price: $10</p>
+          </label>
+
+          {/* Standard Package */}
+          <label
+            className={`border rounded-lg p-4 hover:shadow transition cursor-pointer 
+      ${
+        selectedPackage === "Standard"
+          ? "border-primary shadow"
+          : "border-gray-300"
+      }`}
+          >
+            <input
+              type="radio"
+              value="Standard"
+              checked={selectedPackage === "Standard"}
+              onChange={(e) => setSelectedPackage(e.target.value)}
+              className="mb-2"
+            />
+            <h3 className="font-bold text-lg mb-2">Standard Membership</h3>
+            <ul className="text-sm text-gray-600 list-disc pl-5">
+              <li>All Basic benefits included</li>
+              <li>Group classes: Yoga, Zumba, Spinning</li>
+              <li>Sauna / Steam room access</li>
+            </ul>
+            <p className="mt-2 text-primary font-bold">Price: $50</p>
+          </label>
+
+          {/* Premium Package */}
+          <label
+            className={`border rounded-lg p-4 hover:shadow transition cursor-pointer 
+      ${
+        selectedPackage === "Premium"
+          ? "border-primary shadow"
+          : "border-gray-300"
+      }`}
+          >
+            <input
+              type="radio"
+              value="Premium"
+              checked={selectedPackage === "Premium"}
+              onChange={(e) => setSelectedPackage(e.target.value)}
+              className="mb-2"
+            />
+            <h3 className="font-bold text-lg mb-2">Premium Membership</h3>
+            <ul className="text-sm text-gray-600 list-disc pl-5">
+              <li>All Standard benefits included</li>
+              <li>Personal trainer sessions</li>
+              <li>Massage & nutrition discounts</li>
+            </ul>
+            <p className="mt-2 text-primary font-bold">Price: $100</p>
+          </label>
+        </div>
+
+        {/* Join Button */}
+        <div className="text-center mt-6">
+          <button onClick={handleJoinNow} className="btn btn-primary px-8">
+            Join Now
+          </button>
+        </div>
       </div>
     </div>
   );

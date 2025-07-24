@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const About = () => {
   return (
     <div>
-      <section className="px-4 my-16 flex flex-col lg:flex-row items-center gap-10 border border-primary rounded-2xl">
+      <section className="px-4 py-4 my-16 flex flex-col lg:flex-row items-center gap-10 border border-primary rounded-2xl">
         {/* Left Side: Image */}
         <div className="flex-1">
           <img

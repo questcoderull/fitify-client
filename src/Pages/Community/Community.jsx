@@ -78,12 +78,14 @@ const Community = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
-      <h1 className="text-3xl font-bold text-center text-primary">
+      <h1 className="text-3xl font-bold text-center text-primary mb-3">
         Community Forums
       </h1>
-      <p className="text-center text-gray-600 mb-8">
-        Explore real stories, fitness journeys, and healthy lifestyle tips — all
-        in one place.
+      <p className="text-center text-gray-600 max-w-3xl mx-auto text-sm md:text-base mb-12">
+        Welcome to the official Community Forum where our certified trainers and
+        admins share valuable insights, updates, and expert advice. While
+        posting access is limited to our professionals, members are encouraged
+        to engage by reading, upvoting, or downvoting to express their feedback.
       </p>
 
       <div className="space-y-6">

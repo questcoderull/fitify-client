@@ -88,7 +88,7 @@ const AllClasses = () => {
     <div className="my-16">
       {/* Hero Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-primary mb-3">
+        <h1 className="text-3xl font-bold text-center text-primary mb-3">
           Explore All Fitness Classes
         </h1>
         <p className="text-gray-600 text-base max-w-xl mx-auto">
@@ -98,8 +98,7 @@ const AllClasses = () => {
         </p>
       </div>
 
-      {/* 🔍 Search & Category Filter */}
-
+      {/*  Search & Category Filter */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 px-4">
         {/* Search Input */}
         <div className="relative w-full md:w-1/2">
@@ -175,7 +174,11 @@ const AllClasses = () => {
                 </figure>
               </Link>
               <div className="card-body">
-                <h2 className="card-title">{singleClass.className}</h2>
+                <h2 className="card-title hover:underline">
+                  <Link to={`/class-details/${singleClass._id}`}>
+                    {singleClass.className}
+                  </Link>
+                </h2>
 
                 <p className="text-sm text-gray-700">
                   {isExpanded || !detailsTooLong

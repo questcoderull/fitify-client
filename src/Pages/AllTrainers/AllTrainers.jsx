@@ -42,9 +42,14 @@ const AllTrainers = () => {
       <Helmet>
         <title>Fitify | All Trainers</title>
       </Helmet>
-      <h1 className="text-3xl font-bold text-center text-primary mb-10">
+      <h1 className="text-3xl font-bold text-center text-primary mb-3">
         Our Trainers
       </h1>
+      <p className="text-center text-gray-600 max-w-3xl mx-auto text-sm md:text-base mb-12">
+        Meet our certified and passionate trainers who are committed to helping
+        you achieve your fitness goals. Each trainer brings unique expertise,
+        energy, and dedication to guide you every step of the way.
+      </p>
 
       {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {trainers.map((trainer) => (

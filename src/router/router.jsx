@@ -29,6 +29,7 @@ import ClassDetails from "../Pages/ClassDetails/ClassDetails";
 import AdminRoute from "../Routes/AdminRoute";
 import TrainerRoute from "../Routes/TrainerRoute";
 import MemberRoute from "../Routes/MemberRoute";
+import AdminOrTrainerRoute from "../Routes/AdminOrTrainerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -145,7 +146,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "add-forum",
-        element: <AddForum></AddForum>,
+        element: (
+          <AdminOrTrainerRoute>
+            <AddForum></AddForum>,
+          </AdminOrTrainerRoute>
+        ),
       },
       {
         path: "add-slot",

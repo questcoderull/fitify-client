@@ -30,11 +30,14 @@ import AdminRoute from "../Routes/AdminRoute";
 import TrainerRoute from "../Routes/TrainerRoute";
 import MemberRoute from "../Routes/MemberRoute";
 import AdminOrTrainerRoute from "../Routes/AdminOrTrainerRoute";
+import PageNotFound from "../Pages/PageNotFoun/PageNotFound";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -110,7 +113,7 @@ export const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
-
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "add-class",
@@ -197,5 +200,9 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "*",
+    Component: PageNotFound,
   },
 ]);

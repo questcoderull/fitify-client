@@ -32,6 +32,7 @@ import MemberRoute from "../Routes/MemberRoute";
 import AdminOrTrainerRoute from "../Routes/AdminOrTrainerRoute";
 import PageNotFound from "../Pages/PageNotFoun/PageNotFound";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import CommunityDetails from "../Pages/CommunityDetails/CommunityDetails";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "community",
         Component: Community,
+      },
+      {
+        path: "community/:id",
+        Component: CommunityDetails,
       },
       {
         path: "trainer/:id",

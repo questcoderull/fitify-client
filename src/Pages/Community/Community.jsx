@@ -4,6 +4,7 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import useAxios from "../../Hooks/useAxios";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const Community = () => {
   const { user } = useAuth();
@@ -107,9 +108,9 @@ const Community = () => {
                     <span
                       className={`badge badge-outline text-xs ${
                         post.role === "admin"
-                          ? "badge-primary"
+                          ? "badge-primary bg-primary text-white"
                           : post.role === "trainer"
-                          ? "badge-secondary"
+                          ? "badge-secondary bg-secondary text-white"
                           : "badge-accent"
                       }`}
                     >
@@ -118,14 +119,18 @@ const Community = () => {
                   </div>
                 </div>
 
-                <h2 className="text-xl font-bold mt-3">{post.title}</h2>
+                <h2 className="text-xl font-bold mt-3 hover:underline hover:text-primary">
+                  <Link to={`/community/${post._id}`}>{post.title}</Link>
+                </h2>
 
                 {post.contentImage && (
-                  <img
-                    src={post.contentImage}
-                    alt="Forum"
-                    className="w-full max-h-80 object-cover rounded-md mt-3"
-                  />
+                  <Link to={`/community/${post._id}`}>
+                    <img
+                      src={post.contentImage}
+                      alt="Forum"
+                      className="w-full max-h-80 object-cover rounded-md mt-3"
+                    />
+                  </Link>
                 )}
 
                 <p className="mt-4 text-justify">

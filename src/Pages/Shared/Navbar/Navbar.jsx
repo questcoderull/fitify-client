@@ -159,9 +159,9 @@ const Navbar = () => {
                     <span
                       className={`badge badge-sm text-white ${
                         role === "admin"
-                          ? "bg-red-500"
+                          ? "bg-primary"
                           : role === "trainer"
-                          ? "bg-blue-500"
+                          ? "bg-secondary"
                           : "bg-green-500"
                       }`}
                     >

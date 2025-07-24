@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet-async";
 import ReviewList from "../../ReviewList/ReviewList";
 import FeaturedClasses from "../../FeaturedClasses/FeaturedClasses";
 import LatestCommunityPosts from "../../LatestCommunityPosts/LatestCommunityPosts";
+import TeamSection from "../../TeamSection/TeamSection";
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
       <LatestCommunityPosts></LatestCommunityPosts>
       <NewsLater></NewsLater>
       <ReviewList></ReviewList>
+      <TeamSection></TeamSection>
     </div>
   );
 };

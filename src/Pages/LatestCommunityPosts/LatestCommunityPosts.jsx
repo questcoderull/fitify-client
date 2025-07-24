@@ -19,7 +19,7 @@ const LatestCommunityPosts = () => {
   }
 
   return (
-    <section className="py-10 px-4 max-w-6xl mx-auto">
+    <section className="py-10 px-4 max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-center text-primary mb-2">
         Latest Community Posts
       </h2>
@@ -32,7 +32,7 @@ const LatestCommunityPosts = () => {
         {posts.map((post) => (
           <div
             key={post._id}
-            className="card bg-white shadow-md border rounded-xl hover:shadow-lg transition duration-300"
+            className="card bg-white shadow-md border-t-2 border-t-secondary border-b-primary border-b-2 rounded-xl hover:shadow-lg transition duration-300"
           >
             <figure className="h-48 overflow-hidden rounded-t-xl">
               <img

@@ -1,17 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxios from "../../../Hooks/useAxios";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FaMoneyBillWave, FaUserTie } from "react-icons/fa";
 import { MdOutlinePayments } from "react-icons/md";
 import { BsClockHistory } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
+import ChartSubscribersVsMembers from "./ChartSubscribersVsMembers";
 
 const BalanceOverview = () => {
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
 
   const { data = {}, isLoading } = useQuery({
     queryKey: ["admin-balance-overview"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/admin/balance-overview");
+      const res = await axiosSecure.get("/admin/balance-overview");
       return res.data;
     },
   });
@@ -27,7 +28,7 @@ const BalanceOverview = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="max-w-7xl mx-auto px-4 py-20">
       <h2 className="text-3xl font-bold text-primary mb-10 text-center flex items-center justify-center gap-2">
         <MdOutlinePayments className="text-4xl text-primary" />
         Admin Financial Dashboard
@@ -105,16 +106,12 @@ const BalanceOverview = () => {
       </div>
 
       {/* Pie Chart Placeholder */}
-      <div className="mt-16">
+      <div className="mt-16 border border-primary rounded-2xl p-5">
         <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
           <FaUserTie className="text-xl text-primary" />
           Subscribers vs Paid Members
         </h3>
-        <div className="w-full md:w-1/2 mx-auto">
-          <div className="border-2 border-dashed border-gray-300 rounded-xl p-10 text-center text-gray-400">
-            Pie Chart coming soon...
-          </div>
-        </div>
+        <ChartSubscribersVsMembers />
       </div>
     </div>
   );

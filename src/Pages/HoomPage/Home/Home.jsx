@@ -6,6 +6,7 @@ import NewsLater from "../NewsLater/NewsLater";
 import { Helmet } from "react-helmet-async";
 import ReviewList from "../../ReviewList/ReviewList";
 import FeaturedClasses from "../../FeaturedClasses/FeaturedClasses";
+import LatestCommunityPosts from "../../LatestCommunityPosts/LatestCommunityPosts";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <FeatureSection></FeatureSection>
       <About></About>
       <FeaturedClasses></FeaturedClasses>
+      <LatestCommunityPosts></LatestCommunityPosts>
       <NewsLater></NewsLater>
       <ReviewList></ReviewList>
     </div>

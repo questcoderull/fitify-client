@@ -8,6 +8,10 @@ import ForbiddenPage from "../../ForbiddenPage/ForbiddebPage";
 const DashboardHome = () => {
   const { role } = useAuth();
 
+  if (!role) {
+    return <p className="text-center my-20">Dashboard home is loding...</p>;
+  }
+
   if (role === "member") {
     return <MemberDashboard></MemberDashboard>;
   } else if (role === "trainer") {

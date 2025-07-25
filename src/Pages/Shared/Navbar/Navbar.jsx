@@ -94,7 +94,7 @@ const Navbar = () => {
         <>
           <li className="hover:bg-primary rounded-md transition">
             <NavLink
-              to="/dashboard"
+              to="/dashboard/home"
               className="flex items-center gap-2 px-3 py-2 rounded-md text-primary hover:text-white"
             >
               <MdDashboard />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaDumbbell, FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router";
 import FitifyLogo from "../../Shared/FitifyLogo/FitifyLogo";
 import { useForm } from "react-hook-form";
@@ -64,8 +64,30 @@ const Login = () => {
     <div className="hero bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left flex-1">
-          <h className="text-2xl">Lottie animation will be here</h>
-          {/* <Lottie animationData={loginAnimation} loop={true}></Lottie> */}
+          {/* right side */}
+          <div className="space-y-5 text-center lg:text-left">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-primary flex items-center gap-3 justify-center lg:justify-start">
+              <FaDumbbell className="text-secondary animate-bounce" />
+              Welcome Back to <span className="text-secondary">Fitify</span>
+            </h2>
+            <p className="text-gray-700 text-lg font-medium">
+              Ready to{" "}
+              <span className="text-primary font-bold">stay consistent</span>{" "}
+              and keep grinding?
+            </p>
+            <ul className="text-sm text-gray-600 list-disc pl-5 space-y-1">
+              <li>📅 Manage your booked training slots</li>
+              <li>🧑‍🏫 Connect with top trainers</li>
+              <li>💬 Join new forum conversations</li>
+              <li>🌟 Share your progress and quotes</li>
+            </ul>
+            <div className="mt-4">
+              <p className="text-sm text-gray-500 italic">
+                "Motivation gets you started, consistency keeps you going." –
+                Let's go again!
+              </p>
+            </div>
+          </div>
         </div>
         <div className="card bg-base-100 w-full lg:w-11/12 shrink-0 shadow-lg flex-1">
           <div className="card-body py-10">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaFire } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
@@ -99,8 +99,30 @@ const SignUp = () => {
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left flex-1">
-          <h className="text-2xl">Lottie animation will be here</h>
-          {/* <Lottie animationData={resterAnimation} loop={true}></Lottie> */}
+          {/* right side */}
+          <div className="space-y-5 text-center lg:text-left">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-primary flex items-center gap-3 justify-center lg:justify-start">
+              <FaFire className="text-red-500 animate-pulse" />
+              Welcome to <span className="text-secondary">Fitify</span>
+            </h2>
+            <p className="text-gray-700 text-lg font-medium">
+              Your fitness journey begins{" "}
+              <span className="text-primary font-bold">today</span> — not
+              tomorrow!
+            </p>
+            <ul className="text-sm text-gray-600 list-disc pl-5 space-y-1">
+              <li>🔥 Book expert trainers on your schedule</li>
+              <li>📅 Join powerful group classes daily</li>
+              <li>🌟 Share your fitness quotes & inspire others</li>
+              <li>🧠 Read and post in our active forum</li>
+            </ul>
+            <div className="mt-4">
+              <p className="text-sm text-gray-500 italic">
+                "The body achieves what the mind believes." – Start strong with
+                Fitify!
+              </p>
+            </div>
+          </div>
         </div>
         <div className="card bg-base-100 w-full lg:w-11/12 shrink-0 shadow-lg flex-1">
           <div className="card-body py-10">

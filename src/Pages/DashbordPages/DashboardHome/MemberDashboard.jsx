@@ -5,6 +5,7 @@ import { FaQuoteLeft, FaQuoteRight, FaPlus } from "react-icons/fa";
 import { MdForum, MdClass } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const MemberDashboard = () => {
   const axiosSecure = useAxiosSecure();
@@ -65,6 +66,9 @@ const MemberDashboard = () => {
 
   return (
     <div className="p-6 md:p-10 space-y-10 bg-gradient-to-b from-white via-slate-50 to-white min-h-screen my-12">
+      <Helmet>
+        <title>Fitify | Dashboard | Home | Member</title>
+      </Helmet>
       {/* ✅ Welcome Section */}
       <div className="space-y-1">
         <h2 className="text-2xl md:text-3xl font-bold text-primary">

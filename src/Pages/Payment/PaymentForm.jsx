@@ -5,6 +5,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useNavigate, useParams, useLocation } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -164,6 +165,9 @@ const PaymentForm = () => {
 
   return (
     <div className="max-w-4xl mx-auto my-16 px-4 space-y-10">
+      <Helmet>
+        <title>Fitify | paymet {trainerInfo.name}</title>
+      </Helmet>
       {/* Trainer + Class Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Trainer Info */}

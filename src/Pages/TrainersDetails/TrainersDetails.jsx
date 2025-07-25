@@ -75,7 +75,7 @@ const TrainerDetails = () => {
   return (
     <div className="max-w-6xl mx-auto p-4">
       <Helmet>
-        <title>Fitify | {name}</title>
+        <title>Fitify | {name}'s details</title>
       </Helmet>
 
       <h1 className="text-3xl md:text-4xl font-bold text-center text-primary mb-8">

@@ -7,6 +7,7 @@ import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../../Hooks/useAuth";
 import useAxios from "../../../Hooks/useAxios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { logInUser } = useAuth();
@@ -62,6 +63,9 @@ const Login = () => {
 
   return (
     <div className="hero bg-base-200">
+      <Helmet>
+        <title>Fitify | Login</title>
+      </Helmet>
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-left flex-1">
           {/* right side */}

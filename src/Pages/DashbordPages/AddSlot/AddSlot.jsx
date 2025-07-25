@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const AddSlot = () => {
   const { user } = useAuth();
@@ -145,10 +146,13 @@ const AddSlot = () => {
     }
   };
 
-  if (!trainer) return <p>Loading...</p>;
+  if (!trainer) return <p className="text-center mt-16">Slots Loading...</p>;
 
   return (
     <div className="max-w-xl mx-auto p-5 shadow-lg bg-white rounded-lg">
+      <Helmet>
+        <title>Fitify | Dashboard | Add slot</title>
+      </Helmet>
       <h2 className="text-2xl font-bold text-center mb-4">Add New Slot</h2>
 
       <div className="mb-6">

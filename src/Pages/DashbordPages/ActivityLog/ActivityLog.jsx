@@ -5,6 +5,7 @@ import useAuth from "../../../Hooks/useAuth";
 import { FaEye } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const ActivityLog = () => {
   const { user } = useAuth();
@@ -65,6 +66,9 @@ const ActivityLog = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
+      <Helmet>
+        <title>Fitify | Dashboard | ActivityLog</title>
+      </Helmet>
       <div className="max-w-3xl w-full mx-auto p-6 border border-primary rounded-2xl shadow-lg bg-base-100">
         <h2 className="text-2xl font-bold mb-4 text-center text-primary">
           My Application Activity Log

@@ -69,7 +69,11 @@ export const router = createBrowserRouter([
 
       {
         path: "trainer-booking/:id",
-        Component: TrainerBooking,
+        element: (
+          <PrivateRoute>
+            <TrainerBooking></TrainerBooking>
+          </PrivateRoute>
+        ),
       },
       {
         path: "payment/:trainerId",

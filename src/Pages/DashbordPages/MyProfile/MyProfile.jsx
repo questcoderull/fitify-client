@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const { user, updateUserProfile } = useAuth();
@@ -233,6 +234,9 @@ const MyProfile = () => {
     // </div>
 
     <div className="min-h-screen bg-base-200 px-4 py-10 flex justify-center items-start">
+      <Helmet>
+        <title>Fitify | Dashboard | My Profile</title>
+      </Helmet>
       <div className="w-full max-w-3xl bg-white shadow-xl rounded-3xl border border-primary p-6 space-y-6">
         {/* Heading */}
         <h2 className="text-3xl font-bold text-center text-primary mb-6">

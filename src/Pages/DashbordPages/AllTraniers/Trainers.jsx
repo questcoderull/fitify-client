@@ -3,6 +3,7 @@ import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const ApprovedTrainers = () => {
   const axiosSecure = useAxiosSecure();
@@ -65,6 +66,9 @@ const ApprovedTrainers = () => {
 
   return (
     <div className="p-4">
+      <Helmet>
+        <title>Fitify | Dashboard | Trainers</title>
+      </Helmet>
       <h2 className="text-3xl font-bold mb-6 text-center">Approved Trainers</h2>
       <div className="hidden md:block overflow-x-auto">
         <table className="table w-full border rounded-lg shadow-lg">

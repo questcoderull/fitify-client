@@ -3,6 +3,7 @@ import { FaEye, FaCheck, FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const PendingTrainers = () => {
   const axiosSecure = useAxiosSecure();
@@ -107,6 +108,9 @@ const PendingTrainers = () => {
 
   return (
     <div className="p-4">
+      <Helmet>
+        <title>Fitify | Dashboard | Pending Trainers</title>
+      </Helmet>
       <h2 className="text-3xl font-bold mb-6 text-center">Applied Trainers</h2>
 
       {/* Desktop/Table view */}

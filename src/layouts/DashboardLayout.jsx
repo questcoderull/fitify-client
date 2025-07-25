@@ -14,12 +14,16 @@ import { FaMoneyCheckAlt, FaUserCheck, FaUserClock } from "react-icons/fa";
 import { GiWeightLiftingUp } from "react-icons/gi";
 import { BiTimeFive } from "react-icons/bi";
 import useAuth from "../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const DashboardLayout = () => {
   const { role } = useAuth();
 
   return (
     <div className="drawer lg:drawer-open">
+      <Helmet>
+        <title>Fitify | Dashboard</title>
+      </Helmet>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}

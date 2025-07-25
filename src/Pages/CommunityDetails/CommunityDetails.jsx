@@ -4,6 +4,7 @@ import useAxios from "../../Hooks/useAxios";
 import toast from "react-hot-toast";
 import { FaArrowUp, FaArrowDown, FaArrowLeft } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const CommunityDetails = () => {
   const { id } = useParams();
@@ -64,6 +65,9 @@ const CommunityDetails = () => {
 
   return (
     <section className="py-10 px-4 max-w-7xl mx-auto">
+      <Helmet>
+        <title>Fitify | {post.title}</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-primary mb-4 text-center">
         {post.title}
       </h2>

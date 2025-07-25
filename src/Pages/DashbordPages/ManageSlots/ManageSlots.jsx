@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageSlots = () => {
   const axiosSecure = useAxiosSecure();
@@ -68,6 +69,9 @@ const ManageSlots = () => {
 
   return (
     <div className="max-w-4xl mx-auto my-12">
+      <Helmet>
+        <title>Fitify | Dashboard | Manage Slots</title>
+      </Helmet>
       <h2 className="text-3xl font-bold mb-6 text-center">Manage Slots</h2>
 
       {trainer?.structuredSlots?.length === 0 ? (

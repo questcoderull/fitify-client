@@ -7,6 +7,7 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const BookedTrainer = () => {
   const { user } = useAuth();
@@ -135,6 +136,9 @@ const BookedTrainer = () => {
 
   return (
     <div className="max-w-6xl mx-auto my-10 px-4">
+      <Helmet>
+        <title>Fitify | Dashboard | My Booked Trainers</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center mb-6">
         Your Booked Trainers
       </h2>

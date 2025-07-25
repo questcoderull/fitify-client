@@ -3,6 +3,7 @@ import useAxios from "../../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AllClasses = () => {
   const axios = useAxios();
@@ -86,6 +87,9 @@ const AllClasses = () => {
 
   return (
     <div className="my-16">
+      <Helmet>
+        <title>Fitify | Classes</title>
+      </Helmet>
       {/* Hero Header */}
       <div className="text-center mb-12">
         <h1 className="text-3xl font-bold text-center text-primary mb-3">

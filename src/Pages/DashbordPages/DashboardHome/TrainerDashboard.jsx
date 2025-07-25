@@ -2,6 +2,7 @@ import React from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const TrainerDashboard = () => {
   const { user } = useAuth();
@@ -40,6 +41,9 @@ const TrainerDashboard = () => {
 
   return (
     <div className="p-6 space-y-10 my-12">
+      <Helmet>
+        <title>Fitify | Dashboard | Home | Trainer</title>
+      </Helmet>
       <h2 className="text-2xl font-bold text-primary">👨‍🏫 Trainer Dashboard</h2>
 
       {/* Overview Cards */}

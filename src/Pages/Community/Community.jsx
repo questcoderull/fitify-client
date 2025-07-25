@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxios from "../../Hooks/useAxios";
 import { useState } from "react";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const Community = () => {
   const { user } = useAuth();
@@ -78,6 +79,9 @@ const Community = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
+      <Helmet>
+        <title>Fitify | Community</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-center text-primary mb-3">
         Community Forums
       </h1>

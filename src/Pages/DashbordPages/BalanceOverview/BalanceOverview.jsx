@@ -5,6 +5,7 @@ import { MdOutlinePayments } from "react-icons/md";
 import { BsClockHistory } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 import ChartSubscribersVsMembers from "./ChartSubscribersVsMembers";
+import { Helmet } from "react-helmet-async";
 
 const BalanceOverview = () => {
   const axiosSecure = useAxiosSecure();
@@ -29,6 +30,9 @@ const BalanceOverview = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-20">
+      <Helmet>
+        <title>Fitify | Dashboard | Balance</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-primary mb-10 text-center flex items-center justify-center gap-2">
         <MdOutlinePayments className="text-4xl text-primary" />
         Admin Financial Dashboard

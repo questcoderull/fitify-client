@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { formatDateTime } from "../../../utility/timeFormate";
+import { Helmet } from "react-helmet-async";
 
 const AllSubscribers = () => {
   const axiosSecure = useAxiosSecure();
@@ -44,6 +45,9 @@ const AllSubscribers = () => {
 
   return (
     <div className="overflow-x-auto p-4">
+      <Helmet>
+        <title>Fitify | Dashboard | All Subscriber</title>
+      </Helmet>
       <h2 className="text-3xl font-bold mb-6 text-center">
         All Newsletter Subscribers
       </h2>

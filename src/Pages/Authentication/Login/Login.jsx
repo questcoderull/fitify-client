@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../../Hooks/useAuth";
 import useAxios from "../../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { logInUser } = useAuth();
@@ -23,23 +24,39 @@ const Login = () => {
   const from = location.state?.from || "/";
 
   const onSubmit = (data) => {
-    console.log(data);
-
     logInUser(data.email, data.password)
       .then(async (result) => {
-        console.log(result);
-
-        //  Update last login time
-        const res = await axiosInstance.patch("/users/update-last-login", {
+        //  Update last login
+        await axiosInstance.patch("/users/update-last-login", {
           email: data.email,
           last_log_in: new Date().toISOString(),
         });
-        console.log(res.data);
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
 
         navigate(from);
       })
       .catch((error) => {
-        console.log(error);
+        //  Custom error handling
+        let customMessage = "Something went wrong!";
+
+        if (error.message.includes("auth/invalid-login-credentials")) {
+          customMessage = "Invalid email or password.";
+        } else if (error.message.includes("auth/user-not-found")) {
+          customMessage = "No user found with this email.";
+        } else if (error.message.includes("auth/wrong-password")) {
+          customMessage = "Incorrect password.";
+        }
+
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: customMessage,
+        });
       });
   };
 

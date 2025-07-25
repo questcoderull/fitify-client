@@ -24,7 +24,7 @@ const MemberDashboard = () => {
   });
 
   // ডাটা চেক করার জন্য console.log
-  console.log("Dashboard data:", data);
+  //   console.log("Dashboard data:", data);
 
   const handleSubmitQuote = async (e) => {
     e.preventDefault();
@@ -76,7 +76,7 @@ const MemberDashboard = () => {
         </p>
       </div>
 
-      {/* ✅ Recent Forum Posts and Recent Classes with card style */}
+      {/* Recent Forum Posts and Recent Classes with card style */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Recent Forum Posts */}
         <div>
@@ -127,7 +127,7 @@ const MemberDashboard = () => {
         </div>
       </section>
 
-      {/* ✅ Quick Actions */}
+      {/*  Quick Actions */}
       <section className="mb-16">
         <h3 className="text-xl font-bold text-gray-800 mb-4">
           🧭 Quick Actions

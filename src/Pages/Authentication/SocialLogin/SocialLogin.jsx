@@ -2,6 +2,7 @@ import React from "react";
 import useAuth from "../../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
 import useAxios from "../../../Hooks/useAxios";
+import toast from "react-hot-toast";
 
 const SocialLogin = () => {
   const { continueWithGoogle } = useAuth();
@@ -15,19 +16,21 @@ const SocialLogin = () => {
       .then(async (result) => {
         const user = result.user;
 
-        console.log(user);
-
-        const res = await axiosInstance.post("/users/google", {
+        await axiosInstance.post("/users/google", {
           name: user.displayName,
           email: user.email,
           profilePic: user.photoURL,
         });
-        console.log(res.data);
 
+        toast.success(`Welcome, ${user.displayName}!`);
         navigate(from);
       })
       .catch((error) => {
-        console.log(error);
+        if (error.message.includes("popup-closed-by-user")) {
+          toast.error("Popup closed. Please try again.");
+        } else {
+          toast.error("Google Sign-in failed!");
+        }
       });
   };
 

@@ -22,7 +22,7 @@ const MyProfile = () => {
 
     axiosSecure.get(`/users/profile/${user.email}`).then((res) => {
       setProfileData(res.data);
-      console.log(res.data);
+      // console.log(res.data);
       setInitialValues({
         name: user.displayName,
         photo: user.photoURL,

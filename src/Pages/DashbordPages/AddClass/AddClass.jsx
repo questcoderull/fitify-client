@@ -40,9 +40,9 @@ const AddClass = () => {
     };
 
     const res = await axiosSecure.post("/class", classData);
-    console.log(res.data.insertedId);
+    // console.log(res.data.insertedId);
     if (res.data.insertedId) {
-      console.log("class added succesfully");
+      // console.log("class added succesfully");
       toast.success("Class added successfully");
       reset();
       setImageUrl("");

@@ -6,6 +6,7 @@ import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import axios from "axios";
 import useAxios from "../../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -21,12 +22,8 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password)
       .then(async (result) => {
-        console.log(result);
-        console.log("profile pic", profilePic);
-        // updating userinfo in the db.
         const userInfo = {
           name: data.name,
           email: data.email,
@@ -37,9 +34,8 @@ const SignUp = () => {
         };
 
         const userRes = await axiosInstance.post("/users", userInfo);
-        console.log(userRes.data);
 
-        //updating profilePic and name here (in firebase)
+        // Firebase profile update
         const userProfile = {
           displayName: data.name,
           photoURL: profilePic,
@@ -47,21 +43,48 @@ const SignUp = () => {
 
         updateUserProfile(userProfile)
           .then(() => {
-            console.log("profile picture updated successfully");
+            Swal.fire({
+              icon: "success",
+              title: "Registration Successful!",
+              text: "Welcome to Fitify 🎉",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+
             navigate("/");
           })
           .catch((error) => {
-            console.log(error);
+            Swal.fire({
+              icon: "error",
+              title: "Profile Update Failed",
+              text:
+                error.message ||
+                "Something went wrong while updating your profile.",
+            });
           });
       })
       .catch((error) => {
-        console.log(error);
+        let customMsg = "Something went wrong during registration.";
+
+        if (error.message.includes("auth/email-already-in-use")) {
+          customMsg = "This email is already registered.";
+        } else if (error.message.includes("auth/invalid-email")) {
+          customMsg = "Invalid email address.";
+        } else if (error.message.includes("auth/weak-password")) {
+          customMsg = "Password should be at least 6 characters.";
+        }
+
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: customMsg,
+        });
       });
   };
 
   const handleImageUpload = async (e) => {
     const image = e.target.files[0];
-    console.log(image);
+    // console.log(image);
     const formData = new FormData();
     formData.append("image", image);
     const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
@@ -129,7 +152,18 @@ const SignUp = () => {
               </label>
               <div className="input input-bordered flex items-center justify-between w-full px-3 py-2 gap-2">
                 <input
-                  {...register("password", { required: true, minLength: 6 })}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                    pattern: {
+                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/,
+                      message:
+                        "Must include uppercase, lowercase & a special character",
+                    },
+                  })}
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   className="flex-grow bg-transparent outline-none"
@@ -143,16 +177,18 @@ const SignUp = () => {
                 </button>
               </div>
 
-              {/* showing error message for password */}
-              {errors.password?.type === "required" && (
-                <p className="text-secondary">Password is requred</p>
-              )}
-              {errors.password?.type === "minLength" && (
-                <p className="text-secondary">
-                  Password must be 6 charecter or longer
+              {/* 🔴 Error Message */}
+              {errors.password && (
+                <p className="text-secondary text-sm mt-1">
+                  {errors.password.message}
                 </p>
               )}
 
+              {/* ℹ️ Password Hint */}
+              <p className="text-xs text-gray-500 mt-1">
+                Must include at least 1 uppercase, 1 lowercase & 1 special
+                character.
+              </p>
               <button className="btn btn-primary mt-4 ">Sign Up</button>
             </form>
 

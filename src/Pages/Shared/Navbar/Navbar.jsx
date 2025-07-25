@@ -13,18 +13,39 @@ import FitifyLogo from "../FitifyLogo/FitifyLogo";
 import useAuth from "../../../Hooks/useAuth";
 import { MdDashboard, MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 import { GiMuscleUp } from "react-icons/gi";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, role, loading, logOutUser } = useAuth();
 
   const handleLogout = () => {
-    logOutUser()
-      .then(() => {
-        console.log("logged out succesfully");
-      })
-      .then((error) => {
-        console.log(error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out from your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOutUser()
+          .then(() => {
+            Swal.fire(
+              "Logged Out!",
+              "You have been successfully logged out.",
+              "success"
+            );
+          })
+          .catch((error) => {
+            Swal.fire(
+              "Error!",
+              error.message || "Something went wrong.",
+              "error"
+            );
+          });
+      }
+    });
   };
 
   const links = (

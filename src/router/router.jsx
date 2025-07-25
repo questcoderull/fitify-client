@@ -34,6 +34,7 @@ import PageNotFound from "../Pages/PageNotFoun/PageNotFound";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import CommunityDetails from "../Pages/CommunityDetails/CommunityDetails";
 import BalanceOverview from "../Pages/DashbordPages/BalanceOverview/BalanceOverview";
+import DashboardHome from "../Pages/DashbordPages/DashboardHome/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -121,6 +122,10 @@ export const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
+      {
+        index: true,
+        Component: DashboardHome,
+      },
       {
         path: "add-class",
         element: (

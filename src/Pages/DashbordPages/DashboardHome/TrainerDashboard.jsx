@@ -86,11 +86,15 @@ const TrainerDashboard = () => {
       {/* Latest Reviews */}
       <Section title="⭐ Latest Reviews">
         <ul className="space-y-1">
-          {latestReviews.map((r, i) => (
-            <li key={i} className="text-sm text-gray-700">
-              {r.memberEmail} — {r.rating}⭐
-            </li>
-          ))}
+          {latestReviews.length > 0 ? (
+            latestReviews.map((r, i) => (
+              <li key={i} className="text-sm text-gray-700">
+                {r.memberEmail} — {r.rating}⭐
+              </li>
+            ))
+          ) : (
+            <li>No latest review yet</li>
+          )}
         </ul>
       </Section>
 

@@ -23,6 +23,9 @@ const MemberDashboard = () => {
     },
   });
 
+  // ডাটা চেক করার জন্য console.log
+  console.log("Dashboard data:", data);
+
   const handleSubmitQuote = async (e) => {
     e.preventDefault();
     const quote = e.target.quote.value;
@@ -57,7 +60,8 @@ const MemberDashboard = () => {
     );
   }
 
-  const { quote, todaysForums = [], todaysClasses = [] } = data;
+  // এখানে নাম পরিবর্তন করে নিচ্ছি
+  const { quote, recentForums = [], recentClasses = [] } = data;
 
   return (
     <div className="p-6 md:p-10 space-y-10 bg-gradient-to-b from-white via-slate-50 to-white min-h-screen my-12">
@@ -72,8 +76,59 @@ const MemberDashboard = () => {
         </p>
       </div>
 
+      {/* ✅ Recent Forum Posts and Recent Classes with card style */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Recent Forum Posts */}
+        <div>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+            📢 Recent Forum Posts
+          </h3>
+          {recentForums.length > 0 ? (
+            <ul className="space-y-4">
+              {recentForums.map((post) => (
+                <li key={post._id}>
+                  <a
+                    href={`/community/${post._id}`}
+                    className="block p-4 border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 hover:bg-blue-50 text-blue-800 hover:text-blue-900 font-medium"
+                    title={post.title}
+                  >
+                    {post.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-500 italic">No recent forum posts.</p>
+          )}
+        </div>
+
+        {/* Recent Classes */}
+        <div>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+            🆕 Recent Published Classes
+          </h3>
+          {recentClasses.length > 0 ? (
+            <ul className="space-y-4">
+              {recentClasses.map((cls) => (
+                <li key={cls._id}>
+                  <a
+                    href={`/class-details/${cls._id}`}
+                    className="block p-4 border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 hover:bg-green-50 text-green-800 hover:text-green-900 font-medium"
+                    title={cls.className}
+                  >
+                    {cls.className}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-500 italic">No recent classes.</p>
+          )}
+        </div>
+      </section>
+
       {/* ✅ Quick Actions */}
-      <section>
+      <section className="mb-16">
         <h3 className="text-xl font-bold text-gray-800 mb-4">
           🧭 Quick Actions
         </h3>
@@ -92,72 +147,9 @@ const MemberDashboard = () => {
         </div>
       </section>
 
-      {/* ✅ Forum Posts Today */}
-      <section>
-        <h3 className="text-xl font-bold text-gray-800 mb-4">
-          📢 Today’s Forum Posts
-        </h3>
-        {todaysForums.length > 0 ? (
-          <ul className="space-y-2">
-            {todaysForums.map((post) => (
-              <li key={post._id}>
-                <a
-                  href={`/forums/${post._id}`}
-                  className="block bg-base-100 border rounded-lg p-3 text-blue-700 hover:bg-primary hover:text-white transition font-medium shadow"
-                >
-                  {post.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-gray-500">No forum posts today.</p>
-        )}
-      </section>
-
-      {/* ✅ Classes Today */}
-      <section>
-        <h3 className="text-xl font-bold text-gray-800 mb-4">
-          🆕 Today’s Published Classes
-        </h3>
-        {todaysClasses.length > 0 ? (
-          <ul className="space-y-2">
-            {todaysClasses.map((cls) => (
-              <li key={cls._id}>
-                <a
-                  href={`/classes/${cls._id}`}
-                  className="block bg-base-100 border rounded-lg p-3 text-green-700 hover:bg-green-500 hover:text-white transition font-medium shadow"
-                >
-                  {cls.className}
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-gray-500">No new classes today.</p>
-        )}
-      </section>
-
       {/* ✅ Motivational Quote */}
       {quote && (
-        // <section className="bg-base-100 border-l-4 border-tr border-primary p-6 rounded shadow relative">
-        //   <FaQuoteLeft className="text-primary text-xl absolute -top-2 -left-2" />
-        //   <p className="text-lg font-semibold text-primary italic text-center">
-        //     “{quote.quote}”
-        //   </p>
-        //   <div className="flex items-center justify-end gap-2 mt-3 text-sm text-gray-800">
-        //     <img
-        //       src={quote.authorPhoto}
-        //       alt="author"
-        //       className="w-8 h-8 rounded-full border"
-        //     />
-        //     — {quote.authorName}
-        //   </div>
-        //   <FaQuoteRight className="text-primary text-xl absolute -bottom-2 -right-2" />
-        // </section>
-
         <section className="bg-base-100 border-l-4 border-primary p-6 rounded shadow relative">
-          {/* 🔵 Decorative Top-Right Border */}
           <div className="absolute top-0 right-0 w-1/2 h-1/2 border-t border-r border-primary rounded-tr-md"></div>
 
           <FaQuoteLeft className="text-primary text-xl absolute -top-2 -left-2" />

@@ -39,7 +39,7 @@ const AddForum = () => {
       role: role || "trainer",
       upVotes: [],
       downVotes: [],
-      added_At: new Date().toISOString(),
+      added_At: new Date(),
     };
 
     mutation.mutate(postData);

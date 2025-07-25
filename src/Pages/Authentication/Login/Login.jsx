@@ -63,9 +63,9 @@ const Login = () => {
   return (
     <div className="hero bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left flex-1">
+        <div className="text-left flex-1">
           {/* right side */}
-          <div className="space-y-5 text-center lg:text-left">
+          <div className="space-y-5 text-left">
             <h2 className="text-2xl md:text-3xl font-extrabold text-primary flex items-center gap-3 justify-center lg:justify-start">
               <FaDumbbell className="text-secondary animate-bounce" />
               Welcome Back to <span className="text-secondary">Fitify</span>

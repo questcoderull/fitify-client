@@ -26,7 +26,7 @@ const FeaturedClasses = () => {
     <section className="max-w-7xl mx-auto px-4 py-14">
       <div className="text-center mb-10">
         <h2 className="text-4xl font-bold text-primary mb-2 tracking-tight">
-          🌟 Featured Classes
+          🌟 Top Booked Classes
         </h2>
         <p className="text-gray-600 max-w-xl mx-auto text-sm">
           Discover our top booked classes loved by members! These popular

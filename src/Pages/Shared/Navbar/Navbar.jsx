@@ -118,7 +118,7 @@ const Navbar = () => {
 
   return (
     <div className=" sticky top-0 z-50 py-4 bg-white/30 backdrop-blur-md shadow">
-      <div className="navbar max-w-11/12 mx-auto">
+      <div className="navbar max-w-7xl mx-auto">
         <div className="navbar-start">
           <span className="ml-3">
             <FitifyLogo />

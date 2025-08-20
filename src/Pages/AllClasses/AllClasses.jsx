@@ -173,7 +173,7 @@ const AllClasses = () => {
                   <img
                     src={singleClass.image}
                     alt={singleClass.className}
-                    className="max-h-72 w-full object-cover"
+                    className="max-h-52 min-h-52 md:max-h-60 md:min-h-60 lg:max-h-72 lg:min-h-72 w-full object-cover rounded-t-lg"
                   />
                 </figure>
               </Link>

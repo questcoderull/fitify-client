@@ -61,7 +61,6 @@ const MemberDashboard = () => {
     );
   }
 
-  // এখানে নাম পরিবর্তন করে নিচ্ছি
   const { quote, recentForums = [], recentClasses = [] } = data;
 
   return (

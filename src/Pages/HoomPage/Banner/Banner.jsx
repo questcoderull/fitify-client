@@ -23,7 +23,7 @@ const Banner = () => {
         {/* Slide 1: Explore Classes */}
         <div className="relative h-[500px]">
           <img
-            src="https://i.ibb.co/YF0T6X3b/images.jpg"
+            src="https://i.ibb.co/xtDRVq5f/banner3.jpg"
             alt="Explore Classes"
             className="w-full h-full object-cover"
           />
@@ -44,7 +44,7 @@ const Banner = () => {
         {/* Slide 2: See Trainers */}
         <div className="relative h-[500px]">
           <img
-            src="https://i.ibb.co/VY2f3C2L/download.jpg"
+            src="https://i.ibb.co/Z6QBD97M/banner2.jpg"
             alt="Our Trainers"
             className="w-full h-full object-cover"
           />
@@ -65,7 +65,7 @@ const Banner = () => {
         {/* Slide 3: Explore Forums */}
         <div className="relative h-[500px]">
           <img
-            src="https://i.ibb.co/XZscWvf9/download-1.jpg"
+            src="https://i.ibb.co/8nmPnnjT/banner1.jpg"
             alt="Community"
             className="w-full h-full object-cover"
           />
@@ -86,7 +86,7 @@ const Banner = () => {
         {/* Slide 4: Ready to Start */}
         <div className="relative h-[500px]">
           <img
-            src="https://i.ibb.co/yNMxs0v/fitness-banner.jpg"
+            src="https://i.ibb.co/fGnPGyww/banner4.jpg"
             alt="Start Now"
             className="w-full h-full object-cover"
           />

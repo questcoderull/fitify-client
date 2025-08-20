@@ -20,7 +20,7 @@ const DashboardLayout = () => {
   const { role } = useAuth();
 
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="max-w-7xl mx-auto drawer lg:drawer-open">
       <Helmet>
         <title>Fitify | Dashboard</title>
       </Helmet>
@@ -52,7 +52,9 @@ const DashboardLayout = () => {
           <div className="mx-2 flex-1 px-2">Dashboard</div>
         </div>
         {/* Page content here */}
-        <Outlet></Outlet>
+        <div>
+          <Outlet></Outlet>
+        </div>
         {/* Page content here */}
       </div>
       <div className="drawer-side">

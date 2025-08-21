@@ -151,7 +151,7 @@ const Navbar = () => {
                     />
                   </div>
                 </div>
-                <IoIosArrowDown className="text-lg text-gray-600" />
+                <IoIosArrowDown className="text-lg text-info" />
               </div>
 
               <ul

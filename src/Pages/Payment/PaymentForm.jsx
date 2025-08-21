@@ -171,22 +171,22 @@ const PaymentForm = () => {
       {/* Trainer + Class Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Trainer Info */}
-        <div className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center border border-primary">
+        <div className="bg-neutral shadow-lg rounded-2xl p-6 flex flex-col items-center border border-primary">
           <img
             src={trainerInfo.image}
             alt={trainerInfo.name}
             className="w-32 h-32 object-cover rounded-full border-4 border-primary shadow-sm mb-4"
           />
-          <h2 className="text-xl font-bold text-gray-800 mb-1">
+          <h2 className="text-xl font-bold text-primary mb-1">
             {trainerInfo.name}
           </h2>
-          <p className="text-sm text-gray-600 mb-2">
+          <p className="text-sm text-info mb-2">
             <strong>Expertise:</strong>{" "}
             {Array.isArray(trainerInfo.expertise)
               ? trainerInfo.expertise.join(", ")
               : trainerInfo.expertise}
           </p>
-          <div className="text-sm text-gray-700 space-y-1 text-center">
+          <div className="text-sm text-info space-y-1 text-center">
             <p>
               <strong>📅 Day:</strong> {day}
             </p>
@@ -207,7 +207,7 @@ const PaymentForm = () => {
 
         {/* Class Info */}
         {selectedClassInfo && (
-          <div className="bg-white shadow-lg rounded-2xl p-6 border border-primary flex flex-col items-center">
+          <div className="bg-neutral shadow-lg rounded-2xl p-6 border border-primary flex flex-col items-center">
             <img
               src={selectedClassInfo.image}
               alt={selectedClassInfo.className}
@@ -216,10 +216,10 @@ const PaymentForm = () => {
             <h3 className="text-xl font-bold text-secondary mb-1 text-center">
               {selectedClassInfo.className}
             </h3>
-            <p className="text-sm text-gray-600 mb-1">
+            <p className="text-sm text-info mb-1">
               <strong>Category:</strong> {selectedClassInfo.category}
             </p>
-            <p className="text-sm text-gray-700 text-center">
+            <p className="text-sm text-info text-center">
               {selectedClassInfo.details.slice(0, 120)}...
             </p>
           </div>
@@ -229,12 +229,12 @@ const PaymentForm = () => {
       {/* Payment Form */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-2xl shadow-lg border border-primary space-y-4"
+        className="bg-neutral p-6 rounded-2xl shadow-lg border border-primary space-y-4"
       >
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">
+        <h3 className="text-xl font-semibold text-primary mb-2">
           💳 Enter Card Info
         </h3>
-        <CardElement className="p-4 border rounded-md shadow-sm" />
+        <CardElement className="p-4 text-info border rounded-md shadow-sm" />
         <button
           className="btn btn-primary w-full"
           type="submit"

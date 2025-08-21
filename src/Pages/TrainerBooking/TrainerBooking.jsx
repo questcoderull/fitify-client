@@ -89,10 +89,10 @@ const TrainerBooking = () => {
             alt={trainer.name}
             className="rounded-lg w-full h-auto  object-cover mb-4"
           />
-          <p className="text-sm text-gray-700 mb-1">
+          <p className="text-sm text-info mb-1">
             <strong>Slot:</strong> {day} - {label} - {time}
           </p>
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-info">
             <strong>Trainer Expertise:</strong>{" "}
             {Array.isArray(trainer.expertise)
               ? trainer.expertise.join(", ")
@@ -111,13 +111,13 @@ const TrainerBooking = () => {
               alt={selectedClassInfo.className}
               className="w-full h-auto object-cover rounded mb-3"
             />
-            <p className="text-sm text-gray-700 mb-1">
+            <p className="text-sm text-info mb-1">
               <strong>Name:</strong> {selectedClassInfo.className}
             </p>
-            <p className="text-sm text-gray-700 mb-1">
+            <p className="text-sm text-info mb-1">
               <strong>Category:</strong> {selectedClassInfo.category}
             </p>
-            <p className="text-sm text-gray-700 mt-2">
+            <p className="text-sm text-info mt-2">
               {selectedClassInfo.details.slice(0, 150)}...
             </p>
           </div>
@@ -170,9 +170,7 @@ const TrainerBooking = () => {
           <label
             className={`border rounded-lg p-4 hover:shadow transition cursor-pointer 
       ${
-        selectedPackage === "Basic"
-          ? "border-primary shadow"
-          : "border-gray-300"
+        selectedPackage === "Basic" ? "border-primary shadow" : "border-error"
       }`}
           >
             <input
@@ -183,7 +181,7 @@ const TrainerBooking = () => {
               className="mb-2"
             />
             <h3 className="font-bold text-lg mb-2">Basic Membership</h3>
-            <ul className="text-sm text-gray-600 list-disc pl-5">
+            <ul className="text-sm text-info list-disc pl-5">
               <li>Access to gym during regular hours</li>
               <li>Cardio & strength equipment</li>
               <li>Locker rooms and showers</li>
@@ -197,7 +195,7 @@ const TrainerBooking = () => {
       ${
         selectedPackage === "Standard"
           ? "border-primary shadow"
-          : "border-gray-300"
+          : "border-error"
       }`}
           >
             <input
@@ -208,7 +206,7 @@ const TrainerBooking = () => {
               className="mb-2"
             />
             <h3 className="font-bold text-lg mb-2">Standard Membership</h3>
-            <ul className="text-sm text-gray-600 list-disc pl-5">
+            <ul className="text-sm text-info list-disc pl-5">
               <li>All Basic benefits included</li>
               <li>Group classes: Yoga, Zumba, Spinning</li>
               <li>Sauna / Steam room access</li>
@@ -220,9 +218,7 @@ const TrainerBooking = () => {
           <label
             className={`border rounded-lg p-4 hover:shadow transition cursor-pointer 
       ${
-        selectedPackage === "Premium"
-          ? "border-primary shadow"
-          : "border-gray-300"
+        selectedPackage === "Premium" ? "border-primary shadow" : "border-error"
       }`}
           >
             <input
@@ -233,7 +229,7 @@ const TrainerBooking = () => {
               className="mb-2"
             />
             <h3 className="font-bold text-lg mb-2">Premium Membership</h3>
-            <ul className="text-sm text-gray-600 list-disc pl-5">
+            <ul className="text-sm text-info list-disc pl-5">
               <li>All Standard benefits included</li>
               <li>Personal trainer sessions</li>
               <li>Massage & nutrition discounts</li>

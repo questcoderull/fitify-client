@@ -91,14 +91,14 @@ const TrainerDetails = () => {
             className="rounded-lg w-full h-80 object-cover mb-4"
           />
           <h2 className="text-2xl font-semibold mb-2">{name}</h2>
-          <p className="text-sm text-gray-600 mb-1">
+          <p className="text-sm text-info mb-1">
             Expertise:{" "}
             {Array.isArray(expertise) ? expertise.join(", ") : expertise}
           </p>
-          <p className="mt-4 text-sm text-gray-700">{description}</p>
+          <p className="mt-4 text-sm text-info">{description}</p>
           <div className="mt-4">
             <h3 className="text-lg text-primary">Social Links</h3>
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-info">
               Facebook:{" "}
               <a
                 href={socialLinks.facebook}
@@ -109,7 +109,7 @@ const TrainerDetails = () => {
                 {socialLinks.facebook}
               </a>
             </p>
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-info">
               Instagram:{" "}
               <a
                 href={socialLinks.instagram}
@@ -120,7 +120,7 @@ const TrainerDetails = () => {
                 {socialLinks.instagram}
               </a>
             </p>
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-info">
               LinkedIn:{" "}
               <a
                 href={socialLinks.linkedin}
@@ -142,7 +142,7 @@ const TrainerDetails = () => {
 
           {/* Class Selection Dropdown */}
           <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-700">
+            <label className="block mb-2 text-sm font-medium text-info">
               Select a Class to book
             </label>
             <select
@@ -171,15 +171,15 @@ const TrainerDetails = () => {
                   alt={selectedClassInfo.className}
                   className="w-full h-48 object-cover rounded mb-3"
                 />
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-info">
                   <span className="font-medium">Name:</span>{" "}
                   {selectedClassInfo.className}
                 </p>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-info">
                   <span className="font-medium">Category:</span>{" "}
                   {selectedClassInfo.category}
                 </p>
-                <p className="text-sm text-gray-700 mt-2">
+                <p className="text-sm text-info mt-2">
                   {selectedClassInfo.details.slice(0, 120)}...
                 </p>
               </div>
@@ -191,12 +191,12 @@ const TrainerDetails = () => {
             <div className="space-y-4">
               {structuredSlots.map((slotObj, index) => (
                 <div key={index}>
-                  <h4 className="text-lg font-semibold text-gray-700 mb-1">
+                  <h4 className="text-lg font-semibold text-info mb-1">
                     {slotObj.day}
                   </h4>
                   {slotObj.slots.map((labelSlot, i) => (
                     <div key={i} className="mb-2">
-                      <p className="text-sm text-gray-600 font-medium mb-1">
+                      <p className="text-sm text-info font-medium mb-1">
                         {labelSlot.label}:
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -234,7 +234,7 @@ const TrainerDetails = () => {
         <h3 className="text-2xl font-bold mb-4 text-primary text-center">
           Want to Inspire Others? Become a Trainer!
         </h3>
-        <p className="text-sm text-gray-700 mb-6 text-center max-w-3xl mx-auto">
+        <p className="text-sm text-info mb-6 text-center max-w-3xl mx-auto">
           Are you passionate about fitness and ready to take the next step in
           your journey? Join our platform as a certified trainer and share your
           knowledge with members from all walks of life. Whether you're into

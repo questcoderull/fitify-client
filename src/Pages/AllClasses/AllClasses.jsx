@@ -95,7 +95,7 @@ const AllClasses = () => {
         <h1 className="text-3xl font-bold text-center text-primary mb-3">
           Explore All Fitness Classes
         </h1>
-        <p className="text-gray-600 text-base max-w-xl mx-auto">
+        <p className="text-info text-base max-w-xl mx-auto">
           Discover our wide range of fitness classes tailored to all levels.
           Search by name or filter by category to find what suits your style and
           goals!

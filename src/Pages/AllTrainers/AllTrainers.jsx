@@ -45,7 +45,7 @@ const AllTrainers = () => {
       <h1 className="text-3xl font-bold text-center text-primary mb-3">
         Our Trainers
       </h1>
-      <p className="text-center text-gray-600 max-w-3xl mx-auto text-sm md:text-base mb-12">
+      <p className="text-center text-info max-w-3xl mx-auto text-sm md:text-base mb-12">
         Meet our certified and passionate trainers who are committed to helping
         you achieve your fitness goals. Each trainer brings unique expertise,
         energy, and dedication to guide you every step of the way.
@@ -103,7 +103,7 @@ const AllTrainers = () => {
         {trainers.map((trainer) => (
           <div
             key={trainer._id}
-            className="card bg-white shadow-lg border border-gray-200 rounded-2xl hover:shadow-2xl hover:scale-[1.03] transition-transform duration-300 flex flex-col"
+            className="card bg-neutral shadow-lg border border-error rounded-2xl hover:shadow-2xl hover:scale-[1.03] transition-transform duration-300 flex flex-col"
           >
             {/* Avatar Image */}
             <figure className="flex justify-center pt-6 px-4">
@@ -123,11 +123,11 @@ const AllTrainers = () => {
               <h2 className="text-xl font-semibold text-primary mb-1">
                 {trainer.name}
               </h2>
-              <p className="text-sm text-gray-700 mb-3">Age: {trainer.age}</p>
+              <p className="text-sm text-info mb-3">Age: {trainer.age}</p>
 
               {/* Expertise */}
               <div className="mb-3">
-                <p className="text-xs font-semibold text-gray-800 mb-1 tracking-wide">
+                <p className="text-xs font-semibold text-info mb-1 tracking-wide">
                   Expertise
                 </p>
                 <div className="flex flex-wrap justify-center gap-2">
@@ -141,7 +141,7 @@ const AllTrainers = () => {
                       </span>
                     ))
                   ) : (
-                    <span className="text-gray-700 font-medium text-sm">
+                    <span className="text-info font-medium text-sm">
                       {trainer.expertise}
                     </span>
                   )}
@@ -150,7 +150,7 @@ const AllTrainers = () => {
 
               {/* Available Days */}
               <div className="mb-3">
-                <p className="text-xs font-semibold text-gray-800 mb-1 tracking-wide">
+                <p className="text-xs font-semibold text-info mb-1 tracking-wide">
                   Available Days
                 </p>
                 <div className="flex flex-wrap justify-center gap-2">
@@ -166,10 +166,10 @@ const AllTrainers = () => {
               </div>
 
               {/* Structured Slots */}
-              <div className="text-left w-full mt-auto space-y-1 text-gray-700 max-h-20 overflow-y-auto text-xs">
+              <div className="text-left w-full mt-auto space-y-1 text-info max-h-20 overflow-y-auto text-xs">
                 {trainer.structuredSlots?.map((slotObj, i) => (
                   <div key={i} className="text-sm leading-tight">
-                    <strong className="text-gray-900">{slotObj.day}</strong>:
+                    <strong>{slotObj.day}</strong>:
                     {slotObj.slots.map((group, j) => (
                       <div key={j} className="ml-2 mt-0.5">
                         <span className="font-semibold text-primary">
@@ -199,7 +199,7 @@ const AllTrainers = () => {
       {/*  Pagination Buttons */}
       <div className="flex justify-center gap-2 mt-8">
         <button
-          className="btn btn-sm"
+          className="btn btn-sm bg-base-300"
           disabled={page === 1}
           onClick={() => setPage((prev) => prev - 1)}
         >
@@ -217,7 +217,7 @@ const AllTrainers = () => {
           </button>
         ))}
         <button
-          className="btn btn-sm"
+          className="btn btn-sm bg-base-300"
           disabled={page === totalPages}
           onClick={() => setPage((prev) => prev + 1)}
         >

@@ -23,7 +23,7 @@ const TeamSection = () => {
       <h2 className="text-3xl font-bold text-center text-primary mb-3">
         Meet Our Expert Trainers
       </h2>
-      <p className="text-center text-gray-600 mb-10">
+      <p className="text-center text-info mb-10">
         Our team is here to help you achieve your fitness goals.
       </p>
 
@@ -31,7 +31,7 @@ const TeamSection = () => {
         {trainers.map((trainer) => (
           <div
             key={trainer._id}
-            className="card bg-white shadow-md border-t-2 border-t-primary border-b-2 border-b-secondary rounded-xl hover:shadow-lg transition duration-300"
+            className="card bg-neutral shadow-md border-t-2 border-t-primary border-b-2 border-b-secondary rounded-xl hover:shadow-lg transition duration-300"
           >
             <figure className="pt-6 px-6">
               <div className="avatar">
@@ -49,7 +49,7 @@ const TeamSection = () => {
               <h3 className="text-xl font-bold text-primary hover:underline">
                 <Link to={`/trainer/${trainer._id}`}>{trainer.name}</Link>
               </h3>
-              <p className="text-sm text-gray-700 italic">
+              <p className="text-sm text-info italic">
                 {trainer.description?.slice(0, 100)}...
               </p>
               <div className="flex flex-wrap justify-center gap-2 mt-2">

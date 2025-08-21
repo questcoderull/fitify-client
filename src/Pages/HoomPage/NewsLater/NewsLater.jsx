@@ -29,7 +29,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="bg-gradient-to-r from-primary to-accent py-16 px-4 md:px-10 text-white rounded-2xl mb-10">
+    <section className="bg-gradient-to-r from-[#065482] to-[#00cee8] py-16 px-4 md:px-10 text-white rounded-2xl mb-10">
       <div className="max-w-3xl mx-auto text-center space-y-6">
         <h2 className="text-4xl font-bold">Join Our Newsletter</h2>
         <p className="text-lg opacity-90">
@@ -46,7 +46,7 @@ const Newsletter = () => {
               {...register("name", { required: true })}
               type="text"
               placeholder="Your Name"
-              className="input w-full text-black"
+              className="input w-full text-gray-700 bg-white"
             />
             {errors.name && (
               <p className="text-red-500 text-sm mt-1">Name is required</p>
@@ -58,7 +58,7 @@ const Newsletter = () => {
               {...register("email", { required: true })}
               type="email"
               placeholder="Your Email"
-              className="input w-full text-black"
+              className="input w-full text-gray-700 bg-white"
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">Email is required</p>
@@ -67,7 +67,7 @@ const Newsletter = () => {
 
           <button
             type="submit"
-            className="btn btn-primary font-bold uppercase tracking-widest"
+            className="btn bg-[#065482] border-none text-white font-bold uppercase tracking-widest"
           >
             Subscribe Now
           </button>

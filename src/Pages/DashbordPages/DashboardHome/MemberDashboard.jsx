@@ -68,7 +68,7 @@ const MemberDashboard = () => {
       <Helmet>
         <title>Fitify | Dashboard | Home | Member</title>
       </Helmet>
-      {/* ✅ Welcome Section */}
+      {/*  Welcome Section */}
       <div className="space-y-1">
         <h2 className="text-2xl md:text-3xl font-bold text-primary">
           Welcome back,{" "}
@@ -174,7 +174,7 @@ const MemberDashboard = () => {
         </section>
       )}
 
-      {/* ✅ Submit Quote Section */}
+      {/*  Submit Quote Section */}
       <section className="text-center mt-5">
         <div className="text-center space-y-1 mb-6">
           <p className="text-lg md:text-xl font-semibold text-primary">

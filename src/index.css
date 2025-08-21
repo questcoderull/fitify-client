@@ -13,6 +13,7 @@
   --color-accent: #00cee8;
   --color-neutral: #fff; /*card bg color*/
   --color-info: #4b5563; /*for gray text as short description under the headlines*/
+  --color-error: #e5e7eb; /*for border*/
 }
 
 @plugin "daisyui/theme" {
@@ -22,6 +23,7 @@
   --color-accent: #00eaff; /* neon cyan */
   --color-neutral: #1a2933; /*for card bg*/
   --color-info: #d1d5db;
+  --color-error: #374151; /*for border*/
 }
 
 * {

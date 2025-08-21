@@ -115,7 +115,7 @@ const ReviewList = () => {
       <Slider {...settings}>
         {reviews.map((review) => (
           <div key={review._id} className="px-2">
-            <div className="bg-white rounded-xl shadow-md p-6 space-y-3 border border-gray-200 h-[330px] flex flex-col justify-between">
+            <div className="bg-neutral rounded-xl shadow-md p-6 space-y-3 border border-error h-[330px] flex flex-col justify-between">
               {/* Member Info */}
               <div className="flex items-center gap-4">
                 <img
@@ -125,7 +125,7 @@ const ReviewList = () => {
                 />
                 <div>
                   <h4 className="font-semibold">{review.memberName}</h4>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-info">
                     {new Date(review.reviwed_at).toLocaleString("en-GB", {
                       dateStyle: "short",
                       timeStyle: "short",
@@ -146,13 +146,11 @@ const ReviewList = () => {
                     <FaRegStar key={index} />
                   )
                 )}
-                <span className="ml-2 text-sm text-gray-600">
-                  {review.rating}
-                </span>
+                <span className="ml-2 text-sm text-info">{review.rating}</span>
               </div>
 
               {/* Review Text */}
-              <p className="text-gray-700">
+              <p className="text-info">
                 {review.reviewText.length > 200 ? (
                   <>
                     {review.reviewText.slice(0, 200)}

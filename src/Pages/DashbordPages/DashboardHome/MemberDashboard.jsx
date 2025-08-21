@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaQuoteLeft, FaQuoteRight, FaPlus } from "react-icons/fa";
-import { MdForum, MdClass } from "react-icons/md";
+import {
+  MdForum,
+  MdClass,
+  MdPersonSearch,
+  MdOutlineExplore,
+  MdCampaign,
+  MdOutlineLibraryBooks,
+} from "react-icons/md";
+import { HiMiniHandThumbUp } from "react-icons/hi2";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
@@ -61,7 +69,7 @@ const MemberDashboard = () => {
     );
   }
 
-  const { quote, recentForums = [], recentClasses = [] } = data;
+  const { quote, todaysForums = [], todaysClasses = [] } = data;
 
   return (
     <div className="p-6 md:p-10 space-y-10 bg-gradient-to-b from-white via-slate-50 to-white min-h-screen my-12">
@@ -74,21 +82,23 @@ const MemberDashboard = () => {
           Welcome back,{" "}
           <span className="text-secondary underline">{user?.displayName}!</span>
         </h2>
-        <p className="text-gray-600 text-sm">
-          Let’s continue your fitness journey today 💪
+        <p className="text-gray-600 text-sm flex items-center gap-2">
+          Let’s continue your fitness journey today{" "}
+          <HiMiniHandThumbUp className="text-secondary" />
         </p>
       </div>
 
-      {/* Recent Forum Posts and Recent Classes with card style */}
+      {/* Today's Forum Posts and Today's Classes with card style */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Recent Forum Posts */}
+        {/* Today's Forum Posts */}
         <div>
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6">
-            📢 Recent Forum Posts
+          <h3 className="text-2xl font-semibold text-primary mb-6 flex items-center gap-2">
+            <MdCampaign className="text-3xl text-secondary" />
+            Today's Forum Posts
           </h3>
-          {recentForums.length > 0 ? (
+          {todaysForums.length > 0 ? (
             <ul className="space-y-4">
-              {recentForums.map((post) => (
+              {todaysForums.map((post) => (
                 <li key={post._id}>
                   <a
                     href={`/community/${post._id}`}
@@ -101,18 +111,19 @@ const MemberDashboard = () => {
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500 italic">No recent forum posts.</p>
+            <p className="text-gray-500 italic">No Today's forum posts.</p>
           )}
         </div>
 
-        {/* Recent Classes */}
+        {/* Today's Classes */}
         <div>
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6">
-            🆕 Recent Published Classes
+          <h3 className="text-2xl font-semibold text-primary mb-6 flex items-center gap-2">
+            <MdOutlineLibraryBooks className="text-3xl text-green-600" />
+            Today's Published Classes
           </h3>
-          {recentClasses.length > 0 ? (
+          {todaysForums.length > 0 ? (
             <ul className="space-y-4">
-              {recentClasses.map((cls) => (
+              {todaysForums.map((cls) => (
                 <li key={cls._id}>
                   <a
                     href={`/class-details/${cls._id}`}
@@ -125,15 +136,16 @@ const MemberDashboard = () => {
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500 italic">No recent classes.</p>
+            <p className="text-gray-500 italic">No Today's classes.</p>
           )}
         </div>
       </section>
 
       {/*  Quick Actions */}
       <section className="mb-16">
-        <h3 className="text-xl font-bold text-gray-800 mb-4">
-          🧭 Quick Actions
+        <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
+          <MdOutlineExplore className="text-2xl text-primary" />
+          Quick Actions
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <QuickAction
@@ -146,11 +158,15 @@ const MemberDashboard = () => {
             title="Browse Classes"
             link="/all-classes"
           />
-          <QuickAction title="Find a Trainer" link="/all-trainers" />
+          <QuickAction
+            icon={<MdPersonSearch />}
+            title="Find a Trainer"
+            link="/all-trainers"
+          />
         </div>
       </section>
 
-      {/* ✅ Motivational Quote */}
+      {/*  Motivational Quote */}
       {quote && (
         <section className="bg-base-100 border-l-4 border-primary p-6 rounded shadow relative">
           <div className="absolute top-0 right-0 w-1/2 h-1/2 border-t border-r border-primary rounded-tr-md"></div>

@@ -23,7 +23,7 @@ const LatestCommunityPosts = () => {
       <h2 className="text-3xl font-bold text-center text-primary mb-2">
         Latest Community Posts
       </h2>
-      <p className="text-center text-gray-600 mb-8">
+      <p className="text-center text-info mb-8">
         Discover fresh insights, stories, and helpful articles from our
         community.
       </p>
@@ -32,7 +32,7 @@ const LatestCommunityPosts = () => {
         {posts.map((post) => (
           <div
             key={post._id}
-            className="card bg-white shadow-md border-t-2 border-t-secondary border-b-primary border-b-2 rounded-xl hover:shadow-lg transition duration-300"
+            className="card bg-neutral shadow-md border-t-2 border-t-secondary border-b-primary border-b-2 rounded-xl hover:shadow-lg transition duration-300"
           >
             <figure className="h-48 overflow-hidden rounded-t-xl">
               <img
@@ -45,7 +45,7 @@ const LatestCommunityPosts = () => {
               <h3 className="text-lg font-bold text-primary mb-1 line-clamp-2">
                 {post.title}
               </h3>
-              <p className="text-sm text-gray-600 mb-3 line-clamp-3">
+              <p className="text-sm text-info mb-3 line-clamp-3">
                 {post.content}
               </p>
 
@@ -56,9 +56,7 @@ const LatestCommunityPosts = () => {
                   className="w-8 h-8 rounded-full"
                 />
                 <div>
-                  <p className="text-sm font-medium text-gray-800">
-                    {post.authorName}
-                  </p>
+                  <p className="text-sm font-medium">{post.authorName}</p>
                   <span
                     className={`badge text-[10px] uppercase font-medium mt-1 ${
                       post.role === "admin"

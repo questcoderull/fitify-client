@@ -28,7 +28,7 @@ const FeaturedClasses = () => {
         <h2 className="text-4xl font-bold text-primary mb-2 tracking-tight">
           🌟 Top Booked Classes
         </h2>
-        <p className="text-gray-600 max-w-xl mx-auto text-sm">
+        <p className="text-primary max-w-xl mx-auto text-sm">
           Discover our top booked classes loved by members! These popular
           sessions offer the perfect mix of energy, expertise, and
           transformation.

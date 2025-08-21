@@ -13,6 +13,13 @@
   --color-accent: #00cee8;
 }
 
+@plugin "daisyui/theme" {
+  name: "dark";
+  --color-primary: #4db6e5; /* lighter glowing blue */
+  --color-secondary: #f9a65a; /* softer orange */
+  --color-accent: #00eaff; /* neon cyan */
+}
+
 * {
   font-family: "Outfit", sans-serif;
 }

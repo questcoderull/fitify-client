@@ -42,7 +42,7 @@ const FeatureSection = () => {
         {features.map(({ id, title, description, icon }) => (
           <div
             key={id}
-            className="card shadow-lg border border-base-300 p-6 hover:shadow-xl transition rounded-xl"
+            className="card shadow-sm border border-base-300 p-6 hover:shadow-md transition duration-500 rounded-xl  hover:scale-110"
           >
             <div className="flex justify-center mb-4 text-4xl  text-primary">
               {icon}

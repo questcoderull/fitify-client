@@ -191,7 +191,7 @@ const Navbar = () => {
                   </p>
                 </li>
                 <li>
-                  <Link to="/dashboard" className="text-sm">
+                  <Link to="/dashboard/home" className="text-sm">
                     Dashboard
                   </Link>
                 </li>

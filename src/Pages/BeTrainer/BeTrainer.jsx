@@ -151,7 +151,7 @@ const BeATrainer = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto my-10 p-5 shadow-xl rounded-lg bg-white">
+    <div className="max-w-2xl mx-auto my-10 p-5 shadow-xl rounded-lg bg-neutral border-error">
       <h2 className="text-3xl font-bold mb-6 text-center">
         Apply to Be a Trainer
       </h2>
@@ -202,7 +202,7 @@ const BeATrainer = () => {
             {skillOptions.map((skill) => (
               <label
                 key={skill}
-                className="flex items-center gap-2 p-2 border rounded hover:bg-gray-100 transition"
+                className="flex items-center gap-2 p-2 border rounded hover:bg-base-300 transition"
               >
                 <input type="checkbox" {...register(`skill_${skill}`)} />
                 {skill}
@@ -218,14 +218,34 @@ const BeATrainer = () => {
             name="slotDay"
             control={control}
             render={({ field }) => (
-              <Select {...field} options={availableDays} placeholder="Day" />
+              <Select
+                {...field}
+                options={availableDays}
+                placeholder="Day"
+                styles={{
+                  option: (provided) => ({
+                    ...provided,
+                    color: "black",
+                  }),
+                }}
+              />
             )}
           />
           <Controller
             name="slotLabel"
             control={control}
             render={({ field }) => (
-              <Select {...field} options={slotLabels} placeholder="Slot Name" />
+              <Select
+                {...field}
+                options={slotLabels}
+                placeholder="Slot Name"
+                styles={{
+                  option: (provided) => ({
+                    ...provided,
+                    color: "black",
+                  }),
+                }}
+              />
             )}
           />
           <Controller
@@ -237,6 +257,21 @@ const BeATrainer = () => {
                 isMulti
                 options={generateTimeSlots(selectedLabel?.value)}
                 placeholder="Slot Times"
+                styles={{
+                  option: (provided) => ({
+                    ...provided,
+                    color: "black",
+                  }),
+                  multiValueRemove: (provided) => ({
+                    ...provided,
+                    color: "black", // icon color
+                    ":hover": {
+                      backgroundColor: "#ef4444", // red hover korle
+                      color: "white",
+                    },
+                  }),
+                  // Allah eigula eto kotin. i am not gonna use react select again.
+                }}
               />
             )}
           />

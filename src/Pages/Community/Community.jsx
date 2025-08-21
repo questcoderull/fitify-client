@@ -85,7 +85,7 @@ const Community = () => {
       <h1 className="text-3xl font-bold text-center text-primary mb-3">
         Community Forums
       </h1>
-      <p className="text-center text-gray-600 max-w-3xl mx-auto text-sm md:text-base mb-12">
+      <p className="text-center text-info max-w-3xl mx-auto text-sm md:text-base mb-12">
         Welcome to the official Community Forum where our certified trainers and
         admins share valuable insights, updates, and expert advice. While
         posting access is limited to our professionals, members are encouraged
@@ -100,7 +100,7 @@ const Community = () => {
           return (
             <div
               key={post._id}
-              className="card bg-base-100 border border-gray-300"
+              className="card bg-base-100 border border-error"
             >
               <div className="card-body">
                 <div className="flex items-center gap-3">
@@ -112,7 +112,7 @@ const Community = () => {
                   <div>
                     <p className="font-semibold">{post.authorName}</p>
                     <span
-                      className={`badge badge-outline text-xs ${
+                      className={`badge text-xs ${
                         post.role === "admin"
                           ? "badge-primary bg-primary text-white"
                           : post.role === "trainer"
@@ -169,7 +169,7 @@ const Community = () => {
                     </button>
                     <button
                       className={`btn btn-sm ${
-                        downVoted ? "btn-error text-white" : "btn-outline"
+                        downVoted ? "btn-success text-white" : "btn-outline"
                       }`}
                       onClick={() => handleVote(post._id, "down")}
                     >

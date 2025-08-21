@@ -111,7 +111,7 @@ const AllClasses = () => {
             placeholder="🔍 Search by class name..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="w-full py-3 pl-12 pr-4 rounded-xl border border-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 bg-white/60 backdrop-blur-md"
+            className="w-full py-3 pl-12 pr-4 rounded-xl border border-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 bg-neutral text-info backdrop-blur-md"
           />
           <span className="absolute top-1/2 left-4 transform -translate-y-1/2 text-primary text-lg">
             🔍
@@ -123,7 +123,7 @@ const AllClasses = () => {
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full py-3 pl-12 pr-4 rounded-xl border border-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 bg-white/60 backdrop-blur-md"
+            className="w-full py-3 pl-12 pr-4 rounded-xl border border-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 bg-neutral text-priamry backdrop-blur-md"
           >
             <option value="">🎯 All Categories</option>
             <option value="Zumba">Zumba</option>
@@ -184,7 +184,7 @@ const AllClasses = () => {
                   </Link>
                 </h2>
 
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-info">
                   {isExpanded || !detailsTooLong
                     ? singleClass.details
                     : `${singleClass.details.slice(0, 200)}... `}
@@ -198,11 +198,11 @@ const AllClasses = () => {
                   )}
                 </p>
 
-                <p className="text-sm text-gray-600 mt-2">
+                <p className="text-sm text-info mt-2">
                   Duration:{" "}
                   <span className="text-primary">{singleClass.duration}</span>
                 </p>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-info">
                   Level:{" "}
                   <span className="text-primary">{singleClass.level}</span>
                   <span className="ml-2.5">
@@ -235,7 +235,7 @@ const AllClasses = () => {
                         className="avatar avatar-placeholder cursor-pointer"
                         onClick={() => showExtraTrainers(matchedTrainers)}
                       >
-                        <div className="bg-neutral text-neutral-content w-12 rounded-full flex items-center justify-center">
+                        <div className="bg-primary text-neutral-content w-12 rounded-full flex items-center justify-center">
                           +{matchedTrainers.length - 5}
                         </div>
                       </div>

@@ -87,7 +87,7 @@ const CommunityDetails = () => {
           className="w-10 h-10 rounded-full"
         />
         <div>
-          <p className="text-sm font-medium text-gray-800">{post.authorName}</p>
+          <p className="text-sm font-medium text-info">{post.authorName}</p>
           <span
             className={`badge text-[10px] uppercase font-medium mt-1 ${
               post.role === "admin"
@@ -102,7 +102,7 @@ const CommunityDetails = () => {
         </div>
       </div>
 
-      <p className="text-gray-700 leading-relaxed text-justify mb-6">
+      <p className="text-info leading-relaxed text-justify mb-6">
         {post.content}
       </p>
 
@@ -120,7 +120,7 @@ const CommunityDetails = () => {
           <button
             onClick={() => handleVote("down")}
             className={`btn btn-sm flex items-center gap-2 rounded-full px-4 ${
-              downVoted ? "btn-error text-white" : "btn-outline"
+              downVoted ? "btn-success text-white" : "btn-outline"
             }`}
           >
             <FaArrowDown /> Downvote ({post.downVotes?.length})

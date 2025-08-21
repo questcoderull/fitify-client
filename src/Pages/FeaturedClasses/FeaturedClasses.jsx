@@ -28,7 +28,7 @@ const FeaturedClasses = () => {
         <h2 className="text-4xl font-bold text-primary mb-2 tracking-tight">
           🌟 Top Booked Classes
         </h2>
-        <p className="text-primary max-w-xl mx-auto text-sm">
+        <p className="text-info max-w-xl mx-auto text-sm">
           Discover our top booked classes loved by members! These popular
           sessions offer the perfect mix of energy, expertise, and
           transformation.
@@ -39,7 +39,7 @@ const FeaturedClasses = () => {
         {featured.map((cls) => (
           <div
             key={cls._id}
-            className="group rounded-xl border-t-2 border-b-2 border-primary shadow-md hover:shadow-xl transition duration-300 overflow-hidden bg-white"
+            className="group rounded-xl border-t-2 border-b-2 border-primary shadow-md hover:shadow-xl transition duration-300 overflow-hidden bg-neutral"
           >
             <div className="relative">
               <img
@@ -47,7 +47,7 @@ const FeaturedClasses = () => {
                 alt={cls.className}
                 className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute top-2 right-2 bg-white text-xs text-primary font-semibold px-3 py-1 rounded-full shadow">
+              <div className="absolute top-2 right-2 bg-neutral text-xs text-primary font-semibold px-3 py-1 rounded-full shadow">
                 {cls.category}
               </div>
             </div>
@@ -57,13 +57,13 @@ const FeaturedClasses = () => {
                 <Link to={`/class-details/${cls._id}`}>{cls.className}</Link>
               </h3>
 
-              <p className="text-sm text-gray-700 leading-relaxed line-clamp-4">
+              <p className="text-sm text-info leading-relaxed line-clamp-4">
                 {cls.details.length > 180
                   ? cls.details.slice(0, 180) + "..."
                   : cls.details}
               </p>
 
-              <div className="flex flex-wrap items-center justify-between text-sm font-medium mt-4 text-gray-600">
+              <div className="flex flex-wrap items-center justify-between text-sm font-medium mt-4 text-info">
                 <span className="flex items-center gap-1">
                   <FaClock className="text-primary" /> {cls.duration}
                 </span>
@@ -71,7 +71,7 @@ const FeaturedClasses = () => {
                   <MdOutlineSportsGymnastics className="text-secondary" />{" "}
                   {cls.level}
                 </span>
-                <span className="flex items-center gap-1 text-rose-500 font-semibold">
+                <span className="flex items-center gap-1 text-primary font-semibold">
                   <FaUsers /> {cls.bookedCount} Booked
                 </span>
               </div>
